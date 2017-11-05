@@ -3,13 +3,10 @@ package com.hiekn.demo.rest;
 import java.io.IOException;
 
 import javax.annotation.Resource;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+import com.hiekn.demo.bean.result.BaseParam;
 import org.springframework.stereotype.Controller;
 
 import com.hiekn.demo.bean.UserBean;
@@ -22,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Controller
 @Path("/user")
-@Api(tags="用户")
+@Api("用户")
 @Produces({MediaType.APPLICATION_JSON})
 public class UserRestApi {
 	
@@ -30,13 +27,11 @@ public class UserRestApi {
 	private UserService userService;
 	
 	@POST
-	@ApiOperation(value = "登录")
+	@ApiOperation("登录")
 	@Path("/login")
-	public  RestResp<String> test(@QueryParam("userId") Integer userId, 
+	public  RestResp<String> test(@BeanParam BaseParam baseParam,
 			@FormParam("mobile") String mobile,
-			@FormParam("mcode") String mcode,
-			@QueryParam("accessToken") String accessToken,
-			@QueryParam("tt") Long tt){
+			@FormParam("mcode") String mcode){
 		try {
 			String m = PakoGzipUtils.uncompress(mobile);
 			String m2 = PakoGzipUtils.uncompress(mcode);
@@ -45,17 +40,15 @@ public class UserRestApi {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new RestResp<String>(System.currentTimeMillis()+"",tt);
+		return new RestResp<>(System.currentTimeMillis()+"",baseParam.getTt());
 	}
 	
 	@POST
-	@ApiOperation(value = "根据用户名查询用户")
+	@ApiOperation("根据用户名查询用户")
 	@Path("/get")
-	public  RestResp<UserBean> getUserByName(@QueryParam("userId") Integer userId, 
-			@FormParam("name") String name,
-			@QueryParam("accessToken") String accessToken,
-			@QueryParam("tt") Long tt){
-		return  new RestResp<UserBean>(userService.getByName(name),tt);
+	public  RestResp<UserBean> getUserByName(@BeanParam BaseParam baseParam,
+											 @FormParam("name") String name){
+		return  new RestResp<>(userService.getByName(name),baseParam.getTt());
 	}
 	
 }
