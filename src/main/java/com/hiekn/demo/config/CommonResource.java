@@ -14,7 +14,6 @@ public class CommonResource {
 	public static final String SWAGGER_TITLE = props.getProperty("swagger.title");
 	public static final String SWAGGER_HOST = props.getProperty("swagger.host");
 	public static final String SWAGGER_BASE_PATH = props.getProperty("swagger.base.path");
-	public static final String SWAGGER_RESOURCE_PACKAGE = props.getProperty("swagger.resource.package");
 
 	public static final String QINIU_AK = props.getProperty("QINIU_AK");
 	public static final String QINIU_SK = props.getProperty("QINIU_SK");
