@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AopTest{
 	
-	@Around("execution(* com.hiekn.demo.service.impl.*.*(..)) and @annotation(com.hiekn.demo.aop.Intercept)")
+	@Around("execution(* com.hiekn.demo.service.impl.*.*(..)) && @annotation(com.hiekn.demo.aop.Intercept)")
 	public Object log(ProceedingJoinPoint p) throws Throwable{
 		System.out.println("around前2");
 		Object obj = p.proceed();
