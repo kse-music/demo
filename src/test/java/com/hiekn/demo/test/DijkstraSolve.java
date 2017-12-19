@@ -45,14 +45,14 @@ public class DijkstraSolve {
             }
 
             if(graph.successors(currentVisitNode).contains(node)) {
-                Integer edgeValue = graph.edgeValue(sourceNode, currentVisitNode) + graph.edgeValue(currentVisitNode, node);
-                Integer currentPathValue = graph.edgeValue(sourceNode, node);
+                Integer edgeValue = graph.edgeValue(sourceNode, currentVisitNode).get() + graph.edgeValue(currentVisitNode, node).get();
+                Integer currentPathValue = graph.edgeValue(sourceNode, node).get();
                 if(edgeValue > 0) {
                     graph.putEdgeValue(sourceNode, node, Math.min(edgeValue, currentPathValue));
                 }
             }
             
-            int minPath = graph.edgeValue(sourceNode, node);
+            int minPath = graph.edgeValue(sourceNode, node).get();
             if( minPath < shortestPath) {
                 shortestPath = minPath;
                 nextVisitNode = node;
