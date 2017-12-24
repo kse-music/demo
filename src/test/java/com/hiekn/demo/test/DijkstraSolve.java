@@ -1,9 +1,9 @@
 package com.hiekn.demo.test;
 
-import java.util.Set;
-
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableValueGraph;
+
+import java.util.Set;
 
 public class DijkstraSolve {
 	
@@ -28,11 +28,7 @@ public class DijkstraSolve {
             currentVisitNode = nextVisitNode;
         }
         System.out.println(graph);
-        for (String node : graph.nodes()) {
-			if(node.equals(targetNode)){
-				System.out.println(sourceNode +"到" + targetNode + "的minPath=" + graph.edgeValue(sourceNode, targetNode));
-			}
-		}
+        System.out.println(sourceNode +"到" + targetNode + "的minPath=" + graph.edgeValue(sourceNode,targetNode).get());
     }
 
     private static String findNextNode(String currentVisitNode, Set<String> notVisitedNodes, MutableValueGraph<String, Integer> graph,String sourceNode) {
