@@ -68,13 +68,8 @@ public class GuavaTest extends TestBase{
 				new PersonDb("lisi", 24), new PersonDb("wangwu", 30));  
 
 		//返回的列表是原有列表的一个转换视图，对原有集合的修改当然会反映到新集合中,transform是单向的，无法向结果列表中添加新元素
-		List<PersonVo> personVos = Lists.transform(personDbs, new Function<PersonDb, PersonVo>() {  
-			@Override  
-			public PersonVo apply(PersonDb personDb) {  
-				return personDbToVo(personDb);  
-			}  
-		});  
-		
+		List<PersonVo> personVos = Lists.transform(personDbs, (personDb) -> personDbToVo(personDb));
+
 		for(PersonDb personDb : personDbs) {  
 			personDb.setMsg("hello world!");  
 		}  
@@ -164,7 +159,7 @@ public class GuavaTest extends TestBase{
         graph.putEdgeValue("C", "E", 15);
         graph.putEdgeValue("D", "E", 11);
 		DijkstraSolve.dijkstra("A","D", graph);
-	}
+    }
 
 	@Test
 	public void testNetWork(){

@@ -66,8 +66,9 @@ public class Java8Test extends TestBase{
 		Collections.sort(names, (String a, String b) -> b.compareTo(a));
 		//style3,Java编译器可以自动推导出参数类型
 		Collections.sort(names, (a, b) -> b.compareTo(a));
-
-	}
+        //style4
+		Collections.sort(names, Comparator.comparing(String::valueOf).reversed());
+    }
 
 	//三、函数式接口:是指仅仅只包含一个抽象方法的接口，每一个该类型的lambda表达式都会被匹配到这个抽象方法
 	@Test
@@ -135,11 +136,11 @@ public class Java8Test extends TestBase{
 		personSupplier.get();   // new Person
 		
 		//Consumer接口
-		Consumer<Person> greeter = (p) -> System.out.println("Hello, " + p.firstName);
+		Consumer<Person> greeter = (p) -> System.out.println("Hello, " + p.getFirstName());
 		greeter.accept(new Person("Luke", "Skywalker"));
 		
 		//Comparator 接口
-		Comparator<Person> comparator = (p1, p2) -> p1.firstName.compareTo(p2.firstName);
+		Comparator<Person> comparator = (p1, p2) -> p1.getFirstName().compareTo(p2.getFirstName());
 		Person p1 = new Person("John", "Doe");
 		Person p2 = new Person("Alice", "Wonderland");
 		System.out.println(comparator.compare(p1, p2));             // > 0
@@ -163,9 +164,9 @@ public class Java8Test extends TestBase{
 		//--Sort 排序,排序只创建了一个排列好后的Stream，而不会影响原有的数据源
 		stringCollection.stream().sorted().filter(s -> s.startsWith("a")).forEach(System.out::println);
 		stringCollection.stream().sorted((a,b) -> b.compareTo(a)).filter(s -> s.startsWith("a")).forEach(System.out::println);
-		
+
 		//--Map 映射,将元素根据指定的Function接口来依次将元素转成另外的对象
-		stringCollection.stream().map(String::toUpperCase).sorted((a, b) -> b.compareTo(a)).forEach(System.out::println);
+		stringCollection.stream().map(String::toUpperCase).sorted(Comparator.comparing(String::valueOf).reversed()).forEach(System.out::println);
 		 
 		//--Match 匹配,所有的匹配操作都是最终操作
 		boolean anyStartsWithA = stringCollection.stream().anyMatch((s) -> s.startsWith("a"));

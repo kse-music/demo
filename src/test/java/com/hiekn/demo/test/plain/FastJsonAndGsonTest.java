@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java8;
+package com.hiekn.demo.test.plain;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,21 +8,21 @@ import com.alibaba.fastjson.JSON;
 import com.hiekn.demo.test.TestBase;
 import com.hiekn.demo.util.JsonUtils;
 
-public class OtherTest extends TestBase	{
+public class FastJsonAndGsonTest extends TestBase	{
 	
-	private static Logger log = LogManager.getLogger(OtherTest.class);
+	private static Logger logger = LogManager.getLogger(FastJsonAndGsonTest.class);
 	
 	@Test
 	public void t() throws Exception {
 		A a = new A();
 		a.setAge(20);
-		a.setName(null);
+		a.setName("json");
 		System.out.println(JSON.toJSON(a));
 		System.out.println(JsonUtils.toJson(a));
-		
-		log.info("info");
-		log.warn("warn");
-		log.error("error");
+
+        logger.info("info");
+        logger.warn("warn");
+        logger.error("error");
 	}
 }
 

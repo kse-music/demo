@@ -3,7 +3,7 @@
 
     <Properties>
         <!-- 配置日志文件输出目录 -->
-        <Property name="LOG_HOME">${sys:catalina.base}/project_logs/demo</Property>
+        <Property name="LOG_HOME">/project_logs/demo</Property>
         <!-- 配置日志文件名 -->
         <Property name="LOG_NAME">demo_2.log</Property>
     </Properties>

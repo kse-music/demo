@@ -43,7 +43,7 @@ public class MongoServiceImpl implements MongoService{
 				.socketTimeout(1000000)
 				.build();
 		MongoCredential credentials = MongoCredential.createScramSha1Credential(username, username, password.toCharArray());
-		return new MongoClient(new ServerAddress(ip, port), Lists.newArrayList(credentials),options);
+		return new MongoClient(new ServerAddress(ip, port), credentials,options);
 	}
 
 	@Override
@@ -76,6 +76,7 @@ public class MongoServiceImpl implements MongoService{
 				}
 			}
 		});
+
 		close(mongoClient);
 		return list;
 	}

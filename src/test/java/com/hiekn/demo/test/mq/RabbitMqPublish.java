@@ -16,7 +16,7 @@ public class RabbitMqPublish {
 	
 	public static void main(String[] args) throws Exception {
 		
-		Connection connection = RabbitMqFactory.getConnection("test", "test123", "192.168.1.122", "/", 5672);
+		Connection connection = RabbitMqFactory.getConnection("test", "test123", "192.168.1.152", "/", 5672);
 		
 		Channel channel =  connection.createChannel();
 		
