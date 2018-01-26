@@ -1,11 +1,12 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.java;
 
 import java.util.Map;
 import java.util.Properties;
 
+import com.hiekn.demo.test.TestBase;
 import org.junit.Test;
 
-public class SystemPropertiesTest extends TestBase{
+public class SystemPropertiesTest extends TestBase {
 	
 	@Test
 	public void getAll(){

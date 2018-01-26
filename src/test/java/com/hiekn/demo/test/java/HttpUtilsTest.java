@@ -1,4 +1,4 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.java;
 
 import javax.ws.rs.core.GenericType;
 

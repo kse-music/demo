@@ -1,4 +1,4 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.java;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,9 +9,9 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
+import com.hiekn.demo.test.TestBase;
 import org.junit.Test;
 
-import com.google.common.base.Function;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.cache.Cache;
@@ -39,7 +39,7 @@ import com.google.common.graph.MutableValueGraph;
 import com.google.common.graph.NetworkBuilder;
 import com.google.common.graph.ValueGraphBuilder;
 
-public class GuavaTest extends TestBase{
+public class GuavaTest extends TestBase {
 	
 	@Test
 	public void testMultiSet(){

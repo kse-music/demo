@@ -1,4 +1,4 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.java;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -7,6 +7,7 @@ import java.net.URL;
 
 import javax.annotation.Resource;
 
+import com.hiekn.demo.test.TestBase;
 import org.bson.Document;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 
 
-public class DownloadImageUtil extends TestBase{
+public class DownloadImageUtil extends TestBase {
 	
 	@Resource
 	private MongoClient mongoClient;

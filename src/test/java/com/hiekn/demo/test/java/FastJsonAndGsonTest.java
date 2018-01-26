@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.plain;
+package com.hiekn.demo.test.java;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

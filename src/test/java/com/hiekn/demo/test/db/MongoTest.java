@@ -1,6 +1,7 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.db;
 
 import com.google.common.collect.Lists;
+import com.hiekn.demo.test.TestBase;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MapReduceIterable;
 import com.mongodb.client.MongoCollection;
@@ -10,7 +11,7 @@ import org.junit.Test;
 
 import javax.annotation.Resource;
 
-public class MongoTest extends TestBase{
+public class MongoTest extends TestBase {
 	@Resource
 	private MongoClient mongoClient;
 

@@ -1,4 +1,4 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.db;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import com.hiekn.demo.test.TestBase;
 import org.bson.Document;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
-public class Mongo2Excel extends TestBase{
+public class Mongo2Excel extends TestBase {
 	@Resource
 	private MongoClient client;
 	

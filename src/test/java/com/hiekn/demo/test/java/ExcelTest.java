@@ -1,10 +1,11 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.java;
 
 import java.io.FileInputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hiekn.demo.test.TestBase;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -12,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 
 
-public class ExcelTest  extends TestBase{
+public class ExcelTest  extends TestBase {
 
 	private static final String EXCEL_FILE_PATH = "F:\\interface.xlsx";
 

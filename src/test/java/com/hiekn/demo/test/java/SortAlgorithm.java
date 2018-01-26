@@ -1,8 +1,8 @@
-package com.hiekn.demo.test.plain;
+package com.hiekn.demo.test.java;
 
 import java.util.Arrays;
 
-public class SortJava {
+public class SortAlgorithm {
 	public static void main(String[] args) {
 		int[] arr = {77,99,44,55,22,88,11,0,66,33,1};
 //		bubbleSort(arr);

@@ -1,4 +1,4 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.java;
 
 import java.io.File;
 import java.io.FileOutputStream;

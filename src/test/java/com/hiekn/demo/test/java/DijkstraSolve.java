@@ -1,4 +1,4 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.java;
 
 import com.google.common.collect.Sets;
 import com.google.common.graph.MutableValueGraph;
