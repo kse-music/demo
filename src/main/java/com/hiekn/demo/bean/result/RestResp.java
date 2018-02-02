@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RestResp<T> {
 	
@@ -15,7 +12,7 @@ public class RestResp<T> {
         OK("OK"),
         FAIL("FAIL");
         private final String name;
-        private ActionStatusMethod(final String name) {
+        ActionStatusMethod(final String name) {
             this.name = name;
         }
         @Override
@@ -26,49 +23,24 @@ public class RestResp<T> {
 	
     @JsonProperty("ActionStatus")
 	private String ActionStatus = ActionStatusMethod.OK.toString();
-    @JsonProperty("ErrorCode")
+    @JsonProperty("ErrorCodes")
 	private Integer ErrorCode = 0;
     @JsonProperty("ErrorInfo")
 	private String ErrorInfo = "";
-	private RestData<T> data = null;
-	private Long tt;
-	
+	private T data;
+
 	public RestResp() {	}
 	
-	public RestResp(Long tt){
-		this.tt = tt;
-	}
-	
-	public RestResp(Integer code,String msg,Long tt){
+	public RestResp(Integer code,String msg){
 		this.ActionStatus = ActionStatusMethod.FAIL.toString();
 		this.ErrorCode = code;
-		this.ErrorInfo = msg == null?com.hiekn.demo.bean.result.ErrorCode.fromErrorCode(code).toString():msg;
-		this.tt = tt;
+		this.ErrorInfo = msg;
 	}
 	
-	public RestResp(T data, Long tt){
-		this(data==null?new RestData<T>(new ArrayList<T>()):new RestData<T>(data),tt);
+	public RestResp(T data){
+		this.data = data;
 	}
 	
-	public RestResp(List<T> data, Long tt){
-		this(data==null?new RestData<T>(new ArrayList<T>()):new RestData<T>(data),tt);
-	}
-	
-	public RestResp(List<T> data, Long count, Long tt){
-		this(data,tt);
-		this.data.setRsCount(count);
-	}
-	
-	public RestResp(List<T> data, Integer count, Long tt){
-		this(data,tt);
-		this.data.setRsCount(Long.valueOf(count));
-	}
-	
-	public RestResp(RestData<T> data, Long tt){
-		this.data = data==null?new RestData<T>(new ArrayList<T>()):data;
-		this.tt = tt;
-	}
-
 	@JsonIgnore
 	public String getActionStatus() {
 		return ActionStatus;
@@ -96,20 +68,11 @@ public class RestResp<T> {
 		ErrorInfo = errorInfo;
 	}
 
-	public RestData<T> getData() {
-		return data;
-	}
+    public T getData() {
+        return data;
+    }
 
-	public void setData(RestData<T> data) {
-		this.data = data;
-	}
-
-	public Long getTt() {
-		return tt;
-	}
-
-	public void setTt(Long tt) {
-		this.tt = tt;
-	}
-	
+    public void setData(T data) {
+        this.data = data;
+    }
 }

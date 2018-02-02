@@ -1,44 +1,38 @@
 package com.hiekn.demo.exception;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.NotAcceptableException;
-import javax.ws.rs.NotAllowedException;
-import javax.ws.rs.NotFoundException;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
+import com.google.common.collect.Lists;
+import com.hiekn.demo.bean.result.ErrorCodes;
+import com.hiekn.demo.bean.result.RestResp;
+import com.hiekn.demo.config.CommonResource;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Configuration;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.glassfish.jersey.media.sse.SseFeature;
-
-import com.hiekn.demo.bean.result.ErrorCode;
-import com.hiekn.demo.bean.result.RestResp;
-
+@Configuration
 @Provider
 public class ExceptionHandler implements ExceptionMapper<Exception> {
 	
-	private static Logger log = LogManager.getLogger(ExceptionHandler.class);  
-	
-	@Context  
-    private HttpServletRequest request;  
-	
+	private static final Log logger = LogFactory.getLog(ExceptionHandler.class);
+
 	@Override
 	public Response toResponse(Exception exception) {
-		String t = request.getParameter("tt");
-		long tt = StringUtils.isBlank(t)?0L:Long.parseLong(t);
-		ErrorCode code = null;
-		RestResp<Integer> resp = null;
+		ErrorCodes code = ErrorCodes.SERVICE_ERROR;
 		Status statusCode = Status.OK;
+        String errMsg = "";
+
 		if(exception instanceof BaseException){
-			code = ((BaseException) exception).getCode();
+            code = ((BaseException) exception).getCode();
+            errMsg = ((BaseException) exception).getMsg();
 		}else if(exception instanceof WebApplicationException){
-			code = ErrorCode.HTTP_ERROR;
+			code = ErrorCodes.HTTP_ERROR;
 			if(exception instanceof NotFoundException){
 				statusCode = Status.NOT_FOUND;
 			}else if(exception instanceof NotAllowedException){
@@ -48,16 +42,13 @@ public class ExceptionHandler implements ExceptionMapper<Exception> {
 			}else if(exception instanceof InternalServerErrorException){
 				statusCode = Status.INTERNAL_SERVER_ERROR;
 			}
-		}else{
-			code = ErrorCode.SERVICE_ERROR;
 		}
-		if(SseFeature.SERVER_SENT_EVENTS.equals(request.getHeader("Accept"))){
-			return Response.ok().status(Status.OK).header("Content-Type", SseFeature.SERVER_SENT_EVENTS).build();  
-		}
-		String errMsg = code.toString();
-		resp = new RestResp<Integer>(code.getErrorCode(),errMsg,tt);
-		log.error(errMsg, exception);  
-		return Response.ok(resp).status(statusCode).build();  
-	}
+
+        Integer errorCode = code.getErrorCode();
+        errMsg = StringUtils.isBlank(errMsg)?code.getInfo():errMsg;
+        exception.setStackTrace(Lists.newArrayList(exception.getStackTrace()).stream().filter(s -> s.getClassName().contains(CommonResource.BASE_PACKAGE)).collect(Collectors.toList()).toArray(new StackTraceElement[]{}));
+        logger.error(errorCode,exception);
+        return Response.ok(new RestResp<>(errorCode,errMsg)).status(statusCode).build();
+    }
 	
 }
