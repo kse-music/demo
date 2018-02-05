@@ -1,18 +1,19 @@
 package com.hiekn.demo.service.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Resource;
-import javax.ws.rs.core.MediaType;
-
+import com.google.common.collect.Lists;
+import com.hiekn.demo.aop.Intercept;
+import com.hiekn.demo.bean.UserBean;
+import com.hiekn.demo.bean.result.RestResp;
+import com.hiekn.demo.bean.search.QueryCondition;
+import com.hiekn.demo.config.CommonResource;
+import com.hiekn.demo.dao.UserDao;
+import com.hiekn.demo.dao.UserMapper;
+import com.hiekn.demo.parser.EsParser;
+import com.hiekn.demo.service.CommonService;
+import com.hiekn.demo.util.CommonUtils;
+import com.mongodb.MongoClient;
+import com.qiniu.storage.UploadManager;
+import com.qiniu.util.Auth;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -30,24 +31,20 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.sse.EventOutput;
 import org.glassfish.jersey.media.sse.OutboundEvent;
 import org.springframework.stereotype.Service;
-
-import com.google.common.collect.Lists;
-import com.hiekn.demo.aop.Intercept;
-import com.hiekn.demo.bean.UserBean;
-import com.hiekn.demo.bean.result.RestResp;
-import com.hiekn.demo.bean.search.QueryCondition;
-import com.hiekn.demo.config.CommonResource;
-import com.hiekn.demo.dao.UserDao;
-import com.hiekn.demo.dao.UserMapper;
-import com.hiekn.demo.parser.EsParser;
-import com.hiekn.demo.service.CommonService;
-import com.hiekn.demo.util.CommonUtils;
-import com.mongodb.MongoClient;
-import com.qiniu.storage.UploadManager;
-import com.qiniu.util.Auth;
-
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+
+import javax.annotation.Resource;
+import javax.ws.rs.core.MediaType;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class CommonServiceImpl implements CommonService{
@@ -180,7 +177,7 @@ public class CommonServiceImpl implements CommonService{
 	}
 
 	@Override
-	public EventOutput getServerSentEvents(String userId,String tt) {
+	public EventOutput getServerSentEvents(String userId) {
 		final EventOutput eventOutput = new EventOutput();
 //		try {
 //			OutboundEvent.Builder eventBuilder = new OutboundEvent.Builder();
@@ -205,7 +202,7 @@ public class CommonServiceImpl implements CommonService{
                 try {
                 	Jedis jedis = jedisPool.getResource();
                 	final OutboundEvent.Builder eventBuilder = new OutboundEvent.Builder();
-                	eventBuilder.name("uid_"+userId+"identifier_"+tt);
+                	eventBuilder.name("uid_"+userId+"identifier_");
                 	while(true){
                 		String str = jedis.get( "s");
                 		if(str!=null){

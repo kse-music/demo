@@ -18,5 +18,5 @@ public interface CommonService {
 	List<UserBean> test(String kw,List<QueryCondition> qcList);
 	void deleteTest(Integer id);
 	void testTransaction();
-	EventOutput getServerSentEvents(String userId,String tt);
+	EventOutput getServerSentEvents(String userId);
 }

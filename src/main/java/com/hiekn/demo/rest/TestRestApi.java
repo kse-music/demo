@@ -64,6 +64,6 @@ public class TestRestApi {
 	@Path("/sse")
 	@Produces(SseFeature.SERVER_SENT_EVENTS)
 	public EventOutput getServerSentEvents() {
-		return commonService.getServerSentEvents(request.getParameter("userId"),request.getParameter("tt"));
+		return commonService.getServerSentEvents(request.getParameter("userId"));
 	}
 }
