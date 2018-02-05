@@ -214,7 +214,7 @@ public class CommonServiceImpl implements CommonService{
                 			jedis.del("s");
                 			break;
                 		}
-            			eventBuilder.data(RestResp.class, new RestResp<String>("The server time is: " + new Date(),1L));
+            			eventBuilder.data(RestResp.class, new RestResp<String>("The server time is: " + new Date()));
             			eventBuilder.mediaType(MediaType.APPLICATION_JSON_TYPE);
                 		final OutboundEvent event = eventBuilder.build();
             			eventOutput.write(event);

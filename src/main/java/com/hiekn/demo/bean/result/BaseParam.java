@@ -7,8 +7,6 @@ public class BaseParam {
     private Integer userId;
     @QueryParam("token")
     private String token;
-    @QueryParam("tt")
-    private Long tt;
 
     public Integer getUserId() {
         return userId;
@@ -26,11 +24,4 @@ public class BaseParam {
         this.token = token;
     }
 
-    public Long getTt() {
-        return tt;
-    }
-
-    public void setTt(Long tt) {
-        this.tt = tt;
-    }
 }

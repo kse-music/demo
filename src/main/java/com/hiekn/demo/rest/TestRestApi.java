@@ -1,30 +1,26 @@
 package com.hiekn.demo.rest;
 
-import java.util.List;
-import java.util.Properties;
+import com.google.gson.reflect.TypeToken;
+import com.hiekn.demo.bean.UserBean;
+import com.hiekn.demo.bean.result.BaseParam;
+import com.hiekn.demo.bean.result.RestResp;
+import com.hiekn.demo.bean.search.QueryCondition;
+import com.hiekn.demo.service.CommonService;
+import com.hiekn.demo.util.JsonUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.glassfish.jersey.media.sse.EventOutput;
+import org.glassfish.jersey.media.sse.SseFeature;
+import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-
-import com.hiekn.demo.bean.result.BaseParam;
-import org.glassfish.jersey.media.sse.EventOutput;
-import org.glassfish.jersey.media.sse.SseFeature;
-import org.springframework.stereotype.Controller;
-
-import com.google.gson.reflect.TypeToken;
-import com.hiekn.demo.bean.UserBean;
-import com.hiekn.demo.bean.result.RestResp;
-import com.hiekn.demo.bean.search.QueryCondition;
-import com.hiekn.demo.exception.JsonException;
-import com.hiekn.demo.service.CommonService;
-import com.hiekn.demo.util.JsonUtils;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import java.util.List;
+import java.util.Properties;
 
 @Controller
 @Path("/test")
@@ -43,25 +39,25 @@ public class TestRestApi {
 	public RestResp<String> test(@BeanParam BaseParam baseParam) {
 		Properties props = System.getProperties();
 		props.list(System.out);
-		return new RestResp<>(System.getProperty("catalina.base"), baseParam.getTt());
+		return new RestResp<>(System.getProperty("catalina.base"));
 	}
 
 	@POST
 	@Path("/testES")
 	@ApiOperation("测试2")
-	public  RestResp<UserBean> test2(@BeanParam BaseParam baseParam,
+	public RestResp<List<UserBean>> test2(@BeanParam BaseParam baseParam,
 			@FormParam("kw") String kw,
 			@FormParam("queryCondition") String queryCondition){
 		List<QueryCondition> qcList  = JsonUtils.fromJson(queryCondition, new TypeToken<List<QueryCondition>>() {}.getType());
-		return new RestResp<>(commonService.test(kw,qcList),baseParam.getTt());
+		return new RestResp<>(commonService.test(kw,qcList));
 	}
 	@POST
 	@Path("/testDel")
 	@ApiOperation("测试3")
-	public  RestResp<String> test3(@BeanParam BaseParam baseParam,
+	public RestResp<String> test3(@BeanParam BaseParam baseParam,
 			@ApiParam(required=true)@FormParam("id") Integer id){
 		commonService.deleteTest(id);
-		return new RestResp<>(baseParam.getTt());
+		return new RestResp<>();
 	}
 
 	@GET

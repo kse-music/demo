@@ -1,21 +1,19 @@
 package com.hiekn.demo.rest;
 
-import java.util.Map;
+import com.hiekn.demo.bean.result.BaseParam;
+import com.hiekn.demo.bean.result.RestData;
+import com.hiekn.demo.bean.result.RestResp;
+import com.hiekn.demo.mongo.MongoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-
-import com.hiekn.demo.bean.result.BaseParam;
-import org.springframework.stereotype.Controller;
-
-import com.hiekn.demo.bean.result.RestData;
-import com.hiekn.demo.bean.result.RestResp;
-import com.hiekn.demo.mongo.MongoService;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @Path("/mongo")
@@ -35,32 +33,32 @@ public class MongoRestApi {
 			@ApiParam(value="用户名")@FormParam("username") String username,
 			@ApiParam(value="密码")@FormParam("password") String password){
 		mongoService.connect(baseParam.getUserId(),ip,port,username,password);
-		return new RestResp<>(baseParam.getTt());
+		return new RestResp<>();
 	}
 
 	@GET
 	@Path("/list/db")
 	@ApiOperation("获取所有数据库")
-	public  RestResp<String> dbList(@BeanParam BaseParam baseParam,
-			@ApiParam(value="ip",required = true)@QueryParam("ip") String ip,
-			@ApiParam(value="端口",required = true)@QueryParam("port") Integer port){
-		return new RestResp<>(mongoService.getDbList(baseParam.getUserId(),ip,port),baseParam.getTt());
+	public  RestResp<List<String>> dbList(@BeanParam BaseParam baseParam,
+                                         @ApiParam(value="ip",required = true)@QueryParam("ip") String ip,
+                                         @ApiParam(value="端口",required = true)@QueryParam("port") Integer port){
+		return new RestResp<>(mongoService.getDbList(baseParam.getUserId(),ip,port));
 	}
 
 	@GET
 	@Path("/list/table")
 	@ApiOperation("获取表")
-	public RestResp<String>  tableList(@BeanParam BaseParam baseParam,
+	public RestResp<List<String>>  tableList(@BeanParam BaseParam baseParam,
 			@ApiParam(value="ip",required = true)@QueryParam("ip") String ip,
 			@ApiParam(value="端口",required = true)@QueryParam("port") Integer port,
 			@ApiParam(value="数据库名",required = true)@QueryParam("db") String db){
-		return new RestResp<>(mongoService.getTableList(baseParam.getUserId(),db,ip,port),baseParam.getTt());
+		return new RestResp<>(mongoService.getTableList(baseParam.getUserId(),db,ip,port));
 	}
 
 	@GET
 	@Path("/list/data")
 	@ApiOperation("分页获取数据")
-	public RestResp<Map<String, Object>> dataList(@BeanParam BaseParam baseParam,
+	public RestResp<RestData<Map<String,Object>>> dataList(@BeanParam BaseParam baseParam,
 			@ApiParam(value="ip",required = true)@QueryParam("ip") String ip,
 			@ApiParam(value="端口",required = true)@QueryParam("port") Integer port,
 			@ApiParam(value="数据库名",required = true)@QueryParam("db") String db,
@@ -68,6 +66,6 @@ public class MongoRestApi {
 			@QueryParam("pageNo")@DefaultValue("1") Integer pageNo,
 			@QueryParam("pageSize")@DefaultValue("10")  Integer pageSize){
 		RestData<Map<String,Object>> rd = mongoService.getData(baseParam.getUserId(),db, table, pageNo, pageSize,ip,port);
-		return new RestResp<>(rd,baseParam.getTt());
+		return new RestResp<>(rd);
 	}
 }

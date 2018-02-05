@@ -1,31 +1,22 @@
 package com.hiekn.demo.filter;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.hiekn.demo.util.BeanUtils;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
+import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.ext.Provider;
+import java.io.*;
 import java.net.URLDecoder;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
-
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.core.Cookie;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.ext.Provider;
-
-import com.hiekn.demo.bean.result.ErrorCode;
-import com.hiekn.demo.bean.result.RestResp;
-import com.hiekn.demo.util.BeanUtils;
-
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 @Provider
 public class RequestFilter implements ContainerRequestFilter{
@@ -50,7 +41,7 @@ public class RequestFilter implements ContainerRequestFilter{
 		
 		if(Objects.nonNull(userId)){
 			if(checkFrequency(userId, url)){
-				requestContext.abortWith(Response.ok(new RestResp<String>(ErrorCode.INVOKE_FAST_ERROR.getErrorCode(),ErrorCode.INVOKE_FAST_ERROR.toString(),Objects.isNull(tt)?0L:Long.parseLong(tt))).build());
+//				requestContext.abortWith(Response.ok(new RestResp<String>(ErrorCodes.INVOKE_FAST_ERROR.getErrorCode(),ErrorCodes.INVOKE_FAST_ERROR.toString(),Objects.isNull(tt)?0L:Long.parseLong(tt))).build());
 				return;
 			}
 			setFrequency(userId, url);

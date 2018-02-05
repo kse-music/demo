@@ -1,21 +1,18 @@
 package com.hiekn.demo.rest;
 
-import java.io.IOException;
+import com.hiekn.demo.bean.UserBean;
+import com.hiekn.demo.bean.result.BaseParam;
+import com.hiekn.demo.bean.result.RestResp;
+import com.hiekn.demo.service.UserService;
+import com.hiekn.demo.util.PakoGzipUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-
-import com.hiekn.demo.bean.result.BaseParam;
-import org.springframework.stereotype.Controller;
-
-import com.hiekn.demo.bean.UserBean;
-import com.hiekn.demo.bean.result.RestResp;
-import com.hiekn.demo.service.UserService;
-import com.hiekn.demo.util.PakoGzipUtils;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.io.IOException;
 
 @Controller
 @Path("/user")
@@ -29,7 +26,7 @@ public class UserRestApi {
 	@POST
 	@ApiOperation("登录")
 	@Path("/login")
-	public  RestResp<String> test(@BeanParam BaseParam baseParam,
+	public RestResp<Object> test(@BeanParam BaseParam baseParam,
 			@FormParam("mobile") String mobile,
 			@FormParam("mcode") String mcode){
 		try {
@@ -40,15 +37,15 @@ public class UserRestApi {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new RestResp<>(System.currentTimeMillis()+"",baseParam.getTt());
+		return new RestResp<>(System.currentTimeMillis());
 	}
 	
 	@POST
 	@ApiOperation("根据用户名查询用户")
 	@Path("/get")
-	public  RestResp<UserBean> getUserByName(@BeanParam BaseParam baseParam,
+	public RestResp<UserBean> getUserByName(@BeanParam BaseParam baseParam,
 											 @FormParam("name") String name){
-		return  new RestResp<>(userService.getByName(name),baseParam.getTt());
+		return  new RestResp<>(userService.getByName(name));
 	}
 	
 }

@@ -1,16 +1,15 @@
 package com.hiekn.demo.util;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import com.hiekn.demo.bean.result.ErrorCodes;
+import com.hiekn.demo.exception.ServiceException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
-
-import com.hiekn.demo.bean.result.ErrorCode;
-import com.hiekn.demo.exception.ServiceException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class ValidatorUtils {  
     private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();  
@@ -30,7 +29,7 @@ public class ValidatorUtils {
                     StringBuffer sb = new StringBuffer();  
                     sb.append(cv.getMessage());  
                     errorMap.put(property, sb);  
-                    throw ServiceException.newInstance(ErrorCode.PARAM_ERROR);
+                    throw ServiceException.newInstance(ErrorCodes.PARAM_PARSE_ERROR);
                 }  
             }  
         }  
