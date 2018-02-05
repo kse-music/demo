@@ -1,8 +1,49 @@
 package com.hiekn.demo.test.java;
 
-public class GenericTest  {
 
-	public static void main(String[] args) throws Exception{
+/**
+ * https://www.zhihu.com/question/20400700
+ *
+ * 协变和逆变指的是宽类型和窄类型在某种情况下的替换或交换的特性。
+ * 简单的说，协变就是用一个窄类型替代宽类型，而逆变则用宽类型覆盖窄类型。
+ */
+public class GenericTest {
+    public static void main(String[] args) throws Exception {
+        //1.上界通配符<? extends T>
+//        Plate<Fruit> p = new Plate<Apple>(new Apple());//装苹果的盘子”无法转换成“装水果的盘子”
+        Plate<? extends Fruit> p = new Plate<>(new Apple());//Plate<？ extends Fruit>是Plate<Fruit>以及Plate<Apple>的基类
+        //2.下界通配符<? super T>
+        //一个能放水果以及一切是水果基类的盘子。Plate<？ super Fruit>是Plate<Fruit>的基类，但不是Plate<Apple>的基类
+
+        //******副作用********
+        //不能存入任何元素
+        //标上一个占位符：CAP#1，来表示捕获一个Fruit或Fruit的子类，具体是什么类不知道，所以就都不允许。
+//        p.set(new Fruit());    //Error
+//        p.set(new Apple());    //Error
+
+
+        //读取出来的东西只能存放在Fruit或它的基类里。
+        Fruit newFruit1 = p.get();
+        Object newFruit2 = p.get();
+//        Apple newFruit3=p.get();    //Error
+
+        //**************************************************************************************//
+
+        //下界<? super T>不影响往里存，但往外取只能放在Object对象里
+        Plate<? super Fruit> p2 = new Plate<>(new Fruit());
+        p2.set(new Fruit());
+        p2.set(new Apple());
+
+        //读取出来的东西只能存放在Object类里。
+//        Fruit newFruit3 = p2.get();//Error
+//        Fruit newFruit11 = p2.get();//Error
+        Object newFruit22= p2.get();    //Error
+
+        /*
+        PECS（Producer Extends Consumer Super）原则
+        1.频繁往外读取内容的，适合用上界Extends。
+        2.经常往里插入的，适合用下界Super。
+         */
         System.out.println(genericMethod(GenericTest.class));
     }
 
@@ -22,5 +63,39 @@ public class GenericTest  {
         T instance = tClass.newInstance();
         return instance;
     }
-
 }
+
+
+class Plate<T> {
+    private T item;
+
+    public Plate(T t) {
+        item = t;
+    }
+
+    public void set(T t) {
+        item = t;
+    }
+
+    public T get() {
+        return item;
+    }
+}
+
+//Lev 1
+class Food{}
+
+class Fruit extends Food{}
+
+//Lev 2
+class Meat extends Food{}
+
+//Lev 3
+class Apple extends Fruit {}
+class Banana extends Fruit{}
+class Pork extends Meat{}
+class Beef extends Meat{}
+
+//Lev 4
+class RedApple extends Apple{}
+class GreenApple extends Apple{}
