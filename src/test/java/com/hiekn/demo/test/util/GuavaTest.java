@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java;
+package com.hiekn.demo.test.util;
 
 import java.util.Collection;
 import java.util.HashMap;

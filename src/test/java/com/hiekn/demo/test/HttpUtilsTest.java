@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java;
+package com.hiekn.demo.test;
 
 import com.hiekn.demo.bean.Student;
 import com.hiekn.demo.bean.result.RestResp;
