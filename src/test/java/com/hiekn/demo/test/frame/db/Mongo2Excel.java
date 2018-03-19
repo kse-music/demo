@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.db;
+package com.hiekn.demo.test.frame.db;
 
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,9 +1,8 @@
-package com.hiekn.demo.test.db;
+package com.hiekn.demo.test.frame.db;
 
 import com.google.common.collect.Lists;
 import com.hiekn.demo.test.TestBase;
 import com.mongodb.MongoClient;
-import com.mongodb.client.MapReduceIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;

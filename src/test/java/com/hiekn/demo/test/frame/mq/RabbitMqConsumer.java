@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.mq;
+package com.hiekn.demo.test.frame.mq;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;

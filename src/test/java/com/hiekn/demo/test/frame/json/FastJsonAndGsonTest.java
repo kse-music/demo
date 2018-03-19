@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame;
+package com.hiekn.demo.test.frame.json;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.es;
+package com.hiekn.demo.test.frame.es;
 
 import javax.annotation.Resource;
 
