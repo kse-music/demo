@@ -1,43 +1,24 @@
 package com.hiekn.demo.test.util;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
-
-import com.hiekn.demo.test.TestBase;
-import org.junit.Test;
-
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multiset;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 import com.google.common.collect.Table.Cell;
 import com.google.common.eventbus.AllowConcurrentEvents;
 import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.Subscribe;
-import com.google.common.graph.ElementOrder;
-import com.google.common.graph.EndpointPair;
-import com.google.common.graph.GraphBuilder;
-import com.google.common.graph.MutableGraph;
-import com.google.common.graph.MutableNetwork;
-import com.google.common.graph.MutableValueGraph;
-import com.google.common.graph.NetworkBuilder;
-import com.google.common.graph.ValueGraphBuilder;
+import com.google.common.graph.*;
+import com.hiekn.demo.test.TestBase;
+import org.junit.Test;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 
 public class GuavaTest extends TestBase {
 	
@@ -68,7 +49,7 @@ public class GuavaTest extends TestBase {
 				new PersonDb("lisi", 24), new PersonDb("wangwu", 30));  
 
 		//返回的列表是原有列表的一个转换视图，对原有集合的修改当然会反映到新集合中,transform是单向的，无法向结果列表中添加新元素
-		List<PersonVo> personVos = Lists.transform(personDbs, (personDb) -> personDbToVo(personDb));
+		List<PersonVo> personVos = Lists.transform(personDbs,  (personDb) -> personDbToVo(personDb));
 
 		for(PersonDb personDb : personDbs) {  
 			personDb.setMsg("hello world!");  
