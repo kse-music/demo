@@ -86,7 +86,7 @@
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-jersey2-jaxrs</artifactId>
-			<version>1.5.16</version>
+			<version>1.5.10</version>
 		</dependency>
 		<!-- jersey-swagger结束 -->
 
@@ -280,8 +280,13 @@
 			<version>4.12</version>
 		</dependency>
 		<!-- 第三方工具如：日志、guava、gson、Junit结束 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-staticdocs</artifactId>
+            <version>2.6.1</version>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<finalName>demo</finalName>
@@ -330,7 +335,7 @@
                     <apiSources>
                         <apiSource>
                             <springmvc>false</springmvc>
-                            <locations>com.hiekn.plantrobot.cms.rest</locations>
+                            <locations>com.hiekn.demo.rest</locations>
                             <schemes>http,https</schemes>
                             <host>192.168.1.119:8080</host>
                             <basePath>/api</basePath>
@@ -355,7 +360,7 @@
                             </info>
                             <securityDefinitions>
                             </securityDefinitions>
-                            <swaggerDirectory>${basedir}/doc</swaggerDirectory>
+                            <swaggerDirectory>${basedir}/json</swaggerDirectory>
                         </apiSource>
                     </apiSources>
                 </configuration>
@@ -375,6 +380,39 @@
                         <version>1.5.6</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.3</version>
+                <configuration>
+                    <sourceDirectory>${project.basedir}/doc</sourceDirectory>
+                    <sourceDocumentName>index.adoc</sourceDocumentName>
+                    <attributes>
+                        <doctype>book</doctype>
+                        <toc>left</toc>
+                        <toclevels>3</toclevels>
+                        <numbered></numbered>
+                        <hardbreaks></hardbreaks>
+                        <sectlinks></sectlinks>
+                        <sectanchors></sectanchors>
+                        <generated>${project.basedir}/doc</generated>
+                    </attributes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>output-html</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>html5</backend>
+                            <outputDirectory>${project.basedir}/src/docs</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
 		</plugins>
