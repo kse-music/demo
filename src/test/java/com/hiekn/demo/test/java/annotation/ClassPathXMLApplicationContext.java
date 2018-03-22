@@ -42,12 +42,9 @@ public class ClassPathXMLApplicationContext {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             document = saxReader.read(classLoader.getResourceAsStream(fileName));
             Element beans = document.getRootElement();
-            for (Iterator<Element> beansList = beans.elementIterator();
-                 beansList.hasNext();) {
+            for (Iterator<Element> beansList = beans.elementIterator();beansList.hasNext();) {
                 Element element = beansList.next();
-                BeanDefine bean = new BeanDefine(
-                        element.attributeValue("id"),
-                        element.attributeValue("class"));
+                BeanDefine bean = new BeanDefine(element.attributeValue("id"),element.attributeValue("class"));
                 beanList.add(bean);
             }
         } catch (DocumentException e) {
@@ -92,25 +89,24 @@ public class ClassPathXMLApplicationContext {
     public void propertyAnnotation(Object bean){
         try {
             //获取其属性的描述
-            PropertyDescriptor[] ps =
-                    Introspector.getBeanInfo(bean.getClass()).getPropertyDescriptors();
-            for(PropertyDescriptor proderdesc : ps){
+            PropertyDescriptor[] ps =  Introspector.getBeanInfo(bean.getClass()).getPropertyDescriptors();
+            for(PropertyDescriptor p : ps){
                 //获取所有set方法
-                Method setter = proderdesc.getWriteMethod();
+                Method setter = p.getWriteMethod();
                 //判断set方法是否定义了注解
                 if(setter!=null && setter.isAnnotationPresent(ZxfResource.class)){
                     //获取当前注解，并判断name属性是否为空
                     ZxfResource resource = setter.getAnnotation(ZxfResource.class);
                     String name ="";
                     Object value = null;
-                    if(resource.name()!=null&&!"".equals(resource.name())){
+                    if(resource.name() != null && !"".equals(resource.name())){
                         //获取注解的name属性的内容
                         name = resource.name();
                         value = sigletions.get(name);
                     }else{ //如果当前注解没有指定name属性,则根据类型进行匹配
                         for(String key : sigletions.keySet()){
                             //判断当前属性所属的类型是否在配置文件中存在
-                            if(proderdesc.getPropertyType().isAssignableFrom(sigletions.get(key).getClass())){
+                            if(p.getPropertyType().isAssignableFrom(sigletions.get(key).getClass())){
                                 //获取类型匹配的实例对象
                                 value = sigletions.get(key);
                                 break;
