@@ -321,6 +321,62 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
+
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>false</springmvc>
+                            <locations>com.hiekn.plantrobot.cms.rest</locations>
+                            <schemes>http,https</schemes>
+                            <host>192.168.1.119:8080</host>
+                            <basePath>/api</basePath>
+                            <info>
+                                <title>PlantRobot CMS API</title>
+                                <version>v1</version>
+                                <description>
+
+                                </description>
+                                <termsOfService>
+                                    http://blog.csdn.net/dh798417147
+                                </termsOfService>
+                                <contact>
+                                    <email>dinghao@hiekn.com</email>
+                                    <name>dinghao</name>
+                                    <url>http://blog.csdn.net/dh798417147</url>
+                                </contact>
+                                <license>
+                                    <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+                                    <name>Apache 2.0</name>
+                                </license>
+                            </info>
+                            <securityDefinitions>
+                            </securityDefinitions>
+                            <swaggerDirectory>${basedir}/doc</swaggerDirectory>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-hibernate-validations</artifactId>
+                        <version>1.5.6</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
 		</plugins>
 	</build>
 
