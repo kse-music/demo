@@ -20,13 +20,14 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import com.hiekn.demo.test.design.filter.Employee;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.hiekn.demo.test.TestBase;
 
-public class Java8Test extends TestBase{
+public class Java8Tester extends TestBase{
 
 	//一、接口的默认方法
 	@Test
@@ -160,10 +161,11 @@ public class Java8Test extends TestBase{
 		stringCollection.stream().filter(s -> s.startsWith("a")).forEach(System.out::println);
 	    Map<String, Long> result =	stringCollection.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println(result);
-		
+
 		//--Sort 排序,排序只创建了一个排列好后的Stream，而不会影响原有的数据源
 		stringCollection.stream().sorted().filter(s -> s.startsWith("a")).forEach(System.out::println);
 		stringCollection.stream().sorted((a,b) -> b.compareTo(a)).filter(s -> s.startsWith("a")).forEach(System.out::println);
+		stringCollection.stream().sorted(Comparator.comparing(String::valueOf).reversed()).filter(s -> s.startsWith("a")).forEach(System.out::println);
 
 		//--Map 映射,将元素根据指定的Function接口来依次将元素转成另外的对象
 		stringCollection.stream().map(String::toUpperCase).sorted(Comparator.comparing(String::valueOf).reversed()).forEach(System.out::println);

@@ -1,11 +1,7 @@
 package com.hiekn.demo.test.java8;
 
-import java.nio.charset.StandardCharsets;
-import java.time.Clock;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Base64;
+import java.time.*;
+import java.time.temporal.TemporalAdjusters;
 
 /**
  * Instant 它代表的是时间戳，比如2014-01-14T02:20:13.592Z，这可以从java.time.Clock类中获取，像这样： Instant current = Clock.system(ZoneId.of(“Asia/Tokyo”)).instant();
@@ -22,25 +18,46 @@ public class Java8Time {
 
         // Get the system clock as UTC offset
         final Clock clock = Clock.systemDefaultZone();
-        System.out.println( clock.instant() );
-        System.out.println( clock.millis() );
+        System.out.println(clock.instant());
+        System.out.println(clock.millis());
         System.out.println(Clock.systemUTC().millis());
-
 
         Instant timestamp = Instant.now();
         System.out.println(timestamp);
 
-        final LocalDateTime datetime = LocalDateTime.now();
+        ZoneId currentZone = ZoneId.systemDefault();
+        System.out.println(currentZone);
+        System.out.println("Local date: " + LocalDateTime.ofInstant(timestamp,currentZone));
+
+        final LocalDateTime datetime = LocalDateTime.now().withNano(0);
         final LocalDateTime datetimeFromClock = LocalDateTime.now( clock );
 
-        System.out.println( datetime);
-        System.out.println( datetimeFromClock );
+        System.out.println(datetime);
+        System.out.println(datetimeFromClock );
 
         final LocalDate date = LocalDate.of(2020,2,3);
         System.out.println(date.isLeapYear());
 
-        String text = "dd";
-        System.out.println(Base64.getEncoder().encodeToString(text.getBytes()));
+        LocalDate today = LocalDate.now();
+        // 取本月第1天：
+        LocalDate firstDayOfThisMonth = today.with(TemporalAdjusters.firstDayOfMonth());
+        System.out.println(firstDayOfThisMonth);
+        // 取本月第2天：
+        LocalDate secondDayOfThisMonth = today.withDayOfMonth(2);
+        System.out.println(secondDayOfThisMonth);
+
+        // 取本月最后一天，再也不用计算是28，29，30还是31：
+        LocalDate lastDayOfThisMonth = today.with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println(lastDayOfThisMonth);
+
+        // 取下一天：
+        LocalDate firstDayOf2018 = lastDayOfThisMonth.plusDays(1);
+        System.out.println(firstDayOf2018);
+
+        // 取2018年1月第一个周一，这个计算用Calendar要死掉很多脑细胞：
+        LocalDate firstMondayOf2018 = LocalDate.parse("2018-01-01").with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY)); // 2018-01-01
+        System.out.println(firstMondayOf2018);
+
     }
 
 }
