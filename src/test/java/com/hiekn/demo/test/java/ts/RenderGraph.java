@@ -3,15 +3,16 @@ package com.hiekn.demo.test.java.ts;
 public class RenderGraph{
 
     private class D3Draw extends D3{
+
         @Override
-        void custom() {
+        protected void custom() {
             System.out.println("D3-后续draw");
         }
     }
 
     private class ZoomChartDraw extends ZoomChart{
         @Override
-        public void custom() {
+        protected void custom() {
             System.out.println("ZoomChart-后续draw");
         }
     }

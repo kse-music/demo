@@ -9,5 +9,5 @@ public abstract class ZoomChart extends Draw{
         custom();
     }
 
-    abstract void custom();
+    protected abstract void custom();
 }

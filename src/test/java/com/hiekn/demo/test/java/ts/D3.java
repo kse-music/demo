@@ -8,5 +8,5 @@ public abstract class D3 extends Draw{
         custom();
     }
 
-    abstract void custom();
+    protected abstract void custom();
 }
