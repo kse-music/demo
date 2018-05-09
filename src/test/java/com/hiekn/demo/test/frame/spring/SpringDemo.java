@@ -2,9 +2,9 @@ package com.hiekn.demo.test.frame.spring;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.web.context.ContextLoader;
 
 public class SpringDemo {
+
     public static void main(String[] args) {
 
         //@Configuration注解的spring容器加载方式，用AnnotationConfigApplicationContext替换ClassPathXmlApplicationContext
