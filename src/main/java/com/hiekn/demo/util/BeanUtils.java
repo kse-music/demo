@@ -1,15 +1,15 @@
 package com.hiekn.demo.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class BeanUtils implements ApplicationContextAware{
@@ -21,10 +21,9 @@ public class BeanUtils implements ApplicationContextAware{
 		return ac.getBean(name);  
 	}  
 	
-	@SuppressWarnings("unchecked")
-	public static  <T> T getBean(String name,Class<T> clazz) {  
+	public static  <T> T getBean(String name,Class<T> clazz) {
 		checkApplicationContext();  
-		return (T)ac.getBean(name);  
+		return ac.getBean(name,clazz);
 	} 
 	
 	public static <T> T getBean(Class<T> clazz) {  
