@@ -1,11 +1,19 @@
 package com.hiekn.demo.test.frame.spring;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 @Component
-@Scope("prototype")
+//@Scope("prototype")
 public class TestBean {
+    private String name = "test";
+
+    @PostConstruct
+    private void init(){
+        System.out.println("init");
+    }
+
     public TestBean() {
         System.out.println("TestBean Constructor");
     }
@@ -20,5 +28,13 @@ public class TestBean {
 
     public void cleanUp(){
         System.out.println("TestBean 销毁。。。");
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
