@@ -16,6 +16,10 @@ public class SpringDemo {
 
         TestBean tb = context.getBean(TestBean.class);
         System.out.println(tb.getName());
+        DemoBean1 demoBean1 = context.getBean(DemoBean1.class);
+        System.out.println(demoBean1);
+        demoBean1.d();
+        System.out.println(context.getBean(DemoBean2.class));
     }
 }
 
