@@ -8,7 +8,8 @@ public class SpringDemo {
     public static void main(String[] args) {
 
         //@Configuration注解的spring容器加载方式，用AnnotationConfigApplicationContext替换ClassPathXmlApplicationContext
-        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
+//        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.hiekn.demo.test.frame.spring");
 
         //如果加载spring-context.xml文件：
 //        ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
