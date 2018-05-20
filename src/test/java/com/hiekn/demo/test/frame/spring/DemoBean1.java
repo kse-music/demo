@@ -9,6 +9,13 @@ import java.util.List;
 
 @Component
 public class DemoBean1 {
+
+    private DemoBean3 demoBean22;
+
+    public DemoBean1(DemoBean3 demoBean22) {
+        this.demoBean22 = demoBean22;
+    }
+
     @Autowired
     private DemoBean2 demoBean2;
 
@@ -19,10 +26,12 @@ public class DemoBean1 {
     private ObjectProvider<List<DemoBean3>> demoBean3s;
 
     public void d(){
+        System.out.println(demoBean2);
         System.out.println(demoBean2s.getObject());//beanFactory必须存在DemoBean2至少一个
         List<DemoBean3> ifAvailable = demoBean3s.getIfAvailable();//DemoBean3一个没有则为空
         List<DemoBean3> ifUnique = demoBean3s.getIfUnique();//不唯一且没有@primary，throw ex
         System.out.println(ifAvailable);
         System.out.println(ifUnique);
+        System.out.println("---"+demoBean22);
     }
 }
