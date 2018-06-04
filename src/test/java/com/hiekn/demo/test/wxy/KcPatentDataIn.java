@@ -40,17 +40,17 @@ public class KcPatentDataIn{
 	
 	private static Logger log = LogManager.getLogger(KcPatentDataIn.class);  
 	
-	private static TransportClient client = getClient();
+	private static TransportClient client = getClient(CLUSTER_NAME,ES_IP);
 	
 	private static Set<File> needDealFiles = Sets.newHashSet();
 	private static Set<String> successFilePath = Sets.newHashSet(); 
 
-    public static TransportClient getClient(){ 
+    public static TransportClient getClient(String clusterName,String ip){
     	TransportClient client = null;
 		try {
-			Settings settings = Settings.builder().put("cluster.name", CLUSTER_NAME).build();
+			Settings settings = Settings.builder().put("cluster.name", clusterName).build();
 			client = new PreBuiltTransportClient(settings);
-			client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(ES_IP), 9300));
+			client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(ip), 9300));
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
