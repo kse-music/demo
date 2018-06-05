@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -61,6 +62,10 @@ public class ScrollDemo {
                     out.write(json);
                     out.write("\r\n");
                 }
+//                entity = new NStringEntity("{\"scroll_id\" : [\""+scrollId+"]\"}", ContentType.APPLICATION_JSON);
+//                response = restClient.performRequest(HttpDelete.METHOD_NAME, "/_search/scroll/"+scrollId, Collections.emptyMap());
+//                response = restClient.performRequest(HttpDelete.METHOD_NAME, "/_search/scroll", Collections.emptyMap(), entity);
+
             }
             logger.info("查询结束");
         } catch (Exception e) {
@@ -70,5 +75,7 @@ public class ScrollDemo {
         }
 
     }
+
+
 
 }
