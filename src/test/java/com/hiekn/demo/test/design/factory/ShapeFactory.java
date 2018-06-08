@@ -1,7 +1,5 @@
 package com.hiekn.demo.test.design.factory;
 
-import org.apache.poi.ss.formula.functions.T;
-
 public class ShapeFactory {
     //使用 getShape 方法获取形状类型的对象
     public Shape getShape(String shapeType){
