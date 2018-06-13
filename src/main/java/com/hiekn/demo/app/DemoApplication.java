@@ -22,9 +22,9 @@ public class DemoApplication extends ResourceConfig{
 		.register(MultiPartFeature.class);
 
         //register(MvcFeature.class);
-        property(MvcFeature.TEMPLATE_BASE_PATH+".freemarker", "freemarker");
-//		property(MvcFeature.ENCODING+".freemarker", "GBK");//如果@Produces没指定输出编码，则以此设置为准,默认UTF-8
-//		property(MvcFeature.CACHE_TEMPLATES, new Boolean(true));//不知咋用
+        property(FreemarkerMvcFeature.TEMPLATE_BASE_PATH, "freemarker");
+//		property(FreemarkerMvcFeature.ENCODING, "GBK");//如果@Produces没指定输出编码，则以此设置为准,默认UTF-8
+		property(FreemarkerMvcFeature.CACHE_TEMPLATES, new Boolean(false));
         property(FreemarkerMvcFeature.TEMPLATE_OBJECT_FACTORY,new FreemarkerConfig(null));
         register(FreemarkerMvcFeature.class);//依赖MvcFeature
 
