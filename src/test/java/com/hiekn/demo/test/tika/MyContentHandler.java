@@ -1,12 +1,4 @@
-package com.hiekn.test.tika;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Iterator;
-
-import javax.imageio.ImageIO;
+package com.hiekn.demo.test.tika;
 
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -16,6 +8,13 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Iterator;
 
 public class MyContentHandler extends DefaultHandler {
 

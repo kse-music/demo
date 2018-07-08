@@ -1,15 +1,7 @@
-package com.hiekn.test.tika;
+package com.hiekn.demo.test.tika;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
@@ -21,8 +13,10 @@ import org.apache.tika.parser.Parser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.ContentHandler;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import java.io.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class Dcb {
 	

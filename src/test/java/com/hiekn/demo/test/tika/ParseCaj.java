@@ -1,13 +1,13 @@
-package com.hiekn.test.tika;
+package com.hiekn.demo.test.tika;
+
+import org.apache.tika.Tika;
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import org.apache.tika.Tika;
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;
 
 public class ParseCaj {
 
