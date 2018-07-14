@@ -1,4 +1,8 @@
 package com.hiekn.demo.util;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +16,10 @@ import java.net.URLConnection;
  *
  */
 public final class HttpRequest {
-	/**
+
+    private static final Log logger = LogFactory.getLog(HttpRequest.class);
+
+    /**
 	 * 向指定URL发送GET方法的请求
 	 * 
 	 * @param url
@@ -48,8 +55,7 @@ public final class HttpRequest {
 				sb.append(line);
 			}
 		} catch (Exception e) {
-			System.out.println("发送GET请求出现异常！" + e);
-			e.printStackTrace();
+            logger.error("发送GET请求出现异常！" + e);
 		}
 		// 使用finally块来关闭输入流
 		finally {
@@ -58,8 +64,8 @@ public final class HttpRequest {
 					in.close();
 				}
 			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+                logger.error("close fail");
+            }
 		}
 		return sb.toString();
 	}
@@ -101,8 +107,7 @@ public final class HttpRequest {
 				sb.append(line);
 			}
 		} catch (Exception e) {
-			System.out.println("发送 POST 请求出现异常！"+e);
-			e.printStackTrace();
+            logger.error("发送 POST 请求出现异常！"+e);
 		}
 		//使用finally块来关闭输出流、输入流
 		finally{
@@ -115,8 +120,8 @@ public final class HttpRequest {
 				}
 			}
 			catch(IOException ex){
-				ex.printStackTrace();
-			}
+                logger.error("close fail");
+            }
 		}
 		return sb.toString();
 	}    
