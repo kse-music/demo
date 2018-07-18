@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.design.delegate;
+package com.hiekn.demo.test.design.proxy;
 
 class A{
     void method1(){}
