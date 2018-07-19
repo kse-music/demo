@@ -32,7 +32,7 @@ public class ScrollDemo {
         restClientBuilder.setMaxRetryTimeoutMillis(30000);//在为同一请求进行多次尝试时应该遵守的超时。默认值为30秒
         RestClient restClient = restClientBuilder.build();
 
-        HttpEntity entity = new NStringEntity("{\"query\": {},\"size\": 10000}", ContentType.APPLICATION_JSON);
+        HttpEntity entity = new NStringEntity("{\"query\": {\"match_all\":{}},\"size\": 10000}", ContentType.APPLICATION_JSON);
         Response response = restClient.performRequest(HttpGet.METHOD_NAME, "/gw_prompt_200/_search?scroll=1m", Collections.singletonMap("pretty", "true"),entity);
         String data = EntityUtils.toString(response.getEntity());
         JSONObject jsonObject = JSON.parseObject(data);
