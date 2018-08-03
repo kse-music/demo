@@ -15,50 +15,25 @@ public class MacDemo {
 
         System.out.println(ia);
 
-        getLocalMac(ia);
-
-    }
-
-    private static void getLocalMac(InetAddress ia) throws SocketException {
-
-        //获取网卡，获取地址
-
+        // 获得网络接口对象（即网卡），并得到mac地址，mac地址存在于一个byte数组中。
         byte[] mac = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
 
-        System.out.println("mac数组长度："+mac.length);
+        // 下面代码是把mac地址拼装成String
+        StringBuffer sb = new StringBuffer();
 
-        StringBuffer sb = new StringBuffer("");
-
-        for(int i=0; i<mac.length; i++) {
-
-            if(i!=0) {
-
+        for (int i = 0; i < mac.length; i++) {
+            if (i != 0) {
                 sb.append("-");
-
             }
-
-            //字节转换为整数
-
-            int temp = mac[i]&0xff;
-
-            String str = Integer.toHexString(temp);
-
-            System.out.println("每8位:"+str);
-
-            if(str.length()==1) {
-
-                sb.append("0"+str);
-
-            }else {
-
-                sb.append(str);
-
-            }
-
+            // mac[i] & 0xFF 是为了把byte转化为正整数
+            String s = Integer.toHexString(mac[i] & 0xFF);
+            sb.append(s.length() == 1 ? 0 + s : s);
         }
 
-        System.out.println("本机MAC地址:"+sb.toString().toUpperCase());
+        // 把字符串所有小写字母改为大写成为正规的mac地址并返回
+        System.out.println(sb.toString().toUpperCase());
 
     }
+
 
 }
