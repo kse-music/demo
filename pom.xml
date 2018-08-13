@@ -302,6 +302,13 @@
             <version>5.5.13</version>
         </dependency>
 
+        <dependency>
+            <groupId>de.schlichtherle.truelicense</groupId>
+            <artifactId>truelicense-core</artifactId>
+            <version>1.33</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
 
@@ -316,7 +323,7 @@
 				</excludes>
 			</resource>
 			<resource>
-				<directory>src/main/resources</directory>
+				<directory>src/test/java</directory>
 			</resource>
 		</resources>
 		<plugins>
