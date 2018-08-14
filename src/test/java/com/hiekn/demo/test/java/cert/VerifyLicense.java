@@ -68,14 +68,10 @@ public class VerifyLicense {
 
     // 返回验证证书需要的参数
     private static LicenseParam initLicenseParams() {
-        Preferences preference = Preferences
-                .userNodeForPackage(VerifyLicense.class);
+        Preferences preference = Preferences.userNodeForPackage(VerifyLicense.class);
         CipherParam cipherParam = new DefaultCipherParam(STOREPWD);
-
-        KeyStoreParam privateStoreParam = new DefaultKeyStoreParam(
-                VerifyLicense.class, pubPath, PUBLICALIAS, STOREPWD, null);
-        LicenseParam licenseParams = new DefaultLicenseParam(SUBJECT,
-                preference, privateStoreParam, cipherParam);
+        KeyStoreParam privateStoreParam = new DefaultKeyStoreParam(VerifyLicense.class, pubPath, PUBLICALIAS, STOREPWD, null);
+        LicenseParam licenseParams = new DefaultLicenseParam(SUBJECT, preference, privateStoreParam, cipherParam);
         return licenseParams;
     }
 }
