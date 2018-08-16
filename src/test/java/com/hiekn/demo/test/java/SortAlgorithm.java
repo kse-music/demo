@@ -8,7 +8,7 @@ public class SortAlgorithm {
 //		bubbleSort(arr);
 //		selectSort(arr);
 //		insertSort(arr);
-        quickSort(arr,0,arr.length-1);
+      quickSort(arr,0,arr.length-1);
 		System.out.println(Arrays.toString(arr));
 	}
 
@@ -79,14 +79,10 @@ public class SortAlgorithm {
             for (i = low + 1; i <= high; i++){
                 if (arr[i] < pivot) {
                     p_pos++;
-                    t = arr[p_pos];
-                    arr[p_pos] = arr[i];
-                    arr[i] = t;
+                    swap(arr,i,p_pos);
                 }
             }
-            t = arr[low];
-            arr[low] = arr[p_pos];
-            arr[p_pos] = t;
+            swap(arr,low,p_pos);
             // 分而治之
             quickSort(arr, low, p_pos - 1);// 排序左半部分
             quickSort(arr, p_pos + 1, high);// 排序右半部分
