@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class SortAlgorithm {
 	public static void main(String[] args) {
-		int[] arr = {77,99,44,55,22,88,11,0,66,33,1};
+		int[] arr = {77,99,44,55,22,88,11,0,66,33};
 //		bubbleSort(arr);
 //		selectSort(arr);
 //		insertSort(arr);
@@ -76,13 +76,14 @@ public class SortAlgorithm {
         if (low < high) {
             p_pos = low;
             pivot = arr[p_pos];
-            for (i = low + 1; i <= high; i++)
+            for (i = low + 1; i <= high; i++){
                 if (arr[i] < pivot) {
                     p_pos++;
                     t = arr[p_pos];
                     arr[p_pos] = arr[i];
                     arr[i] = t;
                 }
+            }
             t = arr[low];
             arr[low] = arr[p_pos];
             arr[p_pos] = t;
