@@ -15,7 +15,7 @@
 		<mybatis.version>3.4.6</mybatis.version>
 		<es.version>5.5.3</es.version>
 		<log4j.version>2.8.2</log4j.version>
-		<poi.version>3.14</poi.version>
+		<poi.version>3.17</poi.version>
 	</properties>
 
 	<dependencies>
@@ -86,7 +86,7 @@
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-jersey2-jaxrs</artifactId>
-			<version>1.5.18</version>
+			<version>1.5.19</version>
 		</dependency>
 		<!-- jersey-swagger结束 -->
 
@@ -266,8 +266,22 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>${poi.version}</version>
 		</dependency>
-
-		<!-- <dependency> <groupId>org.seleniumhq.selenium</groupId> <artifactId>selenium-java</artifactId> 
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-poi</artifactId>
+			<version>4.1.12</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.seleniumhq.selenium</groupId> <artifactId>selenium-java</artifactId>
 			<version>3.3.1</version> </dependency> -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
@@ -283,13 +297,7 @@
         <dependency>
             <groupId>io.github.swagger2markup</groupId>
             <artifactId>swagger2markup</artifactId>
-            <version>1.3.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-core</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>1.3.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tika</groupId>
