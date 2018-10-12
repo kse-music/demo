@@ -14,15 +14,17 @@ public class TreeDemo {
         TreeNode rootTreeNode = new TreeNode(node4,node3,10);
 
         preTraverseBtree(rootTreeNode);
-        System.out.println("--");
+
+        System.out.println("-----");
         inTraverseBtree(rootTreeNode);
-        System.out.println("--");
+
+        System.out.println("-----");
         nextTraverseBtree(rootTreeNode);
 
     }
 
     /**
-     * 先序遍历
+     * 先序遍历 ：根 -> 左 -> 右
      * @param rootTreeNode
      */
     public static void preTraverseBtree(TreeNode rootTreeNode){
@@ -34,7 +36,7 @@ public class TreeDemo {
     }
 
     /**
-     * 中序遍历
+     * 中序遍历 ：左 -> 根 -> 右
      * @param rootTreeNode
      */
     public static void inTraverseBtree(TreeNode rootTreeNode){
@@ -46,7 +48,7 @@ public class TreeDemo {
     }
 
     /**
-     * 后序遍历
+     * 后序遍历 ：左 -> 右 -> 根
      * @param rootTreeNode
      */
     public static void nextTraverseBtree(TreeNode rootTreeNode){
