@@ -20,6 +20,8 @@ public class SpringDemo {
         System.out.println(demoBean1);
         demoBean1.d();
         System.out.println(context.getBean(DemoBean2.class));
+
+
     }
 }
 
