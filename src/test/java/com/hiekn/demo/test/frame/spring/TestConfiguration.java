@@ -1,10 +1,9 @@
 package com.hiekn.demo.test.frame.spring;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-//@Configuration
-@ComponentScan("com.hiekn.demo.test.frame.spring")
+@Configuration
+//@ComponentScan("com.hiekn.demo.test.frame.spring")
 public class TestConfiguration {
     public TestConfiguration(){
         System.out.println("TestConfiguration");
