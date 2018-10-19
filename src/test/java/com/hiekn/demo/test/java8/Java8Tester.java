@@ -1,31 +1,20 @@
 package com.hiekn.demo.test.java8;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.hiekn.demo.test.TestBase;
+import org.junit.Test;
+
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-
-import com.hiekn.demo.test.design.filter.Employee;
-import org.junit.Test;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.hiekn.demo.test.TestBase;
 
 public class Java8Tester extends TestBase{
 
