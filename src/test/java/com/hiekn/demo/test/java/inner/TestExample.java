@@ -12,6 +12,33 @@ public class TestExample {
         InterfaceTest a1 = a.getIn();
         a1.test();
 
+        new A().a();
+
+        new A() {
+            @Override
+            public void a() {
+                System.out.println("over a");
+            }
+
+            @Override
+            public void b() {
+                System.out.println("over b");
+
+            }
+        }.a();
+
     }
 
+}
+
+
+class A{
+
+    public void a(){
+        System.out.println("a");
+    }
+
+    public void b(){
+        System.out.println("b");
+    }
 }
