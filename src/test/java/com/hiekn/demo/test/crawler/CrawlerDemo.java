@@ -18,7 +18,7 @@ public class CrawlerDemo extends BreadthCrawler {
         conf.setTopN(100);
         //可以设置每个线程visit的间隔，这里是毫秒
 //        conf.setExecuteInterval(3000);
-        setThreads(1); //看源码用
+        setThreads(2); //看源码用
 //        setResumable(true);//断点
     }
 
