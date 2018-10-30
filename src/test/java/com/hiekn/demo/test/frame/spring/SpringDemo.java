@@ -26,6 +26,7 @@ public class SpringDemo {
 
     public static void justOne(){
         ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
+        System.out.println(context.getBean(TestConfiguration.class));
     }
 }
 
