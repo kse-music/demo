@@ -18,16 +18,13 @@ public class CrawlerDemo extends BreadthCrawler {
         conf.setTopN(100);
         //可以设置每个线程visit的间隔，这里是毫秒
 //        conf.setExecuteInterval(3000);
-        setThreads(2); //看源码用
+        setThreads(1); //看源码用
 //        setResumable(true);//断点
     }
 
     @Override
     public void visit(Page page, CrawlDatums crawlDatums) {
         System.out.println(page.url());
-        if(page.matchUrl("http://www.hiboot.cn/column/all/page/2")){
-            crawlDatums.add(page.url(),"list").meta(page.copyMeta());
-        }
     }
 
     public static void main(String[] args) throws Exception {
