@@ -1,12 +1,12 @@
-package com.hiekn.demo.test.frame;
-
-import java.util.List;
+package com.hiekn.demo.test.frame.commons;
 
 import com.hiekn.demo.test.TestBase;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.junit.Test;
+
+import java.util.List;
 
 public class ConfigurationTest extends TestBase {
 	
