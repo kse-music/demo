@@ -44,11 +44,12 @@ public class HttpRequest {
     }
 
     private static String dealGetParam(String url, Map<String,String> getParam){
+        if(getParam.size() == 0){
+            return url;
+        }
         String f = "?";
-        if(url.indexOf("?") != -1){
+        if(url.indexOf(f) != -1){
             f = "&";
-        }else {
-            f= "";
         }
         url = url + f + parseParam(getParam);
         return url;
