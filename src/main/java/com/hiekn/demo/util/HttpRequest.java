@@ -61,7 +61,7 @@ public class HttpRequest {
     }
 
     public static String sendPost(String url, Map<String,String> postParam) {
-        return sendPost(url,parseParam(postParam));
+        return sendPost(url,new HashMap<>(),postParam);
     }
 
     public static String sendPost(String url, Map<String,String> getParam, Map<String,String> postParam) {
