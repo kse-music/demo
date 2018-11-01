@@ -47,6 +47,8 @@ public class HttpRequest {
         String f = "?";
         if(url.indexOf("?") != -1){
             f = "&";
+        }else {
+            f= "";
         }
         url = url + f + parseParam(getParam);
         return url;
@@ -95,7 +97,7 @@ public class HttpRequest {
                 result.append(line);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }finally {
             try {
                 if (in != null) {
@@ -136,7 +138,7 @@ public class HttpRequest {
                 result.append(line);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }finally{
             try{
                 if(out!=null){
