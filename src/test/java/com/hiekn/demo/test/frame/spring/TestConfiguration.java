@@ -1,9 +1,16 @@
 package com.hiekn.demo.test.frame.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 //@Configuration
 //@ComponentScan("com.hiekn.demo.test.frame.spring")
 public class TestConfiguration {
+
+    @Autowired
+    private TestConfiguration a;
+
     public TestConfiguration(){
+        System.out.println(a);
         System.out.println("TestConfiguration");
     }
 
