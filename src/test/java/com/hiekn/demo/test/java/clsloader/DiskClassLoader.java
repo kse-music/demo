@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java;
+package com.hiekn.demo.test.java.clsloader;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
