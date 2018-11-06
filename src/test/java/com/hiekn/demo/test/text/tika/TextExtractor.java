@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.tika;
+package com.hiekn.demo.test.text.tika;
 
 import java.io.File;
 import java.io.IOException;

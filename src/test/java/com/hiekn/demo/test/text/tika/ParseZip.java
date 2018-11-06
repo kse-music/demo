@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.tika;
+package com.hiekn.demo.test.text.tika;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

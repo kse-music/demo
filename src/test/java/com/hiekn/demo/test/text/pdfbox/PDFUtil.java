@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.pdfbox;
+package com.hiekn.demo.test.text.pdfbox;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;

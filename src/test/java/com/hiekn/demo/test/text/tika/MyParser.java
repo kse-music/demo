@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.tika;
+package com.hiekn.demo.test.text.tika;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MediaType;

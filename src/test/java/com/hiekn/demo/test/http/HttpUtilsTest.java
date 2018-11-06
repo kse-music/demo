@@ -1,4 +1,4 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.http;
 
 import com.hiekn.demo.util.HttpRequest;
 

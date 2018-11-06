@@ -1,9 +1,6 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.http;
 
-import com.hiekn.demo.bean.Student;
 import com.hiekn.demo.bean.result.RestResp;
-import com.hiekn.demo.exception.ExceptionHandler;
-import com.hiekn.demo.util.JsonUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpEntity;

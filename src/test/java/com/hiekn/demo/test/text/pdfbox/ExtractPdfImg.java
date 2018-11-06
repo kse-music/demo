@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.pdfbox;
+package com.hiekn.demo.test.text.pdfbox;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.pdfbox.cos.COSName;

@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.tika;
+package com.hiekn.demo.test.text.tika;
 
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;

@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.tika;
+package com.hiekn.demo.test.text.tika;
 
 import org.apache.tika.Tika;
 import org.apache.tika.exception.TikaException;

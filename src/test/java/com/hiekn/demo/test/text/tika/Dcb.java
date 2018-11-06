@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.tika;
+package com.hiekn.demo.test.text.tika;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
