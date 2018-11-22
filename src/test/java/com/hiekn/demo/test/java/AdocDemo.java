@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Properties;
 
-public class AdocTest extends TestBase {
+public class AdocDemo extends TestBase {
 	
 	@Test
 	public void getAll(){
