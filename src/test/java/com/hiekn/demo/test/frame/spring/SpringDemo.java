@@ -1,5 +1,7 @@
 package com.hiekn.demo.test.frame.spring;
 
+import com.hiekn.demo.test.frame.spring.aop.AopConfig;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -25,8 +27,9 @@ public class SpringDemo {
     }
 
     public static void justOne(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
-        System.out.println(context.getBean(TestConfiguration.class));
+        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class,AopConfig.class);
+        TestConfiguration bean = context.getBean(TestConfiguration.class);
+        System.out.println(bean.test());
     }
 }
 

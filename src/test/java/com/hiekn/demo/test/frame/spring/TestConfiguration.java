@@ -1,7 +1,6 @@
 package com.hiekn.demo.test.frame.spring;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 
@@ -9,11 +8,11 @@ import javax.annotation.PostConstruct;
 //@ComponentScan("com.hiekn.demo.test.frame.spring")
 public class TestConfiguration implements InitializingBean {
 
-    @Autowired
-    private TestConfiguration a;
+//    @Autowired
+//    private TestConfiguration a;
 
     public TestConfiguration(){
-        System.out.println(a);
+//        System.out.println(a);
         System.out.println("Constructor");
     }
 
@@ -25,6 +24,11 @@ public class TestConfiguration implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("afterPropertiesSet");
+    }
+
+    public String test(){
+        System.out.println("execute test method");
+        return "test method return value";
     }
 
 //    @Bean注解注册bean,同时可以指定初始化和销毁方法
