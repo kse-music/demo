@@ -13,9 +13,9 @@ public class DemoBean1 {
     private DemoBean3 demoBean33;
     private DemoBean3 demoBean333;
 
-    public DemoBean1(DemoBean3 demoBean33) {
-        this.demoBean33 = demoBean33;
-    }
+//    public DemoBean1(DemoBean3 demoBean33) {
+//        this.demoBean33 = demoBean33;
+//    }
 
     @Autowired
     private DemoBean2 demoBean2;
@@ -37,8 +37,8 @@ public class DemoBean1 {
         System.out.println("---"+demoBean333);
     }
 
-    @Autowired
-    public void setDemoBean333(DemoBean3 demoBean333) {
-        this.demoBean333 = demoBean333;
-    }
+//    @Autowired
+//    public void setDemoBean333(DemoBean3 demoBean333) {
+//        this.demoBean333 = demoBean333;
+//    }
 }

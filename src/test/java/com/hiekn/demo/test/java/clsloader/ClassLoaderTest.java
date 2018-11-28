@@ -63,7 +63,7 @@ public class ClassLoaderTest {
         path = "http://www.hiekn.top:1699/";
         CustomClassLoader loader = new CustomClassLoader(Thread.currentThread().getContextClassLoader() , path);
         try {
-            Class<?> clazz = loader.findClass("com.hiekn.demo.test.java8.Sa");
+            Class<?> clazz = loader.findClass("com.hiekn.demo.test.java.java8.Sa");
             Object newInstance = clazz.newInstance();
             clazz.getMethod("t").invoke(newInstance);
         } catch (Exception e) {
