@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java;
+package com.hiekn.demo.test.java.doc;
 
 import com.hiekn.demo.test.TestBase;
 import io.github.swagger2markup.GroupBy;

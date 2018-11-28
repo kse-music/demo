@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java;
+package com.hiekn.demo.test.java.reflect;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -36,7 +36,7 @@ public class ReflectDemo {
         }
 
         //1.加载Class对象
-        Class clazz = Class.forName("com.hiekn.demo.test.java.Student");
+        Class clazz = Class.forName("com.hiekn.demo.test.java.reflect.Student");
 
         //2.获取所有公有构造方法
         System.out.println("**********************所有公有构造方法*********************************");

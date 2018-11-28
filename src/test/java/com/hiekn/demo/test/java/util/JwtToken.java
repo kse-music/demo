@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java;
+package com.hiekn.demo.test.java.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

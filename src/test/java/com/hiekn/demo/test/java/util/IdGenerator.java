@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java;
+package com.hiekn.demo.test.java.util;
 
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
