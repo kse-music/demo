@@ -27,7 +27,7 @@ public class GuavaDemo extends TestBase {
         String[] words = {"a", "b", "c", "a"};
         Map<String, Integer> counts = new HashMap<String, Integer>();
         Multiset<String> multiSet = HashMultiset.create();
-        Multimap<String, Integer> map1 = HashMultimap.create();
+        Multimap<String, Integer> map1 = HashMultimap.create();//不存相同key和value都相同的
         Multimap<String, Integer> map2 = ArrayListMultimap.create();
         for (String word : words) {
             Integer count = counts.get(word);
@@ -64,7 +64,7 @@ public class GuavaDemo extends TestBase {
         System.out.println(personVos);
     }
 
-    public PersonVo personDbToVo(PersonDb personDb) {
+    private PersonVo personDbToVo(PersonDb personDb) {
         Preconditions.checkNotNull(personDb, "[PersonDbToVo]personDb为null");
         PersonVo personVo = new PersonVo();
         personVo.setName(personDb.getName() + ",from Db");
@@ -217,7 +217,7 @@ public class GuavaDemo extends TestBase {
     }
 
     @Test
-    public void tableTest() {
+    public void testTable() {
         Table<String, String, Integer> tables = HashBasedTable.create();
         tables.put("a", "javase", 80);
         tables.put("b", "javaee", 90);
