@@ -1,8 +1,7 @@
-package com.hiekn.demo.test.java;
+package com.hiekn.demo.test.java.basic;
 
 import com.hiekn.demo.test.java.annotation.BeanDefine;
 import com.hiekn.demo.test.java.annotation.TestAnnotation;
-import com.hiekn.demo.test.java.annotation.ZxfResource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationAttributes;
