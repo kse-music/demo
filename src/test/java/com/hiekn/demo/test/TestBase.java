@@ -1,16 +1,16 @@
 package com.hiekn.demo.test;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@Transactional
 //@ContextConfiguration({"classpath:applicationContext.xml"})
 public class TestBase {
 
-    protected final Log logger = LogFactory.getLog(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Ignore
 	@Test

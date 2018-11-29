@@ -5,8 +5,8 @@ import com.hiekn.demo.bean.result.ErrorCodes;
 import com.hiekn.demo.bean.result.RestResp;
 import com.hiekn.demo.config.CommonResource;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 
 import javax.ws.rs.*;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Provider
 public class ExceptionHandler implements ExceptionMapper<Exception> {
 	
-	private static final Log logger = LogFactory.getLog(ExceptionHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(ExceptionHandler.class);
 
 	@Override
 	public Response toResponse(Exception exception) {
@@ -47,7 +47,7 @@ public class ExceptionHandler implements ExceptionMapper<Exception> {
         Integer errorCode = code.getErrorCode();
         errMsg = StringUtils.isBlank(errMsg)?code.getInfo():errMsg;
         exception.setStackTrace(Lists.newArrayList(exception.getStackTrace()).stream().filter(s -> s.getClassName().contains(CommonResource.BASE_PACKAGE)).collect(Collectors.toList()).toArray(new StackTraceElement[]{}));
-        logger.error(errorCode,exception);
+        logger.error("ErrorMsg = {}",errMsg,exception);
         return Response.ok(new RestResp<>(errorCode,errMsg)).status(statusCode).build();
     }
 	
