@@ -75,7 +75,7 @@
 			<tx:method name="*" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
-	<!-- 第一个*代表返回值，第二*代表impl下所有方法，第三个*代表方法名，“（..）”代表方法参数。 -->
+	<!-- 第一个*代表返回值，第二*代表impl下所有类，第三个*代表方法名，“（..）”代表方法参数。 -->
 	<aop:config>
 		<aop:pointcut id="txServiceMethods"	expression="execution(* com.hiekn.demo.service.impl.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txServiceMethods" />
