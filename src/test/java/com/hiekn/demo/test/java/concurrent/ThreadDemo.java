@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.conrrent;
+package com.hiekn.demo.test.java.concurrent;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
