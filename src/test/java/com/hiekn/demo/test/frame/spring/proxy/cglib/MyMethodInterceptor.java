@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.proxy.cglib;
+package com.hiekn.demo.test.frame.spring.proxy.cglib;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.spring.proxy;
+package com.hiekn.demo.test.frame.spring.proxy.jdk;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

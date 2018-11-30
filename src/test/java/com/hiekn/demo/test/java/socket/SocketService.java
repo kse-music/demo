@@ -46,7 +46,7 @@ public class SocketService {
             //由Socket对象得到输出流，并构造PrintWriter对象
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             //由系统标准输入设备构造BufferedReader对象
-            System.out.println("Client:" + in.readLine());
+            System.out.println("AsmDemo:" + in.readLine());
             //在标准输出上打印从客户端读入的字符串
             line = br.readLine();
             //从标准输入读入一字符串
@@ -59,7 +59,7 @@ public class SocketService {
                 //刷新输出流，使Client马上收到该字符串
                 System.out.println("Server:" + line);
                 //在系统标准输出上打印读入的字符串
-                System.out.println("Client:" + in.readLine());
+                System.out.println("AsmDemo:" + in.readLine());
                 //从Client读入一字符串，并打印到标准输出上
                 line = br.readLine();
                 //从系统标准输入读入一字符串

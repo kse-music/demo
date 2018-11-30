@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.proxy.jdk;
+package com.hiekn.demo.test.frame.spring.proxy.jdk;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

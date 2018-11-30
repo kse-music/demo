@@ -32,7 +32,7 @@ public class SocketClient {
                 // 将从系统标准输入读入的字符串输出到Server
                 write.flush();
                 // 刷新输出流，使Server马上收到该字符串
-                System.out.println("Client:" + readline);
+                System.out.println("AsmDemo:" + readline);
                 // 在系统标准输出上打印读入的字符串
                 System.out.println("Server:" + in.readLine());
                 // 从Server读入一字符串，并打印到标准输出上

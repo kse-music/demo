@@ -1,10 +1,9 @@
-package com.hiekn.demo.test.java.proxy;
+package com.hiekn.demo.test.frame.spring.proxy;
 
-import com.hiekn.demo.test.java.proxy.cglib.HelloConcrete;
-import com.hiekn.demo.test.java.proxy.cglib.MyMethodInterceptor;
-import com.hiekn.demo.test.java.proxy.jdk.Hello;
-import com.hiekn.demo.test.java.proxy.jdk.HelloImpl;
-import com.hiekn.demo.test.java.proxy.jdk.LogInvocationHandler;
+import com.hiekn.demo.test.frame.spring.proxy.cglib.CGLibProxy;
+import com.hiekn.demo.test.frame.spring.proxy.cglib.HelloConcrete;
+import com.hiekn.demo.test.frame.spring.proxy.cglib.MyMethodInterceptor;
+import com.hiekn.demo.test.frame.spring.proxy.jdk.*;
 import org.springframework.asm.ClassWriter;
 import org.springframework.asm.MethodVisitor;
 import org.springframework.asm.Opcodes;
@@ -30,11 +29,17 @@ public class ProxyDemo {
 
         HelloConcrete hello2 = (HelloConcrete)enhancer.create();
         System.out.println(hello2.sayHello("I love you!"));
-        try {
-            helloWorld();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+
+
+        System.out.println("-----------CGLibProxy-------------");
+        UserManager userManager = (UserManager) new CGLibProxy().createProxyObject(new UserManagerImpl());
+        userManager.addUser("tom", "root");
+
+        System.out.println("-----------JDKProxy-------------");
+        JDKProxy jdkProxy = new JDKProxy();
+        UserManager userManagerJDK = (UserManager) jdkProxy.newProxy(new UserManagerImpl());
+        userManagerJDK.addUser("tom", "root");
 
     }
 

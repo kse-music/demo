@@ -1,10 +1,10 @@
-package com.hiekn.demo.test.frame.spring.proxy;
-
-import java.lang.reflect.Method;
+package com.hiekn.demo.test.frame.spring.proxy.cglib;
 
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
+
+import java.lang.reflect.Method;
 
 /**
  * CGLibProxy动态代理类的实例

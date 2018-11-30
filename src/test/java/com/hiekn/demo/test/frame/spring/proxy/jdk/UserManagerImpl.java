@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.spring.proxy;
+package com.hiekn.demo.test.frame.spring.proxy.jdk;
 
 public class UserManagerImpl implements UserManager {
 
