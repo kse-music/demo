@@ -1,7 +1,6 @@
 package com.hiekn.demo.test.frame.spring;
 
 import com.hiekn.demo.test.TestBase;
-import com.hiekn.demo.test.frame.spring.aop.AopConfig;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -29,7 +28,7 @@ public class SpringDemo extends TestBase {
 
     @Test
     public void justOne(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class,AopConfig.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
         TestConfiguration bean = context.getBean(TestConfiguration.class);
         System.out.println(bean.test());
     }

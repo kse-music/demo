@@ -1,6 +1,8 @@
 package com.hiekn.demo.test.frame.spring;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.PostConstruct;
 
@@ -8,11 +10,14 @@ import javax.annotation.PostConstruct;
 //@ComponentScan("com.hiekn.demo.test.frame.spring")
 public class TestConfiguration implements InitializingBean {
 
-//    @Autowired
-//    private TestConfiguration a;
+    @Autowired
+    private TestConfiguration a;
+
+    @Value("${user.home}")
+    private String home;
 
     public TestConfiguration(){
-//        System.out.println(a);
+        System.out.println(a);
         System.out.println("Constructor");
     }
 
