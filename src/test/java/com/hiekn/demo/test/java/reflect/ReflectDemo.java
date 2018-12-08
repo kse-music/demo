@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 /**
  * JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；
- * 对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
+ * 对于任意一个对象，都能够调用它的任意一个方法和属性；
+ * 这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
  */
 public class ReflectDemo {
     /**
@@ -102,39 +103,4 @@ public class ReflectDemo {
         }
 
     }
-}
-
-class Student {
-
-    //---------------构造方法-------------------
-    //（默认的构造方法）
-    Student(String str){
-        System.out.println("(默认)的构造方法 s = " + str);
-    }
-
-    //无参构造方法
-    public Student(){
-        System.out.println("调用了公有、无参构造方法执行了。。。");
-    }
-
-    //有一个参数的构造方法
-    public Student(char name){
-        System.out.println("姓名：" + name);
-    }
-
-    //有多个参数的构造方法
-    public Student(String name ,int age){
-        System.out.println("姓名："+name+"年龄："+ age);//这的执行效率有问题，以后解决。
-    }
-
-    //受保护的构造方法
-    protected Student(boolean n){
-        System.out.println("受保护的构造方法 n = " + n);
-    }
-
-    //私有构造方法
-    private Student(int age){
-        System.out.println("私有的构造方法   年龄："+ age);
-    }
-
 }
