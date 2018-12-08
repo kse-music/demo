@@ -32,7 +32,7 @@ public class TestConfiguration implements InitializingBean {
     }
 
     public String test(){
-        System.out.println("execute test method");
+        System.out.println(home);
         return "test method return value";
     }
 
