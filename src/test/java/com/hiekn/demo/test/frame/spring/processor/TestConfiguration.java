@@ -1,13 +1,13 @@
-package com.hiekn.demo.test.frame.spring;
+package com.hiekn.demo.test.frame.spring.processor;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.annotation.PostConstruct;
 
-//@Configuration
-//@ComponentScan("com.hiekn.demo.test.frame.spring")
+@ComponentScan("com.hiekn.demo.test.frame.spring.processor")
 public class TestConfiguration implements InitializingBean {
 
     @Autowired
@@ -36,9 +36,4 @@ public class TestConfiguration implements InitializingBean {
         return "test method return value";
     }
 
-//    @Bean注解注册bean,同时可以指定初始化和销毁方法
-//    @Bean(name="testNean",initMethod="start",destroyMethod="cleanUp")
-//    public TestBean testBean() {
-//        return new TestBean();
-//    }
 }

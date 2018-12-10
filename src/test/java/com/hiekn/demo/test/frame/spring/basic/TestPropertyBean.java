@@ -1,10 +1,10 @@
-package com.hiekn.demo.test.frame.spring.bean;
+package com.hiekn.demo.test.frame.spring.basic;
 
 /**
  * @Author: DingHao
- * @Date: 2018/11/28 18:33
+ * @Date: 2018/12/10 10:55
  */
-public class P{
+public class TestPropertyBean {
     private Integer a;
 
     public Integer getA() {
@@ -14,6 +14,4 @@ public class P{
     public void setA(Integer a) {
         this.a = a;
     }
-
 }
-

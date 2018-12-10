@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.spring;
+package com.hiekn.demo.test.frame.spring.basic;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;

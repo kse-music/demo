@@ -1,6 +1,5 @@
-package com.hiekn.demo.test.frame.spring.bean;
+package com.hiekn.demo.test.frame.spring.basic;
 
-import com.hiekn.demo.test.frame.spring.DemoBean3;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

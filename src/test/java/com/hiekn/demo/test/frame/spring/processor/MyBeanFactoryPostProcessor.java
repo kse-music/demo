@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.spring;
+package com.hiekn.demo.test.frame.spring.processor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
