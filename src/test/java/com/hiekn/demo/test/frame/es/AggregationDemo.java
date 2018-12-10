@@ -1,10 +1,10 @@
 package com.hiekn.demo.test.frame.es;
 
-import java.util.Calendar;
-import java.util.List;
-
-import javax.annotation.Resource;
-
+import com.google.gson.reflect.TypeToken;
+import com.hiekn.demo.bean.search.QueryCondition;
+import com.hiekn.demo.parser.EsParser;
+import com.hiekn.demo.test.TestBase;
+import com.hiekn.demo.util.JsonUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -21,13 +21,11 @@ import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
-import com.google.gson.reflect.TypeToken;
-import com.hiekn.demo.bean.search.QueryCondition;
-import com.hiekn.demo.parser.EsParser;
-import com.hiekn.demo.test.TestBase;
-import com.hiekn.demo.util.JsonUtils;
+import javax.annotation.Resource;
+import java.util.Calendar;
+import java.util.List;
 
-public class AggTest extends TestBase{
+public class AggregationDemo extends TestBase{
 	
 	private static final String ES_DB_NAME = "twitter";
 	private static final String ES_TABLE_NAME = "twitter_data";

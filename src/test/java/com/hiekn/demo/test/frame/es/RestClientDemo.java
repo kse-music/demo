@@ -1,9 +1,6 @@
 package com.hiekn.demo.test.frame.es;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.concurrent.CountDownLatch;
-
+import com.hiekn.demo.test.TestBase;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
@@ -16,9 +13,11 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.junit.Test;
 
-import com.hiekn.demo.test.TestBase;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.concurrent.CountDownLatch;
 
-public class RestClientTest extends TestBase{
+public class RestClientDemo extends TestBase{
 
 	@Test
 	public void testRestClient() throws IOException{

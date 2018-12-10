@@ -1,14 +1,8 @@
 package com.hiekn.demo.test.frame.es;
 
-import java.io.File;
-import java.io.FileReader;
-import java.util.concurrent.ExecutionException;
-
-import javax.annotation.Resource;
-
+import com.carrotsearch.hppc.cursors.ObjectObjectCursor;
+import com.hiekn.demo.test.TestBase;
 import org.apache.commons.io.IOUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
@@ -20,12 +14,12 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.junit.Test;
 
-import com.carrotsearch.hppc.cursors.ObjectObjectCursor;
-import com.hiekn.demo.test.TestBase;
+import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileReader;
+import java.util.concurrent.ExecutionException;
 
-public class IndexTest extends TestBase{
-	
-	private static Logger log = LogManager.getLogger(IndexTest.class);  
+public class IndexDemo extends TestBase{
 	
 	private static final String INDEX = "twitter";
 	private static final String TYPE = "twitter_data";
@@ -41,7 +35,7 @@ public class IndexTest extends TestBase{
 //		.setSettings(Settings.builder().loadFromSource(loadJson("data/settings.json"), XContentType.JSON))//两步到位
 //		.addMapping(TYPE,loadJson("data/mapping.json"),XContentType.JSON)
 		.get();
-		log.info(createIndexResponse.isAcknowledged());
+		logger.info("result = {}",createIndexResponse.isAcknowledged());
 	}
 	
 	@Test
@@ -77,7 +71,7 @@ public class IndexTest extends TestBase{
 	public void delete(){
 		if(indexExist()){
 			DeleteIndexResponse dResponse = client.admin().indices().prepareDelete(INDEX).get();
-			log.info(dResponse.isAcknowledged());
+			logger.info("result = {}",dResponse.isAcknowledged());
 		}
 	}
 	
@@ -100,10 +94,10 @@ public class IndexTest extends TestBase{
 		    Settings settings = cursor.value;                                               
 		    Integer shards = settings.getAsInt("index.number_of_shards", null);             
 		    Integer replicas = settings.getAsInt("index.number_of_replicas", null);  
-		    log.info(index);
-		    log.info(settings);
-		    log.info(shards);
-		    log.info(replicas);
+		    logger.info(index);
+		    logger.info("result = {}",settings);
+		    logger.info("result = {}",shards);
+		    logger.info("result = {}",replicas);
 		}
 	}
 	

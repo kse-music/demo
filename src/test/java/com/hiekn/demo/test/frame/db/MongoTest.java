@@ -11,6 +11,7 @@ import org.junit.Test;
 import javax.annotation.Resource;
 
 public class MongoTest extends TestBase {
+
 	@Resource
 	private MongoClient mongoClient;
 
