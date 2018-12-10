@@ -16,9 +16,12 @@ public class TestConfiguration implements InitializingBean {
     @Value("${user.home}")
     private String home;
 
+    public void setHome(String home) {
+        this.home = home;
+    }
+
     public TestConfiguration(){
-        System.out.println(a);
-        System.out.println("Constructor");
+        System.out.println("Constructor invoke");
     }
 
     @PostConstruct

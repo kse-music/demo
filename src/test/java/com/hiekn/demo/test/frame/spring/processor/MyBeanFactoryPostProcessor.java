@@ -13,12 +13,14 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         String[] beanStr = beanFactory.getBeanDefinitionNames();
         for (String beanName : beanStr) {
-            if ("testBean".equals(beanName)) {
+            if ("testConfiguration".equals(beanName)) {
                 BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
                 MutablePropertyValues m = beanDefinition.getPropertyValues();
-                m.addPropertyValue("name", "赵四");
+                m.addPropertyValue("home", "赵四");
             }
         }
+        System.out.println("BeanFactoryPostProcessor : postProcessBeanFactory invoke");
+
     }
 
 }
