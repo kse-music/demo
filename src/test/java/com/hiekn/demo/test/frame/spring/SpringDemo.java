@@ -36,10 +36,12 @@ import java.util.Map;
 public class SpringDemo extends TestBase {
 
     @Test
-    public void testIoc(){
+    public void research(){
         ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
+//        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
         TestConfiguration bean = context.getBean(TestConfiguration.class);
         System.out.println(bean.test());
+        //如果加载spring-context.xml文件：
     }
 
     @Test
@@ -50,9 +52,8 @@ public class SpringDemo extends TestBase {
     }
 
     @Test
-    public void testBasic(){
-        //如果加载spring-context.xml文件：
-//        ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
+    public void testIoc(){
+
         ApplicationContext context = new AnnotationConfigApplicationContext(TestBeanConfiguration.class);
 
         TestBean tb = context.getBean(TestBean.class);
