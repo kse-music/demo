@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.crawler;
+package com.hiekn.demo.test.frame.crawler;
 
 import cn.edu.hfut.dmic.webcollector.model.CrawlDatums;
 import cn.edu.hfut.dmic.webcollector.model.Page;

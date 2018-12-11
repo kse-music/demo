@@ -6,6 +6,7 @@ import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.hiekn.demo.bean.UserBean;
 import com.hiekn.demo.test.TestBase;
+import com.hiekn.demo.test.frame.crawler.CrawlerDemo;
 import com.hiekn.demo.test.java.annotation.Student;
 import com.hiekn.demo.util.HttpRequest;
 import io.github.swagger2markup.GroupBy;
@@ -450,6 +451,16 @@ public class ComprehensiveDemo extends TestBase {
                 .withConfig(config)
                 .build()
                 .toFolder(Paths.get("src/docs/generated"));
+    }
+
+    /**
+     *
+     * 使用WebCollector 一次性抓取
+     */
+    @Test
+    public void crawler() throws Exception {
+        CrawlerDemo crawlerDemo = new CrawlerDemo("G:\\data\\crawler",true);
+        crawlerDemo.start(1);
     }
 
     /**

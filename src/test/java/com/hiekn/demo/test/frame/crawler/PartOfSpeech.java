@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.crawler;
+package com.hiekn.demo.test.frame.crawler;
 
 public class PartOfSpeech {
 
