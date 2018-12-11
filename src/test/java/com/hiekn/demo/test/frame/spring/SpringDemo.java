@@ -12,6 +12,7 @@ import com.hiekn.demo.test.frame.spring.proxy.cglib.MyMethodInterceptor;
 import com.hiekn.demo.test.frame.spring.proxy.jdk.*;
 import com.hiekn.demo.test.java.annotation.BeanDefine;
 import com.hiekn.demo.test.java.annotation.TestAnnotation;
+import com.hiekn.demo.test.java.annotation.ZxfResource;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cglib.proxy.Enhancer;
@@ -121,6 +122,8 @@ public class SpringDemo extends TestBase {
         System.out.println(testPropertyBean.getA());
 
         AnnotatedTypeMetadata metadata = new StandardAnnotationMetadata(BeanDefine.class);
+        System.out.println(((StandardAnnotationMetadata) metadata).hasAnnotation(ZxfResource.class.getName()));//false
+        System.out.println(metadata.isAnnotated(ZxfResource.class.getName()));//true
         Map<String, Object> attributes = metadata.getAnnotationAttributes(TestAnnotation.class.getName());
         System.out.println(attributes.get("prefix"));
     }

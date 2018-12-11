@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 // 在运行时执行
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.METHOD })
+@Target({ ElementType.TYPE,ElementType.FIELD, ElementType.METHOD })
 public @interface ZxfResource {
 
     //注解的name属性
