@@ -38,10 +38,10 @@ public class SpringDemo extends TestBase {
     @Test
     public void research(){
         ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
-//        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+//        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");//从spring-context.xml加载
         TestConfiguration bean = context.getBean(TestConfiguration.class);
         System.out.println(bean.test());
-        //如果加载spring-context.xml文件：
+
     }
 
     @Test
