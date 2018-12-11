@@ -1,8 +1,9 @@
-package com.hiekn.demo.test.java.http;
+package com.hiekn.demo.test.frame.spring.http;
 
 import com.hiekn.demo.bean.result.RestResp;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.hiekn.demo.test.TestBase;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,38 +15,36 @@ import org.springframework.web.client.RestTemplate;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RestTemplateDemo {
-
-    private static final Log logger = LogFactory.getLog(RestTemplateDemo.class);
-
-    private static RestTemplate restTemplate = new RestTemplate();
+public class RestTemplateDemo extends TestBase {
 
     private static final String BASE_PATH = "http://localhost:8080/api/";
 
-    public static void main(String[] args) {
-        String getUrl = "test/list";
-        String postUrl = "test/add";
-//        getForObject(getUrl);
-//        getForEntity(getUrl);
-//        postForObject(postUrl);
-        postForEntity(postUrl);
+    private RestTemplate restTemplate;
+
+    @Before
+    public void init() {
+        restTemplate = new RestTemplate();
     }
 
-    public static void getForObject(String url){
-        String s = restTemplate.getForObject(BASE_PATH+url,String.class);
-        RestResp restResp = restTemplate.getForObject(BASE_PATH+url,RestResp.class);
-        logger.info(s);
-        logger.info(restResp.getData());
+    @Test
+    public void getForObject(){
+        String s = restTemplate.getForObject(BASE_PATH+"test/list",String.class);
+        RestResp restResp = restTemplate.getForObject(BASE_PATH+"test/list",RestResp.class);
+        logger.info("Result = {}",s);
+        logger.info("Result = {}",restResp.getData());
     }
 
-    public static void getForEntity(String url){
-        ResponseEntity<String> s = restTemplate.getForEntity(BASE_PATH+url,String.class);
-        logger.info(s.getStatusCodeValue());
-        logger.info(s.getHeaders());
-        logger.info(s.getBody());
+    @Test
+    public void getForEntity(){
+        ResponseEntity<String> s = restTemplate.getForEntity(BASE_PATH+"test/list",String.class);
+        logger.info("Result = {}",s.getStatusCodeValue());
+        logger.info("Result = {}",s.getHeaders());
+        logger.info("Result = {}",s.getBody());
     }
 
-    public static void postForObject(String url){
+    @Test
+
+    public void postForObject(){
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         body.add("bean",timestamp);
@@ -54,12 +53,13 @@ public class RestTemplateDemo {
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE);
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(body, headers);
 
-        String s = restTemplate.postForObject(BASE_PATH+url, requestEntity, String.class);
+        String s = restTemplate.postForObject(BASE_PATH+"test/add", requestEntity, String.class);
         logger.info(s);
 
     }
 
-    public static void postForEntity(String url){
+    @Test
+    public void postForEntity(){
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         body.add("bean",timestamp);
@@ -67,8 +67,8 @@ public class RestTemplateDemo {
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE);
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(body, headers);
-        ResponseEntity<String> s = restTemplate.postForEntity(BASE_PATH+url, requestEntity, String.class);
-        logger.info(s);
+        ResponseEntity<String> s = restTemplate.postForEntity(BASE_PATH+"test/add", requestEntity, String.class);
+        logger.info("Result = {}",s);
 
     }
 

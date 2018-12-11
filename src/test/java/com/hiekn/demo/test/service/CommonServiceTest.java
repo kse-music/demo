@@ -1,16 +1,16 @@
-package com.hiekn.demo.test;
+package com.hiekn.demo.test.service;
 
-import javax.annotation.Resource;
-
+import com.hiekn.demo.bean.Student;
 import com.hiekn.demo.dao.UserDao;
+import com.hiekn.demo.service.CommonService;
+import com.hiekn.demo.test.TestBase;
 import com.hiekn.demo.util.SendEmailUtils;
 import org.apache.commons.mail.EmailException;
 import org.junit.Test;
 
-import com.hiekn.demo.bean.Student;
-import com.hiekn.demo.service.CommonService;
+import javax.annotation.Resource;
 
-public class CommonServiceTest extends TestBase{
+public class CommonServiceTest extends TestBase {
 
 	@Resource
 	private CommonService commonService;

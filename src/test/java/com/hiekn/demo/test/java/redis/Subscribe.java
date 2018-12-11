@@ -1,18 +1,16 @@
-package com.hiekn.demo.test.java.js;
-
-import javax.annotation.Resource;
-
-import org.junit.Test;
+package com.hiekn.demo.test.java.redis;
 
 import com.hiekn.demo.test.TestBase;
-
+import org.junit.Test;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPubSub;
 
+import javax.annotation.Resource;
+
 /**
  * 消费者
- * @author DH
+ * @author
  *
  */
 public class Subscribe extends TestBase{

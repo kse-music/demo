@@ -1,13 +1,11 @@
-package com.hiekn.demo.test.java.js;
-
-import javax.annotation.Resource;
-
-import org.junit.Test;
+package com.hiekn.demo.test.java.redis;
 
 import com.hiekn.demo.test.TestBase;
-
+import org.junit.Test;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+
+import javax.annotation.Resource;
 
 /**
  * 消息生成者
