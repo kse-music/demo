@@ -36,7 +36,7 @@ import java.util.Map;
 public class SpringDemo extends TestBase {
 
     @Test
-    public void justOne(){
+    public void testIoc(){
         ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
         TestConfiguration bean = context.getBean(TestConfiguration.class);
         System.out.println(bean.test());
