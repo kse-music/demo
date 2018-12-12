@@ -7,7 +7,9 @@ import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import com.hiekn.demo.bean.UserBean;
 import com.hiekn.demo.test.TestBase;
 import com.hiekn.demo.test.frame.crawler.CrawlerDemo;
+import com.hiekn.demo.test.java.annotation.BeanDefine;
 import com.hiekn.demo.test.java.annotation.Student;
+import com.hiekn.demo.test.java.annotation.TestAnnotation;
 import com.hiekn.demo.util.HttpRequest;
 import io.github.swagger2markup.GroupBy;
 import io.github.swagger2markup.Language;
@@ -36,13 +38,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.*;
+import java.lang.reflect.Proxy;
 import java.net.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Properties;
 
 //import org.openqa.selenium.By;
@@ -74,6 +77,31 @@ public class ComprehensiveDemo extends TestBase {
     @After
     public void out() {
         System.out.println(Arrays.toString(arr));
+    }
+
+
+    @Test
+    public void modifyAnnotationValue() throws Exception{
+        BeanDefine bar = new BeanDefine();
+
+        Annotation[] annotations = bar.getClass().getDeclaredAnnotations();
+        for (Annotation annotation : annotations) {
+            if(annotation.annotationType().getName().equals(TestAnnotation.class.getName())){
+                TestAnnotation t = (TestAnnotation)annotation;
+                String value =  t.prefix();
+                System.out.println("修改之前的注解值：" + value);
+
+                InvocationHandler invocationHandler = Proxy.getInvocationHandler(annotation);
+                Field declaredField = invocationHandler.getClass().getDeclaredField("memberValues");
+                declaredField.setAccessible(true);
+                Map memberValues = (Map) declaredField.get(invocationHandler);
+                memberValues.put("prefix", "test.annotation.new.value");
+
+                String newValue = t.prefix();
+                System.out.println("修改之后的注解值：" + newValue);
+            }
+        }
+
     }
 
 
