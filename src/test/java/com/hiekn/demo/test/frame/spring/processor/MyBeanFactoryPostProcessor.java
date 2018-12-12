@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -24,9 +23,6 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
         for (String beanName : beanStr) {
             if ("testConfiguration".equals(beanName)) {
                 BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
-                MutablePropertyValues m = beanDefinition.getPropertyValues();
-                m.addPropertyValue("home", "赵四");
-
                 AnnotatedGenericBeanDefinition bd = (AnnotatedGenericBeanDefinition)beanDefinition;
                 try {
                     Field field = bd.getBeanClass().getDeclaredField("home");
@@ -44,9 +40,8 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                BeanDefinitionRegistry r = (BeanDefinitionRegistry)beanFactory;
-                r.removeBeanDefinition(beanName);
-                r.registerBeanDefinition(beanName,new AnnotatedGenericBeanDefinition(bd.getBeanClass()));
+                MutablePropertyValues m = beanDefinition.getPropertyValues();
+                m.addPropertyValue("home", "赵四");
             }
         }
         System.out.println("BeanFactoryPostProcessor : postProcessBeanFactory invoke");
