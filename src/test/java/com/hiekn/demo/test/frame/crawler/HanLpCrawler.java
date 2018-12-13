@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class HanLpCrawler  extends RamCrawler {
+public class HanLpCrawler extends RamCrawler {
 
     public HanLpCrawler() {
         addSeedAndReturn("http://www.hankcs.com/nlp/part-of-speech-tagging.html").type("indedx");
