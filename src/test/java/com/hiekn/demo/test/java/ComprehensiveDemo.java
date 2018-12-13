@@ -43,10 +43,7 @@ import java.lang.reflect.*;
 import java.lang.reflect.Proxy;
 import java.net.*;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 //import org.openqa.selenium.By;
 //import org.openqa.selenium.JavascriptExecutor;
@@ -77,6 +74,21 @@ public class ComprehensiveDemo extends TestBase {
     @After
     public void out() {
         System.out.println(Arrays.toString(arr));
+    }
+
+
+    @Test
+    public void map(){
+        TreeMap<Integer,String> map = new TreeMap();
+        map.put(55,"fifty-five");
+        map.put(56,"fifty-six");
+        map.put(57,"fifty-seven");
+        map.put(58,"fifty-eight");
+        map.put(83,"eighty-three");
+        map.remove(57);
+        map.put(59,"fifty-nine");
+        map.forEach((k,v) -> System.out.println(k+" = "+v));
+
     }
 
 

@@ -12,6 +12,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.nio.entity.NStringEntity;
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
+import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
@@ -27,6 +28,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.functionscore.*;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder.FilterFunctionBuilder;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,6 +62,18 @@ public class ElasticsearchDemo extends TestBase {
                 .get();
 
         logger.info("result = {}",response);
+    }
+
+    @Test
+    public void es6() throws IOException{
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.query(QueryBuilders.termQuery("user", "kimchy"));
+
+        SearchRequest searchRequest = new SearchRequest("twitter").types("tweet");
+        searchRequest.source(searchSourceBuilder);
+//        SearchResponse response =restHighLevelClient.search(searchRequest);
+//        response.getHits().forEach(hit -> logger.info(hit.getSourceAsMap()));
+
     }
 
     @Test

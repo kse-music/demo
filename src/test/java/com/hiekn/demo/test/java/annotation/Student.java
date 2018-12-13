@@ -4,7 +4,7 @@ package com.hiekn.demo.test.java.annotation;
  * @Author: DingHao
  * @Date: 2018/12/8 21:33
  */
-public class Student {
+public class Student implements Comparable{
 
     //---------------构造方法-------------------
     //（默认的构造方法）
@@ -37,4 +37,18 @@ public class Student {
         System.out.println("私有的构造方法   年龄："+ age);
     }
 
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return true;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return -1;
+    }
 }
