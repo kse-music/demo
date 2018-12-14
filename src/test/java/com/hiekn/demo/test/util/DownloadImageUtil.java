@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.util;
+package com.hiekn.demo.test.util;
 import com.hiekn.demo.test.TestBase;
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
