@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.redis;
+package com.hiekn.demo.test.frame.db.redis;
 
 import com.hiekn.demo.test.TestBase;
 import org.junit.Test;

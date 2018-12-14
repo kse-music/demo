@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.es.wxy;
+package com.hiekn.demo.test.frame.db.es.wxy;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

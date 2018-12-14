@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.es;
+package com.hiekn.demo.test.frame.db.es;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

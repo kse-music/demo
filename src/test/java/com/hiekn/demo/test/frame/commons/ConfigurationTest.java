@@ -11,7 +11,7 @@ import java.util.List;
 public class ConfigurationTest extends TestBase {
 	
 	@Test
-	public void test1(){
+	public void prop(){
 		Configurations configs = new Configurations(); 
 		Configuration config;
 		try {
@@ -26,7 +26,7 @@ public class ConfigurationTest extends TestBase {
 	}
 	
 	@Test
-	public void test2(){
+	public void xml(){
 		Configurations configs = new Configurations(); 
 		Configuration config;
 		try {

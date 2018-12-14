@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.es;
+package com.hiekn.demo.test.frame.db.es;
 
 import com.google.gson.reflect.TypeToken;
 import com.hiekn.demo.bean.search.QueryCondition;

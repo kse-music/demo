@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.es;
+package com.hiekn.demo.test.frame.db.es;
 
 import com.carrotsearch.hppc.cursors.ObjectObjectCursor;
 import com.hiekn.demo.test.TestBase;
