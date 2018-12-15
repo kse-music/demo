@@ -1,15 +1,21 @@
 package com.hiekn.demo.test.java.clsloader;
 
-import java.io.*;
-import java.net.URL;
+import com.hiekn.demo.test.TestBase;
+import org.junit.Test;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * https://www.cnblogs.com/doit8791/p/5820037.html
  * 1.隐式装载， 程序在运行过程中当碰到通过new 等方式生成对象时，隐式调用类装载器加载对应的类到jvm中。
  * 2.显式装载， 通过class.forname()等方法，显式加载需要的类
+ *
+ * @author DingHao
+ * @date 2018/12/15 16:19
  */
-public class ClassLoaderTest {
-    /*
+public class ClassLoaderDemo extends TestBase {
+       /*
     体现：
     一个应用程序总是由n多个类组成，Java程序启动时，并不是一次把所有的类全部加载后再运行，
     它总是先把保证程序运行的基础类一次性加载到jvm中，其它类等到jvm用到的时候再加载，
@@ -31,8 +37,8 @@ public class ClassLoaderTest {
     AppClassLoader也是用Java写成的，它的实现类是 sun.misc.Launcher$AppClassLoader，另外我们知道ClassLoader中有个getSystemClassLoader方法,
     此方法返回的正是AppclassLoader.AppClassLoader主要负责加载classpath所指定的位置的类或者是jar文档，它也是Java程序默认的类加载器。
      */
-
-    public static void main(String[] args) {
+    @Test
+    public void custom() {
         /*
         1、装载：查找和导入Class文件
         2、链接：其中解析步骤是可以选择的
@@ -44,7 +50,7 @@ public class ClassLoaderTest {
 
         //Class类没有public的构造方法，Class对象是在装载类时由JVM通过调用类装载器中的defineClass()方法自动构造的
 
-        ClassLoader c  = ClassLoaderTest.class.getClassLoader();  //获取ClassLoaderTest类的类加载器
+        ClassLoader c  = ClassLoaderDemo.class.getClassLoader();  //获取ClassLoaderTest类的类加载器
 
         System.out.println(c);
 
@@ -60,7 +66,6 @@ public class ClassLoaderTest {
         System.out.println(Thread.currentThread().getContextClassLoader());
 
         String path = "D:\\IDEAProject\\util\\";
-        path = "http://www.hiekn.top:1699/";
         CustomClassLoader loader = new CustomClassLoader(Thread.currentThread().getContextClassLoader() , path);
         try {
             Class<?> clazz = loader.findClass("com.hiekn.demo.test.java.java8.Sa");
@@ -70,52 +75,33 @@ public class ClassLoaderTest {
             e.printStackTrace();
         }
     }
-}
 
-class CustomClassLoader extends ClassLoader{
+    @Test
+    public void base() {
+        //创建自定义classloader对象。
+        DiskClassLoader diskLoader = new DiskClassLoader("F:\\IDEAProject\\test\\target\\classes\\com\\hiekn\\test");
 
-    private String path;
-    public CustomClassLoader(ClassLoader parent,String path){
-        super(parent);
-        this.path = path;
-    }
-
-    @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
-        byte[] data = loadClassData(name);
-        //save to disk
-        FileOutputStream fops;
         try {
-            fops = new FileOutputStream("D:\\IDEAProject\\demo\\target\\test-classes\\com\\hiekn\\demo\\test\\java8\\Sa.class");
-            fops.write(data);
-            fops.flush();
-            fops.close();
-        } catch (Exception e) {
+            //加载class文件
+            Class c = diskLoader.loadClass("com.hiekn.test.TestApplication");
+
+            if(c != null){
+                try {
+                    Object obj = c.newInstance();
+                    Method method = c.getDeclaredMethod("say",null);
+                    //通过反射调用Test类的say方法
+                    method.invoke(obj, null);
+                } catch (InstantiationException | IllegalAccessException
+                        | NoSuchMethodException
+                        | SecurityException |
+                        IllegalArgumentException |
+                        InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return super.defineClass(name,data,0,data.length);
-    }
 
-    private byte[] loadClassData(String name){
-        try {
-            InputStream is;
-            name = name.replace("." , File.separator);
-            if(path.indexOf("http://") == 0){
-                name = name.replace(File.separator , "/");
-                URL url = new URL(path + "Sa" + ".class");
-                is = url.openStream();
-            }else{
-                is = new FileInputStream(new File(path + name + ".class"));
-            }
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            int b;
-            while ((b = is.read()) != -1){
-                baos.write(b);
-            }
-            return baos.toByteArray();
-        } catch (Exception e) {
-        e.printStackTrace();
-        }
-        return null;
     }
 }

@@ -8,63 +8,76 @@ import cn.hutool.poi.excel.ExcelWriter;
 import cn.hutool.poi.excel.StyleSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.IndexedColors;
+import com.hiekn.demo.test.TestBase;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.junit.Test;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import javax.annotation.Resource;
+import java.io.FileInputStream;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ExcelDemo {
+public class ExcelDemo extends TestBase {
 
-    public static TransportClient esClient(){
-        Settings settings = Settings.builder().put("cluster.name", "my-application").build();
-        TransportClient  client = new PreBuiltTransportClient(settings);
-        try {
-            for (String ip : new String[]{"62.234.213.56"}) {
-                client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(ip), 9300));
+    @Resource
+    private TransportClient client;
+
+    private static final String EXCEL_FILE_PATH = "F:\\interface.xlsx";
+
+    @Test
+    public void test() throws Exception {
+        List<Row> rowList = new ArrayList<Row>();
+        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(EXCEL_FILE_PATH));
+        for (int t = 0; t < wb.getNumberOfSheets(); t++) {
+            Sheet sheet = wb.getSheetAt(t);
+            int lastRowNum = sheet.getLastRowNum();
+            // 循环读取
+            for (int i = 0; i <= lastRowNum; i++) {
+                Row row = sheet.getRow(i);
+                if (row != null) {
+                    rowList.add(row);
+                    System.out.println("第" + (i + 1) + "行：");
+                    // 获取每一单元格的值
+                    for (int j = 0; j < row.getLastCellNum(); j++) {
+                        String value = getCellValue(row.getCell(j));
+                        System.out.print(value + " | ");
+                    }
+                    System.out.println();
+                }
             }
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
         }
-        return client;
+        wb.close();
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void esDataToExcel() {
 
-//        String path = "C:\\Users\\dh1989\\Desktop\\quick\\me\\server.xlsx";
-//
-//        read(path);
-//
-//        write();
-        Map<String,String> map = Maps.newHashMap();
-        map.put("01de0a69b40f4e4d88da431f2aa25912","std_news_test001");
-        map.put("a754d266f1ed496ab1890541eb2087c4","std_achievement_test001");
-        map.put("std_news2_test001_data_1539777247040","std_news2_test001");
-        map.put("2d5f9e950e2f49a6a76d58caef6d7055","std_project_test001");
-        map.put("684dffa2793d4512bb04ac2aa2bf5952","std_standard_test001");
-        map.put("75944973d09d420b838c0b3d03f143a4","std_policy_test001");
-        map.put("24fbb5810a5b4887a375f1e61cee50eb","std_patent_test001");
-        map.put("815935c705804a709355a15c7208b9f9","std_plan_test001");
-        map.put("52fcfe3ff4d84a47b16efe3d90ca0797","std_people_test001");
-        map.put("c8fc9ad1fc794563a252be5e20d63afd","std_company_test001");
-        map.put("3f5587416fa3428ab44b68ae9cd98bc2","std_product_test001");
+        Map<String, String> map = Maps.newHashMap();
+        map.put("01de0a69b40f4e4d88da431f2aa25912", "std_news_test001");
+        map.put("a754d266f1ed496ab1890541eb2087c4", "std_achievement_test001");
+        map.put("std_news2_test001_data_1539777247040", "std_news2_test001");
+        map.put("2d5f9e950e2f49a6a76d58caef6d7055", "std_project_test001");
+        map.put("684dffa2793d4512bb04ac2aa2bf5952", "std_standard_test001");
+        map.put("75944973d09d420b838c0b3d03f143a4", "std_policy_test001");
+        map.put("24fbb5810a5b4887a375f1e61cee50eb", "std_patent_test001");
+        map.put("815935c705804a709355a15c7208b9f9", "std_plan_test001");
+        map.put("52fcfe3ff4d84a47b16efe3d90ca0797", "std_people_test001");
+        map.put("c8fc9ad1fc794563a252be5e20d63afd", "std_company_test001");
+        map.put("3f5587416fa3428ab44b68ae9cd98bc2", "std_product_test001");
 
-        TransportClient client = esClient();
         ExcelWriter writer = ExcelUtil.getWriter("d:/zh.xlsx");
 
-        map.forEach((k,v) -> {
+        map.forEach((k, v) -> {
             List<List<String>> rows = Lists.newArrayList();
             SearchRequestBuilder searchRequestBuilder = client.prepareSearch(k).setTypes(v).setTimeout(TimeValue.timeValueSeconds(60));
             AggregationBuilder by_key = AggregationBuilders.terms("by_annotation_name").field("annotation_tag.name.keyword").size(Integer.MAX_VALUE);
@@ -73,22 +86,23 @@ public class ExcelDemo {
                     .setSize(0)
                     .get();
             Terms by_annotation_name = response.getAggregations().get("by_annotation_name");
-            rows.add(Lists.newArrayList("",k));
+            rows.add(Lists.newArrayList("", k));
             long sum = 0;
             for (Terms.Bucket entry : by_annotation_name.getBuckets()) {
                 sum += entry.getDocCount();
-                rows.add(Lists.newArrayList(entry.getKey().toString(),entry.getDocCount()+""));
+                rows.add(Lists.newArrayList(entry.getKey().toString(), entry.getDocCount() + ""));
             }
-            rows.add(Lists.newArrayList("",""));
-            rows.add(Lists.newArrayList("标引数据合计",sum+""));
-            rows.add(Lists.newArrayList("合计",response.getHits().getTotalHits()+""));
+            rows.add(Lists.newArrayList("", ""));
+            rows.add(Lists.newArrayList("标引数据合计", sum + ""));
+            rows.add(Lists.newArrayList("合计", response.getHits().getTotalHits() + ""));
             writer.passRows(2);
             writer.write(rows);
         });
         writer.close();
     }
 
-    public static void read(String path){
+    @Test
+    public void read(String path) {
         ExcelReader reader = ExcelUtil.getReader(FileUtil.file(path));
         //通过sheet编号获取
 //        reader = ExcelUtil.getReader(FileUtil.file(path), 0);
@@ -105,7 +119,8 @@ public class ExcelDemo {
 
     }
 
-    public static void write(){
+    @Test
+    public void write() {
 
         List<String> row1 = Lists.newArrayList("aa", "bb", "cc", "dd");
         List<String> row2 = Lists.newArrayList("aa1", "bb1", "cc1", "dd1");
@@ -144,6 +159,36 @@ public class ExcelDemo {
         //关闭writer，释放内存
         writer.close();
 
+    }
+
+
+    private String getCellValue(Cell cell) {
+        Object result = "";
+        if (cell != null) {
+            switch (cell.getCellType()) {
+                case Cell.CELL_TYPE_STRING:
+                    result = cell.getStringCellValue();
+                    break;
+                case Cell.CELL_TYPE_NUMERIC:
+                    //				result = cell.getNumericCellValue();
+                    result = new DecimalFormat("#").format(cell.getNumericCellValue());
+                    break;
+                case Cell.CELL_TYPE_BOOLEAN:
+                    result = cell.getBooleanCellValue();
+                    break;
+                case Cell.CELL_TYPE_FORMULA:
+                    result = cell.getCellFormula();
+                    break;
+                case Cell.CELL_TYPE_ERROR:
+                    result = cell.getErrorCellValue();
+                    break;
+                case Cell.CELL_TYPE_BLANK:
+                    break;
+                default:
+                    break;
+            }
+        }
+        return result.toString();
     }
 
 }

@@ -4,8 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class DiskClassLoader extends ClassLoader {
 
@@ -56,36 +54,6 @@ public class DiskClassLoader extends ClassLoader {
             return name.substring(index+1)+".class";
         }
     }
-
-    public static void main(String[] args) {
-
-        //创建自定义classloader对象。
-        DiskClassLoader diskLoader = new DiskClassLoader("F:\\IDEAProject\\test\\target\\classes\\com\\hiekn\\test");
-
-        try {
-            //加载class文件
-            Class c = diskLoader.loadClass("com.hiekn.test.TestApplication");
-
-            if(c != null){
-                try {
-                    Object obj = c.newInstance();
-                    Method method = c.getDeclaredMethod("say",null);
-                    //通过反射调用Test类的say方法
-                    method.invoke(obj, null);
-                } catch (InstantiationException | IllegalAccessException
-                        | NoSuchMethodException
-                        | SecurityException |
-                        IllegalArgumentException |
-                        InvocationTargetException e) {
-                    e.printStackTrace();
-               }
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
 }
 

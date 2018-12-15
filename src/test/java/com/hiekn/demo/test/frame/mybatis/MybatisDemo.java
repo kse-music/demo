@@ -19,8 +19,8 @@ import java.io.InputStream;
 import java.util.Map;
 
 /**
- * @Author: DingHao
- * @Date: 2018/11/30 13:21
+ * @author DingHao
+ * @date 2018/11/30 13:21
  */
 public class MybatisDemo extends TestBase {
 
