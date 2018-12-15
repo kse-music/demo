@@ -14,17 +14,100 @@ import java.util.Arrays;
  */
 public class AlgorithmDemo extends TestBase {
 
-    private static final int[] arr = {77, 99, 44, 55, 22, 88, 11, 0, 66, 33};
+    private static final int[] arr = {-2,11,-4,13,-5,-2};
 
     @After
     public void out() {
         System.out.println(Arrays.toString(arr));
     }
 
+    @Test
+    public void binarySearch(){
+        int[] sortArr = {1,3,15,37,49,71,88,99};
+        int low = 0,high = sortArr.length - 1;
+        int x = 99;
+        int mid = -1;
+        while (low <= high){
+            mid = (low + high) / 2;
+            if(x < sortArr[mid]){
+                high = mid - 1;
+            }else if(x > sortArr[mid]){
+                low = mid + 1;
+            }else{
+                break;
+            }
+        }
+        System.out.println(mid);
+    }
 
     @Test
-    public void algorithm(){
+    public void maxSubSum4(){
+        int maxSum = 0;
+        int firstIndex = -1;
+        int lastIndex = 0;
+        int thisSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            thisSum += arr[i];
+            if(thisSum > maxSum){
+                maxSum = thisSum;
+                if(firstIndex == -1 && arr[i] > 0){
+                    firstIndex = i;
+                }
+                lastIndex = i;
+            }else if(thisSum < 0){
+                thisSum = 0;
+            }
+        }
+        System.out.println(Arrays.toString(Arrays.copyOfRange(arr,firstIndex,lastIndex+1)));
+        System.out.println(maxSum);
+    }
 
+    @Test
+    public void maxSubSum3(){
+
+    }
+
+    @Test
+    public void maxSubSum2(){
+        int maxSum = 0;
+        int firstIndex = 0;
+        int lastIndex = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int thisSum = 0;
+            for (int j = i; j < arr.length; j++) {
+                thisSum += arr[j];
+                if(thisSum > maxSum){
+                    maxSum = thisSum;
+                    firstIndex= i;
+                    lastIndex= j;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(Arrays.copyOfRange(arr,firstIndex,lastIndex+1)));
+        System.out.println(maxSum);
+    }
+
+
+    @Test
+    public void maxSubSum1(){
+        int maxSum = 0;
+        int firstIndex = 0;
+        int lastIndex = 0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i; j < arr.length; j++) {
+                int thisSum = 0;
+                for (int k = i; k <= j; k++) {
+                    thisSum += arr[k];
+                    if(thisSum > maxSum){
+                        maxSum = thisSum;
+                        firstIndex= i;
+                        lastIndex= j;
+                    }
+                }
+            }
+        }
+        System.out.println(Arrays.toString(Arrays.copyOfRange(arr,firstIndex,lastIndex+1)));
+        System.out.println(maxSum);
     }
 
 
