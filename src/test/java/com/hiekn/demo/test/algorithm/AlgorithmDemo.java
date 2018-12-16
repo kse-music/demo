@@ -22,6 +22,47 @@ public class AlgorithmDemo extends TestBase {
     }
 
     @Test
+    public void pow(){
+        System.out.println(pow(2,10));
+    }
+
+    /**
+     * O(logN)
+     * @param x
+     * @param n
+     * @return
+     */
+    private long pow(long x,int n){
+        if(n == 0){
+            return 1;
+        }
+        if(n == 1){
+            return x;
+        }
+        if(n % 2 == 0){
+            return pow(x * x,n / 2);
+        }else {
+            return pow(x * x,n / 2) * x;
+        }
+    }
+
+    /**
+     * 公因数也叫公约数
+     * 计算最大公因数的欧几里得算法
+     */
+    @Test
+    public void gcd(){
+        long m = 1989;
+        long n = 1590;
+        while (n != 0){
+            long rem = m % n;
+            m = n;
+            n = rem;
+        }
+        System.out.println(m);
+    }
+
+    @Test
     public void binarySearch(){
         int[] sortArr = {1,3,15,37,49,71,88,99};
         int low = 0,high = sortArr.length - 1;
