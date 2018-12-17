@@ -42,10 +42,7 @@ import java.lang.reflect.*;
 import java.lang.reflect.Proxy;
 import java.net.*;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Properties;
-import java.util.TreeMap;
+import java.util.*;
 
 //import org.openqa.selenium.By;
 //import org.openqa.selenium.JavascriptExecutor;
@@ -70,6 +67,15 @@ public class ComprehensiveDemo extends TestBase {
     @Before
     public void init() {
 
+    }
+
+    @Test
+    public void list(){
+        List<String> list = new ArrayList<>();// Default initial capacity：10
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
     }
 
 
