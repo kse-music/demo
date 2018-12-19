@@ -35,6 +35,10 @@ import java.util.Map;
 
 public class SpringDemo extends TestBase {
 
+
+    /**
+     * 单个看某一个功能点
+     */
     @Test
     public void research(){
         ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
@@ -44,6 +48,9 @@ public class SpringDemo extends TestBase {
 
     }
 
+    /**
+     * 查看aop源码
+     */
     @Test
     public void testAop(){
         ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class,AopConfig.class);
@@ -51,6 +58,9 @@ public class SpringDemo extends TestBase {
         System.out.println(bean.test());
     }
 
+    /**
+     * 涵盖了循环依赖注入、FactoryBean、@Bean、ObjectFactory、ObjectProvider
+     */
     @Test
     public void testIoc(){
 
@@ -61,9 +71,6 @@ public class SpringDemo extends TestBase {
         DemoBean1 demoBean1 = context.getBean(DemoBean1.class);
         System.out.println(demoBean1);
         demoBean1.test();
-        System.out.println(context.getBean(DemoBean2.class));
-        DemoBean3 demoBean3 = context.getBean(DemoBean3.class);
-        System.out.println(demoBean3);
 
     }
 

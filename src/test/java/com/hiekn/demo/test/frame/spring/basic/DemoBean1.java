@@ -39,7 +39,6 @@ public class DemoBean1 {
         List<DemoBean3> ifUnique = demoBean3s.getIfUnique();//不唯一且没有@primary，throw ex
         System.out.println(ifAvailable);
         System.out.println(ifUnique);
-        System.out.println(demoBean333);
     }
 
     @Autowired
