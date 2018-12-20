@@ -69,6 +69,7 @@ public class ComprehensiveDemo extends TestBase {
 
     }
 
+
     @Test
     public void list(){
         List<String> list = new ArrayList<>();// Default initial capacity：10
