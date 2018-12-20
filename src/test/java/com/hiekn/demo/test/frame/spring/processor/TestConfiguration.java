@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import javax.annotation.PostConstruct;
 
 @ComponentScan("com.hiekn.demo.test.frame.spring.processor")
+//@ImportResource("classpath:spring-config.xml")
 public class TestConfiguration implements InitializingBean {
 
     @Value("${user.home}")
