@@ -265,6 +265,9 @@ public class RegexDemo extends TestBase {
         Matcher matcher = pattern.matcher(TEXT);
 
         while (matcher.find()) {
+            System.out.println(matcher.start());
+            System.out.println(matcher.end());
+            System.out.println(matcher.group());
             System.out.println("File Name = " + matcher.group("fileName"));
         }
     }
