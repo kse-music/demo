@@ -77,6 +77,7 @@ public class ComprehensiveDemo extends TestBase {
         list.add("b");
         list.add("c");
         list.add("d");
+
     }
 
 
@@ -181,7 +182,7 @@ public class ComprehensiveDemo extends TestBase {
      *
      *    1、获取Class对象的三种方式
      *      1.1 Object ——> getClass();
-     *      1.2 任何数据类型（包括基本数据类型）都有一个“静态”的class属性
+     *      1.2 任何数据类型（包括基本数据类型）都有一个"静态”的class属性
      *      1.3 通过Class类的静态方法：forName（String  className）(常用)
      */
     @Test
