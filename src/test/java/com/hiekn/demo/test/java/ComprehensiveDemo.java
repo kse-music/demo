@@ -4,6 +4,12 @@ import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.google.common.collect.Maps;
 import com.hiekn.demo.bean.UserBean;
 import com.hiekn.demo.test.TestBase;
 import com.hiekn.demo.test.frame.crawler.CrawlerDemo;
@@ -33,10 +39,7 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.lang.reflect.Proxy;
@@ -451,6 +454,32 @@ public class ComprehensiveDemo extends TestBase {
         //解密为字符串
         String decryptStr = aes.decryptStr(encryptHex, CharsetUtil.CHARSET_UTF_8);
 
+    }
+
+    @Test
+    public void jwtToken() throws UnsupportedEncodingException {
+        //签发时间
+        Date iaDate = new Date();
+
+        //过期时间
+        Calendar nowTime = Calendar.getInstance();
+        nowTime.add(Calendar.MINUTE,1);
+        Date expireDate = nowTime.getTime();
+
+        Map<String,Object> map = Maps.newHashMap();
+        String token = JWT.create()
+                .withHeader(map)
+                .withClaim("userId",1)
+                .withExpiresAt(expireDate)
+                .withIssuedAt(iaDate)
+                .withIssuer("hiekn")
+                .sign(Algorithm.HMAC384("SECRET"));
+
+        JWTVerifier verifier = JWT.require(Algorithm.HMAC384("SECRET")).build();
+        DecodedJWT jwt = verifier.verify(token);
+        Map<String, Claim> claims = jwt.getClaims();
+
+        claims.forEach((k,v) -> System.out.println(k+"  "+v.asString()));
     }
 
     //	private static WebDriver driver;

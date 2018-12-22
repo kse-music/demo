@@ -12,7 +12,7 @@ import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.common.graph.*;
 import com.hiekn.demo.test.TestBase;
-import com.hiekn.demo.test.util.DijkstraSolve;
+import com.hiekn.demo.test.algorithm.DijkstraSolve;
 import org.junit.Test;
 
 import java.util.*;
