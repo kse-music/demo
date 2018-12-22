@@ -1,10 +1,11 @@
 package com.hiekn.demo.test.algorithm;
 
+import com.google.common.collect.Lists;
 import com.hiekn.demo.test.TestBase;
 import org.junit.After;
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * study algorithm
@@ -20,6 +21,63 @@ public class AlgorithmDemo extends TestBase {
     public void out() {
         System.out.println(Arrays.toString(arr));
     }
+
+
+    @Test
+    public void computeAdjacentWords(){
+
+        List<String> words = Lists.newArrayList("fine","foot","nine","boot","shoot","wine","shout","fort");
+
+        Map<String,List<String>> adjWords = new TreeMap<>();
+
+        Map<Integer,List<String>> wordsByLength = new TreeMap<>();
+
+        for (String word : words) {
+            update(wordsByLength,word.length(),word);
+        }
+
+        for (Map.Entry<Integer, List<String>> entry : wordsByLength.entrySet()) {
+            List<String> groupWords = entry.getValue();
+            int groupNum = entry.getKey();
+
+            for (int i = 0; i < groupNum; i++) {
+
+                Map<String,List<String>> repToWord = new TreeMap<>();
+
+                for (String str : groupWords) {
+                    String rep = str.substring(0,i) + str.substring(i+1);
+                    update(repToWord,rep,str);
+                }
+
+                for (List<String> wordClique : repToWord.values()) {
+                    if(wordClique.size() >= 2){
+                        for (String s1 : wordClique) {
+                            for (String s2 : wordClique) {
+                                if(s1 != s2){
+                                    update(adjWords,s1,s2);
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        System.out.println(adjWords);
+
+    }
+
+    private <T> void update(Map<T,List<String>> m, T key, String value){
+        List<String> list = m.get(key);
+        if(Objects.isNull(list)){
+            list = Lists.newArrayList();
+            m.put(key,list);
+        }
+        list.add(value);
+    }
+
 
     @Test
     public void pow(){
