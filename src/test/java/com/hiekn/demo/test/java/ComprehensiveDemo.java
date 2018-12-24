@@ -80,7 +80,17 @@ public class ComprehensiveDemo extends TestBase {
         list.add("b");
         list.add("c");
         list.add("d");
+    }
 
+
+    @Test
+    public void shutdownHook(){
+        Thread thread1 = new Thread(() -> System.out.println("thread1..."));
+        Thread thread2 = new Thread(() -> System.out.println("thread2..."));
+        Thread shutdownThread = new Thread(() -> System.out.println("shutdownThread..."));
+        Runtime.getRuntime().addShutdownHook(shutdownThread);
+        thread1.start();
+        thread2.start();
     }
 
 
