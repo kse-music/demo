@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 //@Configuration
 @ComponentScan("com.hiekn.demo.test.frame.spring.basic")
+//@ImportResource("classpath:spring-config.xml")
 public class TestBeanConfiguration {
 
 //   @Bean注解注册bean,同时可以指定初始化和销毁方法

@@ -2,7 +2,10 @@ package com.hiekn.demo.test.frame.spring;
 
 import com.hiekn.demo.test.TestBase;
 import com.hiekn.demo.test.frame.spring.aop.AopConfig;
-import com.hiekn.demo.test.frame.spring.basic.*;
+import com.hiekn.demo.test.frame.spring.basic.DemoBean1;
+import com.hiekn.demo.test.frame.spring.basic.TestBean;
+import com.hiekn.demo.test.frame.spring.basic.TestBeanConfiguration;
+import com.hiekn.demo.test.frame.spring.basic.TestPropertyBean;
 import com.hiekn.demo.test.frame.spring.hierarchy.ChildContext;
 import com.hiekn.demo.test.frame.spring.hierarchy.ParentContext;
 import com.hiekn.demo.test.frame.spring.processor.TestConfiguration;
@@ -18,10 +21,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.core.type.StandardAnnotationMetadata;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.MultiValueMap;
 
 import java.beans.PropertyDescriptor;
@@ -42,10 +47,15 @@ public class SpringDemo extends TestBase {
     @Test
     public void research(){
         ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
-//        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");//从spring-context.xml加载
         TestConfiguration bean = context.getBean(TestConfiguration.class);
         System.out.println(bean.test());
+    }
 
+    @Test
+    public void runFromXml(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");//从spring-context.xml加载
+        JdbcTemplate jdbcTemplate = context.getBean(JdbcTemplate.class);
+        System.out.println(jdbcTemplate);
     }
 
     /**
@@ -59,7 +69,7 @@ public class SpringDemo extends TestBase {
     }
 
     /**
-     * 涵盖了循环依赖注入、FactoryBean、@Bean、ObjectFactory、ObjectProvider
+     * 循环依赖注入、FactoryBean、@Bean、ObjectFactory、ObjectProvider、@ImportResource
      */
     @Test
     public void testIoc(){
