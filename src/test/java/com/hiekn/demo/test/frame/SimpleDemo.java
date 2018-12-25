@@ -15,16 +15,18 @@ import java.util.List;
  * @date: 2018/12/23 1:17
  */
 public class SimpleDemo extends TestBase {
+
     @Test
     public void prop(){
         Configurations configs = new Configurations();
         Configuration config;
         try {
             config = configs.properties("demo.properties");
-            List<Object> b = config.getList("b");
-            List<String> bb = config.getList(String.class,"b");
+            List<Object> b = config.getList("base.package");
+            List<String> bb = config.getList(String.class,"base.package");
             System.out.println(b);
             System.out.println(bb);
+            System.out.println(config.getString("base.package"));
         } catch (ConfigurationException e) {
             e.printStackTrace();
         }

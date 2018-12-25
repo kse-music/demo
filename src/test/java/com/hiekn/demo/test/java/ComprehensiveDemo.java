@@ -72,6 +72,17 @@ public class ComprehensiveDemo extends TestBase {
 
     }
 
+    /**
+     *
+     * 一、使用clazz.getClassLoader().getResourceAsStream(fileName)方式
+     * 1.它只会解析一个配置文件
+     * 2.顺序是：本体项目 -> maven引入jar中的第一个
+     *
+     * 二、使用spring工具类，Properties globalProperties = PropertiesLoaderUtils.loadAllProperties("console.properties");
+     * 1.它会解析classpath*下所有的文件
+     * 2.顺序是：本体项目 -> maven中引入顺序（从上到下）
+     * 3. 相同key后面的覆盖前面的
+     */
     @Test
     public void loadResource(){
         Properties prop  = new Properties();
@@ -85,7 +96,7 @@ public class ComprehensiveDemo extends TestBase {
 //            InputStream in = getClass().getClassLoader().getResourceAsStream("demo.properties");
             prop.load(in);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("{}",e);
         }
         System.out.println(prop);
 
