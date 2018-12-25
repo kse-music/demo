@@ -72,6 +72,28 @@ public class ComprehensiveDemo extends TestBase {
 
     }
 
+    @Test
+    public void loadResource(){
+        Properties prop  = new Properties();
+        try {
+            //下面这两方式,如果不是 / 开头会拼接当前class的路径查找,是则再到class路径根目录查找
+//            InputStream in = getClass().getResource("demo.properties").openStream();
+//            InputStream in = getClass().getResourceAsStream("demo.properties");
+
+            //下面这两方式不管有没有 / 都是从class的根目录查找
+            InputStream in = getClass().getClassLoader().getResource("demo.properties").openStream();
+//            InputStream in = getClass().getClassLoader().getResourceAsStream("demo.properties");
+            prop.load(in);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        System.out.println(prop);
+
+        System.out.println(getClass().getResource("").getPath());
+        System.out.println(getClass().getClassLoader().getResource("").getPath());
+
+    }
+
 
     @Test
     public void list(){
