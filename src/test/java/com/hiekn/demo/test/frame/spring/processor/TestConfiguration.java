@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 @ComponentScan("com.hiekn.demo.test.frame.spring.processor")
 public class TestConfiguration implements InitializingBean {
 
-    @Value("${user.home}")
+    @Value("${user.home2}")
     private String home;
 
     public void setHome(String home) {

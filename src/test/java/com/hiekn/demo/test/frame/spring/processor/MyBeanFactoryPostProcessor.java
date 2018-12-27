@@ -40,7 +40,7 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor,Envi
                             Field declaredField = invocationHandler.getClass().getDeclaredField("memberValues");
                             declaredField.setAccessible(true);
                             Map memberValues = (Map) declaredField.get(invocationHandler);
-                            memberValues.put("value", "${user.home2}");
+                            memberValues.put("value", "${user.home}");
                         }
                     }
                 } catch (Exception e) {
