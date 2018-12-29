@@ -63,14 +63,9 @@ import java.util.*;
  */
 public class ComprehensiveDemo extends TestBase {
 
-    private Object instance;
-    private static final int _1MB = 1024 *1024;
-    private byte[] bigSize = new byte[2 * _1MB];
 
     @Before
-    public void init() {
-
-    }
+    public void init() {}
 
     /**
      *
@@ -165,22 +160,6 @@ public class ComprehensiveDemo extends TestBase {
         }
 
     }
-
-
-    /**
-     * gc
-     */
-    @Test
-    public void gc(){
-        ComprehensiveDemo objA = new ComprehensiveDemo();
-        ComprehensiveDemo objB = new ComprehensiveDemo();
-        objA.instance = objB;
-        objB.instance = objA;
-        objA = null;
-        objB = null;
-        System.gc();
-    }
-
 
     /**
      *强引用
