@@ -301,6 +301,9 @@ public class ComprehensiveDemo extends TestBase {
 
     /**
      * 通过class内省获取bean属性 方法等等
+     *
+     * 反射可以操作各种类的属性，而内省只是通过反射来操作JavaBean的属性
+     * 内省设置属性值肯定会调用setter方法，反射可以不用
      * @throws IntrospectionException
      */
     @Test
