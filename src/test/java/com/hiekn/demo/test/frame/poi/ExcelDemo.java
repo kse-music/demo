@@ -166,23 +166,23 @@ public class ExcelDemo extends TestBase {
         Object result = "";
         if (cell != null) {
             switch (cell.getCellType()) {
-                case Cell.CELL_TYPE_STRING:
+                case STRING:
                     result = cell.getStringCellValue();
                     break;
-                case Cell.CELL_TYPE_NUMERIC:
-                    //				result = cell.getNumericCellValue();
+                case NUMERIC:
+//                    result = cell.getNumericCellValue();
                     result = new DecimalFormat("#").format(cell.getNumericCellValue());
                     break;
-                case Cell.CELL_TYPE_BOOLEAN:
+                case BOOLEAN:
                     result = cell.getBooleanCellValue();
                     break;
-                case Cell.CELL_TYPE_FORMULA:
+                case FORMULA:
                     result = cell.getCellFormula();
                     break;
-                case Cell.CELL_TYPE_ERROR:
+                case ERROR:
                     result = cell.getErrorCellValue();
                     break;
-                case Cell.CELL_TYPE_BLANK:
+                case BLANK:
                     break;
                 default:
                     break;
