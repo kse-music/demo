@@ -13,20 +13,15 @@ import com.hiekn.demo.test.java.annotation.BeanDefine;
 import com.hiekn.demo.test.java.annotation.TestAnnotation;
 import com.hiekn.demo.test.java.annotation.ZxfResource;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.core.type.StandardAnnotationMetadata;
 import org.springframework.util.MultiValueMap;
 
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -117,21 +112,7 @@ public class SpringDemo extends TestBase {
     }
 
     @Test
-    public void parseAnnotation() throws InvocationTargetException, IllegalAccessException {
-        PropertyDescriptor[] descriptors = BeanUtils.getPropertyDescriptors(TestPropertyBean.class);
-        TestPropertyBean testPropertyBean = new TestPropertyBean();
-        for (PropertyDescriptor descriptor : descriptors) {
-            String name = descriptor.getName();
-            if(!"class".equals(name)){
-                MethodParameter methodDescriptors = BeanUtils.getWriteMethodParameter(descriptor);
-                System.out.println(name);
-                Method method = methodDescriptors.getMethod();
-                method.invoke(testPropertyBean,1);
-            }
-        }
-
-        System.out.println(testPropertyBean.getA());
-
+    public void parseAnnotation() {
         AnnotatedTypeMetadata metadata = new StandardAnnotationMetadata(BeanDefine.class);
         System.out.println(((StandardAnnotationMetadata) metadata).hasAnnotation(ZxfResource.class.getName()));//false
         System.out.println(metadata.isAnnotated(ZxfResource.class.getName()));//true

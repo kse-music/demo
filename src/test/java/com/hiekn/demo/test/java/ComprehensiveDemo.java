@@ -31,6 +31,8 @@ import org.junit.Test;
 import org.springframework.asm.ClassWriter;
 import org.springframework.asm.MethodVisitor;
 import org.springframework.asm.Opcodes;
+import org.springframework.beans.BeanUtils;
+import org.springframework.core.MethodParameter;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -307,7 +309,7 @@ public class ComprehensiveDemo extends TestBase {
      * @throws IntrospectionException
      */
     @Test
-    public void introspector() throws IntrospectionException {
+    public void introspector() throws IntrospectionException, InvocationTargetException, IllegalAccessException {
         //1 获得 java Bean的描述信息
         BeanInfo info = Introspector.getBeanInfo(UserBean.class);
         //2 获得 UserBean中的属性信息
@@ -316,6 +318,19 @@ public class ComprehensiveDemo extends TestBase {
         for (PropertyDescriptor pd : pds) {
             System.out.println(pd.getName());
         }
+
+        PropertyDescriptor[] descriptors = BeanUtils.getPropertyDescriptors(UserBean.class);
+        UserBean userBean = new UserBean();
+        for (PropertyDescriptor descriptor : descriptors) {
+            String name = descriptor.getName();
+            if(!"class".equals(name) && "name".equals(name)){
+                MethodParameter methodDescriptors = BeanUtils.getWriteMethodParameter(descriptor);
+                Method method = methodDescriptors.getMethod();
+                method.invoke(userBean,"nn");
+            }
+        }
+        System.out.println(userBean.getName());
+
     }
 
 
