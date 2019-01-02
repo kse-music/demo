@@ -1,11 +1,7 @@
 package com.hiekn.demo.test.frame.spring;
 
 import com.hiekn.demo.test.TestBase;
-import com.hiekn.demo.test.frame.spring.aop.AopConfig;
-import com.hiekn.demo.test.frame.spring.basic.DemoBean1;
-import com.hiekn.demo.test.frame.spring.basic.TestBean;
-import com.hiekn.demo.test.frame.spring.basic.TestBeanConfiguration;
-import com.hiekn.demo.test.frame.spring.basic.TestPropertyBean;
+import com.hiekn.demo.test.frame.spring.basic.*;
 import com.hiekn.demo.test.frame.spring.hierarchy.ChildContext;
 import com.hiekn.demo.test.frame.spring.hierarchy.ParentContext;
 import com.hiekn.demo.test.frame.spring.processor.TestConfiguration;
@@ -26,7 +22,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.core.type.StandardAnnotationMetadata;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.MultiValueMap;
 
 import java.beans.PropertyDescriptor;
@@ -46,33 +41,28 @@ public class SpringDemo extends TestBase {
      */
     @Test
     public void research(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class/*,AopConfig.class*/);
         TestConfiguration bean = context.getBean(TestConfiguration.class);
         System.out.println(bean.test());
     }
 
+
+    /**
+     * 包含  replace-method 示例
+     */
     @Test
     public void runFromXml(){
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");//从spring-context.xml加载
-        JdbcTemplate jdbcTemplate = context.getBean(JdbcTemplate.class);
-        System.out.println(jdbcTemplate);
+        ReplaceMethodDemo replaceMethodDemo = context.getBean(ReplaceMethodDemo.class);
+        System.out.println(replaceMethodDemo.getName());
     }
 
     /**
-     * 查看aop源码
+     * 包含以下示例：
+     *      循环依赖注入、FactoryBean、@Bean、ObjectFactory、ObjectProvider、@ImportResource、@Lookup
      */
     @Test
-    public void testAop(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class,AopConfig.class);
-        TestConfiguration bean = context.getBean(TestConfiguration.class);
-        System.out.println(bean.test());
-    }
-
-    /**
-     * 循环依赖注入、FactoryBean、@Bean、ObjectFactory、ObjectProvider、@ImportResource
-     */
-    @Test
-    public void testIoc(){
+    public void testBasic(){
 
         ApplicationContext context = new AnnotationConfigApplicationContext(TestBeanConfiguration.class);
 
@@ -81,6 +71,9 @@ public class SpringDemo extends TestBase {
         DemoBean1 demoBean1 = context.getBean(DemoBean1.class);
         System.out.println(demoBean1);
         demoBean1.test();
+
+        LookupDemo look = context.getBean(LookupDemo.class);
+        look.look();
 
     }
 

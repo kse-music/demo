@@ -54,5 +54,10 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
+    <bean id="replacer" class="com.hiekn.demo.test.frame.spring.basic.Replacer" />
+    <!-- 方法替换的demo -->
+    <bean id="replaceMethodDemo" class="com.hiekn.demo.test.frame.spring.basic.ReplaceMethodDemo">
+        <replaced-method name="getName" replacer="replacer" />
+    </bean>
 
 </beans>

@@ -1,12 +1,13 @@
 package com.hiekn.demo.test.frame.spring.basic;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
 @Component
-@Scope("prototype")
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class TestBean {
     private String name = "test";
 
