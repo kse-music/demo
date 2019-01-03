@@ -1,7 +1,6 @@
 package com.hiekn.demo.test.java.annotation;
 
-
-@TestAnnotation(prefix = "abc",name = "hh")
+@TestAnnotation("abc")
 public class BeanDefine {
 
     private String id;

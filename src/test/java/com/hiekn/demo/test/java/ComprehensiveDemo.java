@@ -147,7 +147,7 @@ public class ComprehensiveDemo extends TestBase {
         for (Annotation annotation : annotations) {
             if(annotation.annotationType().getName().equals(TestAnnotation.class.getName())){
                 TestAnnotation t = (TestAnnotation)annotation;
-                String value =  t.prefix();
+                String value =  t.value();
                 System.out.println("修改之前的注解值：" + value);
 
                 InvocationHandler invocationHandler = Proxy.getInvocationHandler(annotation);
@@ -156,7 +156,7 @@ public class ComprehensiveDemo extends TestBase {
                 Map memberValues = (Map) declaredField.get(invocationHandler);
                 memberValues.put("prefix", "test.annotation.new.value");
 
-                String newValue = t.prefix();
+                String newValue = t.value();
                 System.out.println("修改之后的注解值：" + newValue);
             }
         }

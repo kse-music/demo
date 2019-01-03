@@ -117,7 +117,9 @@ public class SpringDemo extends TestBase {
         System.out.println(((StandardAnnotationMetadata) metadata).hasAnnotation(ZxfResource.class.getName()));//false
         System.out.println(metadata.isAnnotated(ZxfResource.class.getName()));//true
         Map<String, Object> attributes = metadata.getAnnotationAttributes(TestAnnotation.class.getName());
-        System.out.println(attributes.get("prefix"));
+        MultiValueMap<String, Object> multiValueMap = metadata.getAllAnnotationAttributes(TestAnnotation.class.getName());
+        List<AnnotationAttributes> annotationAttributes = annotationAttributesFromMultiValueMap(multiValueMap);
+        System.out.println(attributes.get("value"));
     }
 
     List<AnnotationAttributes> annotationAttributesFromMultiValueMap(MultiValueMap<String, Object> multiValueMap) {
