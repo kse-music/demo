@@ -12,6 +12,3 @@ public enum  Singleton5 {
     }
 }
 
-class Resource{
-
-}
