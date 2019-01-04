@@ -10,7 +10,7 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
-public class QuartzTest extends TestBase {
+public class QuartzDemo extends TestBase {
 
     @Test
     public void quartz() {
@@ -33,7 +33,7 @@ public class QuartzTest extends TestBase {
                     .withIdentity("job1", "group1") //定义name/group
 //					.usingJobData("name", "quartz") //定义属性
                     .build();
-            job.getJobDataMap().put("name", new QuartzTest());
+            job.getJobDataMap().put("name", new QuartzDemo());
             //加入这个调度
             scheduler.scheduleJob(job, trigger);
 
