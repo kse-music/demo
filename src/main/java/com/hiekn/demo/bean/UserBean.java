@@ -2,6 +2,8 @@ package com.hiekn.demo.bean;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.util.Date;
+
 public class UserBean {
 	
 	@NotBlank(message="用户名不能为空") 
@@ -11,6 +13,7 @@ public class UserBean {
 	private String content;
 	private String search;
 	private String nosearch;
+	private Date date;
 	public String getName() {
 		return name;
 	}
@@ -47,5 +50,10 @@ public class UserBean {
 	public void setNosearch(String nosearch) {
 		this.nosearch = nosearch;
 	}
-	
+    public Date getDate() {
+        return date;
+    }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
