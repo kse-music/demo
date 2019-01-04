@@ -21,7 +21,11 @@ import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.junit.Test;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +106,8 @@ public class ExcelDemo extends TestBase {
     }
 
     @Test
-    public void read(String path) {
+    public void read() {
+        String path = "";
         ExcelReader reader = ExcelUtil.getReader(FileUtil.file(path));
         //通过sheet编号获取
 //        reader = ExcelUtil.getReader(FileUtil.file(path), 0);
@@ -157,6 +162,35 @@ public class ExcelDemo extends TestBase {
         //一次性写出内容
         writer.write(rows);
         //关闭writer，释放内存
+        writer.close();
+
+    }
+
+    @Test
+    public void nerExcel() throws IOException {
+        File dir = new File("G:\\res1");
+
+        List<List<String>> rows = Lists.newArrayList();
+        rows.add(Lists.newArrayList("标题", "地名", "人名"));
+        for (File file : dir.listFiles()) {
+            try {
+                List<String> data = Files.readAllLines(Paths.get(file.getAbsolutePath()));
+                List<String> row = Lists.newArrayList(file.getName().replace(".txt",""));
+                for (String d : data) {
+                    if(d.startsWith("人名")){
+                        row.add(d.split(":")[1]);
+                    }else if(d.startsWith("地名")){
+                        row.add(d.split(":")[1]);
+                    }
+                }
+                rows.add(row);
+            } catch (Exception e) {
+                System.out.println(file.getName());
+            }
+        }
+
+        ExcelWriter writer = ExcelUtil.getWriter("d:/writeTest.xlsx");
+        writer.write(rows);
         writer.close();
 
     }
