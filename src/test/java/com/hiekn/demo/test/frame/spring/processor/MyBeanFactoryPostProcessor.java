@@ -2,7 +2,6 @@ package com.hiekn.demo.test.frame.spring.processor;
 
 import org.aspectj.lang.annotation.Around;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.AnnotatedGenericBeanDefinition;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -46,8 +45,7 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor,Envi
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                MutablePropertyValues m = beanDefinition.getPropertyValues();
-                m.addPropertyValue("home", "赵四");
+                beanDefinition.getPropertyValues().add("home", "赵四");
             }else if ("aopConfig".equals(beanName)) {
                 BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
                 AnnotatedGenericBeanDefinition bd = (AnnotatedGenericBeanDefinition)beanDefinition;
