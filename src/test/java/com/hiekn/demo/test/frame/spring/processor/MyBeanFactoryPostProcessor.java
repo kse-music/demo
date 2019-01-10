@@ -26,7 +26,7 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor,Envi
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         String[] beanStr = beanFactory.getBeanDefinitionNames();
         for (String beanName : beanStr) {
-            if ("testConfiguration".equals(beanName)) {
+            if ("researchConfiguration".equals(beanName)) {
                 BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
                 AnnotatedGenericBeanDefinition bd = (AnnotatedGenericBeanDefinition)beanDefinition;
                 try {
