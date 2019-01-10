@@ -8,8 +8,8 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        if(bean instanceof TestConfiguration) {
-            TestConfiguration testConfiguration = (TestConfiguration) bean;
+        if(bean instanceof ResearchConfiguration) {
+            ResearchConfiguration testConfiguration = (ResearchConfiguration) bean;
 //            testConfiguration.setHome("BeanPostProcessor:postProcessBeforeInitialization");
         }
         System.out.println(beanName+" BeanPostProcessor : postProcessBeforeInitialization invoke");
@@ -18,8 +18,8 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if(bean instanceof TestConfiguration) {
-            TestConfiguration testConfiguration = (TestConfiguration) bean;
+        if(bean instanceof ResearchConfiguration) {
+            ResearchConfiguration testConfiguration = (ResearchConfiguration) bean;
 //            testConfiguration.setHome("BeanPostProcessor:postProcessAfterInitialization");
         }
         System.out.println(beanName+" BeanPostProcessor : postProcessAfterInitialization invoke");

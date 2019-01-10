@@ -2,17 +2,23 @@ package com.hiekn.demo.test.frame.spring.basic;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Primary;
 
 /**
- * @Author: DingHao
- * @Date: 2018/12/10 10:43
+ * @author: DingHao
+ * @date: 2018/12/10 10:43
  */
 //@Configuration
 @ComponentScan("com.hiekn.demo.test.frame.spring.basic")
 //@ImportResource("classpath:spring-config.xml")
-public class TestBeanConfiguration {
+public class MainConfiguration {
 
-//   @Bean注解注册bean,同时可以指定初始化和销毁方法
+    @Bean
+    @Primary
+    public ExampleBean exampleBean(){
+        return new ExampleBean();
+    }
+
     @Bean(name="testBean",initMethod="start",destroyMethod="cleanUp")
     public TestBean testBean() {
         return new TestBean();

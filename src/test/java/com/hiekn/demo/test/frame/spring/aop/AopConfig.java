@@ -12,7 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 public class AopConfig {
 	
-	@Around("execution(* com.hiekn.demo.test.frame.spring.processor.TestConfiguration.*(..))")
+	@Around("execution(* com.hiekn.demo.test.frame.spring.processor.ResearchConfiguration.*(..))")
 	public Object around(ProceedingJoinPoint p) throws Throwable{
 		System.out.println("around前");
 		Object obj = p.proceed();

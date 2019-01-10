@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
  * top level bean
  */
 @Component
-public class DemoBean2 {
+public class CircleBean {
 
     @Autowired
-    private DemoBean1 demoBean1;
+    private DemoBean demoBean;
 
 }

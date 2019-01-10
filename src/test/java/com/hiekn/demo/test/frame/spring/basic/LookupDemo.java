@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
 public abstract class LookupDemo {
 
     public void look() {
-        System.out.println(this.getTestBean());
+        System.out.println(this.getPrototypeBean());
     }
 
     @Lookup
-    public abstract TestBean getTestBean();
+    public abstract PrototypeBean getPrototypeBean();
 }

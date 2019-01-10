@@ -4,7 +4,7 @@ import com.hiekn.demo.test.TestBase;
 import com.hiekn.demo.test.frame.spring.basic.*;
 import com.hiekn.demo.test.frame.spring.hierarchy.ChildContext;
 import com.hiekn.demo.test.frame.spring.hierarchy.ParentContext;
-import com.hiekn.demo.test.frame.spring.processor.TestConfiguration;
+import com.hiekn.demo.test.frame.spring.processor.ResearchConfiguration;
 import com.hiekn.demo.test.frame.spring.proxy.cglib.CGLibProxy;
 import com.hiekn.demo.test.frame.spring.proxy.cglib.HelloConcrete;
 import com.hiekn.demo.test.frame.spring.proxy.cglib.MyMethodInterceptor;
@@ -36,8 +36,8 @@ public class SpringDemo extends TestBase {
      */
     @Test
     public void research(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(TestConfiguration.class/*,AopConfig.class*/);
-        TestConfiguration bean = context.getBean(TestConfiguration.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(ResearchConfiguration.class/*,AopConfig.class*/);
+        ResearchConfiguration bean = context.getBean(ResearchConfiguration.class);
         System.out.println(bean.test());
     }
 
@@ -54,18 +54,18 @@ public class SpringDemo extends TestBase {
 
     /**
      * 包含以下示例：
-     *      循环依赖注入、FactoryBean、@Bean、ObjectFactory、ObjectProvider、@ImportResource、@Lookup
+     *      循环依赖注入、FactoryBean、@Bean、ObjectFactory、ObjectProvider、@ImportResource、@Lookup、@Primary
      */
     @Test
     public void testBasic(){
 
-        ApplicationContext context = new AnnotationConfigApplicationContext(TestBeanConfiguration.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(MainConfiguration.class);
 
         TestBean tb = context.getBean(TestBean.class);
         System.out.println(tb.getName());
-        DemoBean1 demoBean1 = context.getBean(DemoBean1.class);
-        System.out.println(demoBean1);
-        demoBean1.test();
+
+        DemoBean demoBean = context.getBean(DemoBean.class);
+        demoBean.test();
 
         LookupDemo look = context.getBean(LookupDemo.class);
         look.look();

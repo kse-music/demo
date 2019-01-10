@@ -4,16 +4,16 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DemoBean3FactoryBean implements FactoryBean<DemoBean3> {
+public class ExampleBeanFactoryBean implements FactoryBean<ExampleBean> {
 
     @Override
-    public DemoBean3 getObject() throws Exception {
-        return new DemoBean3();
+    public ExampleBean getObject() throws Exception {
+        return new ExampleBean();
     }
 
     @Override
     public Class<?> getObjectType() {
-        return DemoBean3.class;
+        return ExampleBean.class;
     }
 
     @Override
