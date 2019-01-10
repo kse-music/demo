@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.spring.aop;
+package com.hiekn.demo.test.frame.spring.processor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -10,14 +10,15 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Aspect
 @EnableAspectJAutoProxy
+//@Component
 public class AopConfig {
-	
-	@Around("execution(* com.hiekn.demo.test.frame.spring.processor.ResearchConfiguration.*(..))")
-	public Object around(ProceedingJoinPoint p) throws Throwable{
-		System.out.println("around前");
-		Object obj = p.proceed();
-		System.out.println("around后");
-		return obj;
-	}
+
+    @Around("execution(* com.hiekn.demo.test.frame.spring.processor.ResearchConfiguration.*(..))")
+    public Object around(ProceedingJoinPoint p) throws Throwable {
+        System.out.println("around前");
+        Object obj = p.proceed();
+        System.out.println("around后");
+        return obj;
+    }
 
 }

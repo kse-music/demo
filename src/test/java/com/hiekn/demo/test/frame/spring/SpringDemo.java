@@ -36,7 +36,7 @@ public class SpringDemo extends TestBase {
      */
     @Test
     public void research(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(ResearchConfiguration.class/*,AopConfig.class*/);
+        ApplicationContext context = new AnnotationConfigApplicationContext(ResearchConfiguration.class);
         ResearchConfiguration bean = context.getBean(ResearchConfiguration.class);
         System.out.println(bean.test());
     }

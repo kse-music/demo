@@ -8,8 +8,10 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.ScannedGenericBeanDefinition;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ClassUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -48,9 +50,15 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor,Envi
                 beanDefinition.getPropertyValues().add("home", "赵四");
             }else if ("aopConfig".equals(beanName)) {
                 BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
-                AnnotatedGenericBeanDefinition bd = (AnnotatedGenericBeanDefinition)beanDefinition;
                 try {
-                    Method[] declaredMethods = bd.getBeanClass().getDeclaredMethods();
+                    Method[] declaredMethods = null;
+                    if(beanDefinition instanceof ScannedGenericBeanDefinition){
+                        ScannedGenericBeanDefinition bd = (ScannedGenericBeanDefinition)beanDefinition;
+                        bd.setBeanClass(ClassUtils.forName(bd.getBeanClassName(),null));
+                        declaredMethods = bd.getBeanClass().getDeclaredMethods();
+                    }else if(beanDefinition instanceof AnnotatedGenericBeanDefinition){
+                        declaredMethods = ((AnnotatedGenericBeanDefinition) beanDefinition).getBeanClass().getDeclaredMethods();
+                    }
                     for (Method declaredMethod : declaredMethods) {
                         Annotation[] declaredAnnotations = declaredMethod.getDeclaredAnnotations();
                         for (Annotation annotation : declaredAnnotations) {
