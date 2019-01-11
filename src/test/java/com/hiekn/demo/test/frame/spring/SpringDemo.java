@@ -4,7 +4,7 @@ import com.hiekn.demo.test.TestBase;
 import com.hiekn.demo.test.frame.spring.basic.*;
 import com.hiekn.demo.test.frame.spring.hierarchy.ChildContext;
 import com.hiekn.demo.test.frame.spring.hierarchy.ParentContext;
-import com.hiekn.demo.test.frame.spring.processor.ResearchConfiguration;
+import com.hiekn.demo.test.frame.spring.processor.SingleResearchSpring;
 import com.hiekn.demo.test.frame.spring.proxy.cglib.CGLibProxy;
 import com.hiekn.demo.test.frame.spring.proxy.cglib.HelloConcrete;
 import com.hiekn.demo.test.frame.spring.proxy.cglib.MyMethodInterceptor;
@@ -36,8 +36,8 @@ public class SpringDemo extends TestBase {
      */
     @Test
     public void research(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(ResearchConfiguration.class);
-        ResearchConfiguration bean = context.getBean(ResearchConfiguration.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(SingleResearchSpring.class);
+        SingleResearchSpring bean = context.getBean(SingleResearchSpring.class);
         System.out.println(bean.test());
     }
 
@@ -54,7 +54,7 @@ public class SpringDemo extends TestBase {
 
     /**
      * 包含以下示例：
-     *      循环依赖注入、FactoryBean、@Bean、ObjectFactory、ObjectProvider、@ImportResource、@Lookup、@Primary
+     *      循环依赖注入、FactoryBean、@Bean、ObjectFactory、ObjectProvider、@ImportResource、@Lookup、@Primary、aop
      */
     @Test
     public void testBasic(){

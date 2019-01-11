@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import javax.annotation.PostConstruct;
 
 @ComponentScan("com.hiekn.demo.test.frame.spring.processor")
-public class ResearchConfiguration implements InitializingBean {
+public class SingleResearchSpring implements InitializingBean {
 
     @Value("${user.home2}")
     private String home;
@@ -16,7 +16,7 @@ public class ResearchConfiguration implements InitializingBean {
         this.home = home;
     }
 
-    public ResearchConfiguration(){
+    public SingleResearchSpring(){
         System.out.println("Constructor invoke");
     }
 
