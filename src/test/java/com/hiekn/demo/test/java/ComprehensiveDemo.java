@@ -9,6 +9,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.hiekn.demo.bean.UserBean;
 import com.hiekn.demo.test.TestBase;
@@ -48,6 +49,7 @@ import java.lang.reflect.Proxy;
 import java.net.*;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 //import org.openqa.selenium.By;
 //import org.openqa.selenium.JavascriptExecutor;
@@ -112,6 +114,23 @@ public class ComprehensiveDemo extends TestBase {
         list.add("d");
     }
 
+    @Test
+    public void test10() {
+        Map<String, Object> map1 = Maps.newHashMap();
+        map1.put("room_id", "1");
+        map1.put("name", "语文简体");
+        Map<String, Object> map2 = Maps.newHashMap();
+        map2.put("room_id", "1");
+        map2.put("name", "语文繁体");
+        List<Map<String, Object>> list = Lists.newArrayList(map1, map2);
+
+        Map<String, Object> map = Maps.newHashMap();
+        list.stream().collect(Collectors.groupingBy(m -> m.get("room_id"), Collectors.mapping(m -> m.get("name"), Collectors.toList()))).forEach((k, v) -> {
+            map.put("room_id", k);
+            map.put("names", v);
+        });
+        System.out.println(map);
+    }
 
     @Test
     public void shutdownHook(){

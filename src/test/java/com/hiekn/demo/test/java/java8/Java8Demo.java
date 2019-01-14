@@ -2,6 +2,8 @@ package com.hiekn.demo.test.java.java8;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.hiekn.demo.test.TestBase;
+import org.junit.Test;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -17,46 +19,44 @@ import java.util.stream.Collectors;
 /**
  * 流的操作
  * 当把一个数据结构包装成 Stream 后，就要开始对里面的元素进行各类操作了。常见的操作可以归类如下。
- *
+ * <p>
  * Intermediate：
  * map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 limit、 skip、 parallel、 sequential、 unordered
- *
+ * <p>
  * Terminal：
  * forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator
- *
+ * <p>
  * Short-circuiting：
  * anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 limit
  *
+ * @author: DingHao
+ * @date: 2019/1/14 21:20
  */
-public class Java8StreamDemo {
-
-    public static void main(String[] args) {
-
-        Java8StreamDemo java8StreamDemo = new Java8StreamDemo();
-
-//        Stream.iterate(0, n -> n + 3).limit(10).forEach(x -> System.out.print(x + " "));
-        java8StreamDemo.test8();
-
-    }
+public class Java8Demo extends TestBase {
 
     //一、接口的默认方法
-    public void test1(){
+    @Test
+    public void defaultMethod() {
         Formula formula = new Formula() {
             @Override
             public double calculate(int a) {
                 return sqrt(a * 100);
             }
         };
-        System.out.println(formula.calculate(100));     // 100.0
-        System.out.println(formula.sqrt(16));           // 4.0
-        Formula formula2 = (a) -> (double)(a+12);
-        Formula formula3 = Double::valueOf;
+        System.out.println(formula.calculate(100));// 100.0
+        System.out.println(formula.sqrt(16));// 4.0
+
+        Formula formula2 = (a) -> (double) (a + 12);
         System.out.println(formula2.calculate(4));
+
+        Formula formula3 = Double::valueOf;
         System.out.println(formula3.calculate(4));
     }
 
     //二、Lambda 表达式
-    public void test2(){
+    @Test
+    public void lambda() {
+//        Stream.iterate(0, n -> n + 3).limit(10).forEach(x -> System.out.print(x + " "));
 
         List<String> names = Arrays.asList("peter", "anna", "mike", "xenia");
 
@@ -71,10 +71,13 @@ public class Java8StreamDemo {
         Collections.sort(names, (String a, String b) -> {
             return b.compareTo(a);
         });
+
         //style2
         Collections.sort(names, (String a, String b) -> b.compareTo(a));
+
         //style3,Java编译器可以自动推导出参数类型
         Collections.sort(names, (a, b) -> b.compareTo(a));
+
         //style4
         Collections.sort(names, Comparator.comparing(String::valueOf).reversed());
 
@@ -83,15 +86,18 @@ public class Java8StreamDemo {
 
     }
 
+
     //三、函数式接口:是指仅仅只包含一个抽象方法的接口，每一个该类型的lambda表达式都会被匹配到这个抽象方法
-    public void test3(){
-        Converter<String, Integer> converter = from -> Integer.valueOf(from);
+    @Test
+    public void functionInterface() {
+        Converter<String, Integer> converter = Integer::valueOf;
         Integer converted = converter.convert("123");
         System.out.println(converted);    // 123
     }
 
     //四、方法与构造函数引用
-    public void test4(){
+    @Test
+    public void methodConstructor() {
         Converter<String, Integer> converter = Integer::valueOf;
         Integer converted = converter.convert("123");
         System.out.println(converted);   // 123
@@ -101,21 +107,21 @@ public class Java8StreamDemo {
         System.out.println(person);
     }
 
-    //五、Lambda 作用域,在lambda表达式中访问外层作用域和老版本的匿名对象中的方式很相似。你可以直接访问标记了final的外层局部变量，或者实例的字段以及静态变量
+    //五、Lambda 作用域,在lambda表达式中访问外层作用域和老版本的匿名对象中的方式很相似。你可以直接访问标记了final的外层局部变量，
+    // 或者实例的字段以及静态变量
     //六、访问局部变量
-    public void test6(){
+    //七、访问对象字段与静态变量
+    //和本地变量不同的是，lambda内部对于实例的字段以及静态变量是即可读又可写。该行为和匿名对象是一致的
+    @Test
+    public void localVar() {
         int num = 1;//隐性的具有final的语义
         Converter<Integer, String> stringConverter = (from) -> String.valueOf(from + num);
         System.out.println(stringConverter.convert(2));     // 3
     }
 
-    //七、访问对象字段与静态变量
-    public void test7(){
-        //和本地变量不同的是，lambda内部对于实例的字段以及静态变量是即可读又可写。该行为和匿名对象是一致的
-    }
-
     //八、访问接口的默认方法
-    public void test8(){
+    @Test
+    public void comprehensive() {
         //接口Formula定义了一个默认方法sqrt可以直接被formula的实例包括匿名对象访问到，但是在lambda表达式中这个是不行的
         //Lambda表达式中是无法访问到默认方法的
 //		Formula formula = (a) -> sqrt( a * 100);
@@ -162,16 +168,16 @@ public class Java8StreamDemo {
         optional.ifPresent((s) -> System.out.println(s.charAt(0)));     // "b"
 
         //Stream 接口,Stream 操作分为中间操作或者最终操作两种，最终操作返回一特定类型的计算结果，而中间操作返回Stream本身
-        List<String> stringCollection = Lists.newArrayList("ddd2","aaa2","bbb1","aaa1","bbb3","ccc","bbb2","ddd1");
+        List<String> stringCollection = Lists.newArrayList("ddd2", "aaa2", "bbb1", "aaa1", "bbb3", "ccc", "bbb2", "ddd1");
         //--串行Streams
         //--Filter 过滤
         stringCollection.stream().filter(s -> s.startsWith("a")).forEach(System.out::println);
-        Map<String, Long> result =	stringCollection.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map<String, Long> result = stringCollection.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println(result);
 
         //--Sort 排序,排序只创建了一个排列好后的Stream，而不会影响原有的数据源
         stringCollection.stream().sorted().filter(s -> s.startsWith("a")).forEach(System.out::println);
-        stringCollection.stream().sorted((a,b) -> b.compareTo(a)).filter(s -> s.startsWith("a")).forEach(System.out::println);
+        stringCollection.stream().sorted((a, b) -> b.compareTo(a)).filter(s -> s.startsWith("a")).forEach(System.out::println);
         stringCollection.stream().sorted(Comparator.comparing(String::valueOf).reversed()).filter(s -> s.startsWith("a")).forEach(System.out::println);
 
         //--Map 映射,将元素根据指定的Function接口来依次将元素转成另外的对象
@@ -238,7 +244,8 @@ public class Java8StreamDemo {
     }
 
     //九、Date API,新的日期API和开源的Joda-Time库差不多
-    public void test9(){
+    @Test
+    public void time() {
         //Clock 时钟
         Clock clock = Clock.systemDefaultZone();
         long millis = clock.millis();
@@ -248,11 +255,11 @@ public class Java8StreamDemo {
         System.out.println(legacyDate);
 
         //Timezones 时区
-        System.out.println(ZoneId.getAvailableZoneIds());	// prints all available timezone ids
+        System.out.println(ZoneId.getAvailableZoneIds());    // prints all available timezone ids
         ZoneId zone1 = ZoneId.of("Europe/Berlin");
         ZoneId zone2 = ZoneId.of("Brazil/East");
         ZoneId zone3 = ZoneId.of("Asia/Chongqing");
-        System.out.println(zone1.getRules());	// ZoneRules[currentStandardOffset=+01:00]
+        System.out.println(zone1.getRules());    // ZoneRules[currentStandardOffset=+01:00]
         System.out.println(zone2.getRules()); // ZoneRules[currentStandardOffset=-03:00]
         System.out.println(zone3.getRules());
 
@@ -262,25 +269,6 @@ public class Java8StreamDemo {
 
         //LocalDateTime 本地日期时间
     }
-
-    //十、Annotation 注解
-    public void test10(){
-        Map<String,Object> map1 = Maps.newHashMap();
-        map1.put("room_id", "1");
-        map1.put("name", "语文简体");
-        Map<String,Object> map2 = Maps.newHashMap();
-        map2.put("room_id", "1");
-        map2.put("name", "语文繁体");
-        List<Map<String,Object>> list = Lists.newArrayList(map1,map2);
-
-        Map<String,Object> map = Maps.newHashMap();
-        list.stream().collect(Collectors.groupingBy(m -> m.get("room_id"),Collectors.mapping(m -> m.get("name"),Collectors.toList()))).forEach((k, v) -> {
-            map.put("room_id", k);
-            map.put("names", v);
-        });
-        System.out.println(map);
-    }
-
 
 
 
