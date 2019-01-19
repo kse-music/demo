@@ -1,8 +1,13 @@
 package com.hiekn.demo.test.java.clsloader;
 
 import com.hiekn.demo.test.TestBase;
+import com.sun.nio.zipfs.ZipPath;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -50,7 +55,7 @@ public class ClassLoaderDemo extends TestBase {
 
         //Class类没有public的构造方法，Class对象是在装载类时由JVM通过调用类装载器中的defineClass()方法自动构造的
 
-        ClassLoader c  = ClassLoaderDemo.class.getClassLoader();  //获取ClassLoaderTest类的类加载器
+        ClassLoader c = ClassLoaderDemo.class.getClassLoader();  //获取ClassLoaderTest类的类加载器
 
         System.out.println(c);
 
@@ -66,7 +71,7 @@ public class ClassLoaderDemo extends TestBase {
         System.out.println(Thread.currentThread().getContextClassLoader());
 
         String path = "D:\\IDEAProject\\util\\";
-        CustomClassLoader loader = new CustomClassLoader(Thread.currentThread().getContextClassLoader() , path);
+        CustomClassLoader loader = new CustomClassLoader(Thread.currentThread().getContextClassLoader(), path);
         try {
             Class<?> clazz = loader.findClass("com.hiekn.demo.test.java.java8.Sa");
             Object newInstance = clazz.newInstance();
@@ -85,10 +90,10 @@ public class ClassLoaderDemo extends TestBase {
             //加载class文件
             Class c = diskLoader.loadClass("com.hiekn.test.TestApplication");
 
-            if(c != null){
+            if (c != null) {
                 try {
                     Object obj = c.newInstance();
-                    Method method = c.getDeclaredMethod("say",null);
+                    Method method = c.getDeclaredMethod("say", null);
                     //通过反射调用Test类的say方法
                     method.invoke(obj, null);
                 } catch (InstantiationException | IllegalAccessException
@@ -102,6 +107,66 @@ public class ClassLoaderDemo extends TestBase {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+    }
+
+    static {
+        System.out.println("static block init");
+    }
+
+    @Test
+    public void twice() {
+
+        Class<?> class0 = ClassLoaderDemo.class;
+        try {
+            System.out.println(class0.getClassLoader() instanceof MyClassLoader);
+            Class<?> class1 = class0.getClassLoader().loadClass("com.hiekn.demo.test.java.clsloader.ClassLoaderDemo");
+            ClassLoader classLoader = new MyClassLoader();
+            Class<?> class2 = classLoader.loadClass("com.hiekn.demo.test.java.clsloader.ClassLoaderDemo");
+
+            System.out.println(class1.hashCode());
+            System.out.println(class2.hashCode());
+            System.out.println(class1.equals(class2));
+
+            System.out.println(classLoader.getParent());
+            System.out.println(class0.getClassLoader());
+            System.out.println(ZipPath.class.getClassLoader());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //自定义一个类加载器从指定磁盘目录加载类
+    public class MyClassLoader extends ClassLoader {
+        //不破坏双亲委派模型
+        @Override
+        protected Class<?> findClass(String name) {
+            String myPath = "D:\\IDEAProject\\demo\\target\\classes\\" + name.replace(".", "/") + ".class";
+
+            byte[] classBytes = null;
+            FileInputStream in = null;
+
+            try {
+                File file = new File(myPath);
+                in = new FileInputStream(file);
+                classBytes = new byte[(int) file.length()];
+                in.read(classBytes);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            Class<?> clazz = defineClass(name, classBytes, 0, classBytes.length);
+            return clazz;
+        }
+
 
     }
 }
