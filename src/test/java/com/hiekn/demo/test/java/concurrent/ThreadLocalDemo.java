@@ -33,7 +33,7 @@ public class ThreadLocalDemo extends TestBase {
      * 最常见的ThreadLocal使用场景为 用来解决数据库连接、Session管理等。
      */
     @Test
-    public void testThreadLocal() {
+    public void local() {
         final ThreadLocalDemo test = new ThreadLocalDemo();
 
 //        test.set();
