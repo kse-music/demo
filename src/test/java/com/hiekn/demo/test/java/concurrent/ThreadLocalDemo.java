@@ -3,6 +3,10 @@ package com.hiekn.demo.test.java.concurrent;
 import com.hiekn.demo.test.TestBase;
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 /**
  * ThreadLocal在每个线程中对该变量会创建一个副本，即每个线程内部都会有一个该变量，
@@ -19,35 +23,27 @@ import org.junit.Test;
  */
 public class ThreadLocalDemo extends TestBase {
 
-    ThreadLocal<Long> longLocal = ThreadLocal.withInitial(Thread.currentThread()::getId);
-    ThreadLocal<String> stringLocal = ThreadLocal.withInitial(Thread.currentThread()::getName);
-
-    public void set() {
-        longLocal.set(Thread.currentThread().getId());
-        stringLocal.set(Thread.currentThread().getName());
-    }
-
-    public long getLong() {
-        return longLocal.get();
-    }
-
-    public String getString() {
-        return stringLocal.get();
-    }
+    static ThreadLocal<Long> longLocal = ThreadLocal.withInitial(Thread.currentThread()::getId);
+    //SimpleDateFormat是不安全的,让每个线程单独拥有这个对象
+    static ThreadLocal<SimpleDateFormat> simpleDateFormatThreadLocal = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
+    static ThreadLocal<String> stringLocal = ThreadLocal.withInitial(Thread.currentThread()::getName);
 
     @Test
     public void local() {
 
         final ThreadLocalDemo test = new ThreadLocalDemo();
 
-//        test.set();
-        System.out.println(test.getLong());
-        System.out.println(test.getString());
+//        longLocal.set(Thread.currentThread().getId());
+//        stringLocal.set(Thread.currentThread().getName());
+
+        System.out.println(longLocal.get());
+        System.out.println(stringLocal.get());
 
         Thread thread1 = new Thread(() -> {
-            test.set();
-            System.out.println(test.getLong());
-            System.out.println(test.getString());
+            longLocal.set(Thread.currentThread().getId());
+            stringLocal.set(Thread.currentThread().getName());
+            System.out.println(longLocal.get());
+            System.out.println(stringLocal.get());
         });
         thread1.start();
         try {
@@ -56,8 +52,8 @@ public class ThreadLocalDemo extends TestBase {
             e.printStackTrace();
         }
 
-        System.out.println(test.getLong());
-        System.out.println(test.getString());
+        System.out.println(longLocal.get());
+        System.out.println(stringLocal.get());
 
         //所以如果 ThreadLocal 没有被外部强引用的情况下，在垃圾回收的时候会被清理掉的，
         // 这样一来 ThreadLocalMap 中使用这个 ThreadLocal 的 key 也会被清理掉。
@@ -69,5 +65,26 @@ public class ThreadLocalDemo extends TestBase {
         // 并且之后也不再调用 get()、set()、remove() 方法的情况下。
     }
 
+    @Test
+    public void dirtyData(){
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        for (int i = 0; i < 2; i++) {
+            executorService.execute(new MyThread());
+        }
+    }
 
+    private static class MyThread extends Thread{
+
+        private static boolean flag = true;
+
+        @Override
+        public void run() {
+            if(flag){
+                stringLocal.set(this.getName() + ", session info .");
+                flag = false;
+            }
+            System.out.println(this.getName() + " 线程是 " + stringLocal.get());
+
+        }
+    }
 }

@@ -1,10 +1,10 @@
 package com.hiekn.demo.test.design.singleton;
 
-public enum  Singleton5 {
+public enum EnumSingleton {
     //枚举,非懒加载
     INSTANCE;
     private Resource instance;
-    Singleton5() {
+    EnumSingleton() {
         instance = new Resource();
     }
     public Resource getInstance() {
