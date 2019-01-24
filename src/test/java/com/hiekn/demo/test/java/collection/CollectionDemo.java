@@ -20,13 +20,13 @@ public class CollectionDemo extends TestBase {
     @Test
     public void hashMap() {
         Map<Integer, String> map = new HashMap<>();
-        map.put(55, "fifty-five");
-        map.put(56, "fifty-six");
-        map.put(57, "fifty-seven");
-        map.put(58, "fifty-eight");
-        map.put(83, "eighty-three");
-        map.remove(57);
-        map.put(59, "fifty-nine");
+        map.put(1, "one");
+        map.put(2, "two");
+        map.put(3, "three");
+        map.put(4, "four");
+        map.put(5, "five");
+        map.remove(3);
+        map.put(6, "six");
         map.forEach((k, v) -> System.out.println(k + " = " + v));
 
     }

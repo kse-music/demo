@@ -31,13 +31,11 @@ public class TestBase {
 	@Test
 	public void _test_(){
 		MongoCollection<Document> col = mongoClient.getDatabase("kg_cbnode_c").getCollection("concept_instance");
-		col.find(Filters.eq("concept_id", 13)).forEach(new Block<Document>() {
-			@Override
-			public void apply(Document t) {
-				Long id = t.getLong("ins_id");
-				downloadPic("http://7xveaq.com1.z0.glb.clouddn.com/"+id+".jpg", id+".jpg","data/image/");
-			}
-		});
+		Block<Document> printer = t -> {
+			Long id = t.getLong("ins_id");
+			downloadPic("http://7xveaq.com1.z0.glb.clouddn.com/"+id+".jpg", id+".jpg","data/image/");
+		};
+		col.find(Filters.eq("concept_id", 13)).forEach(printer);
 	}
 
 	public void downloadPic(String imgUrl,String fileName,String filePath) {
