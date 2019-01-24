@@ -136,17 +136,6 @@ public class ComprehensiveDemo extends TestBase {
 
     }
 
-    /**
-     *强引用
-     * 软引用
-     * 弱引用
-     * 平台引用
-     */
-    @Test
-    public void javaReference(){
-
-    }
-
     @Test
     public void mac() throws UnknownHostException, SocketException {
         //得到IP，输出PC-201309011313/122.206.73.83

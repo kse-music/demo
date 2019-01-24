@@ -14,6 +14,8 @@ import org.junit.Test;
  * <p>
  * 应用场景:
  * 用来解决数据库连接、Session管理等。
+ *
+ * CopyValueIntoEveryThread
  */
 public class ThreadLocalDemo extends TestBase {
 
