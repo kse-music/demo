@@ -31,7 +31,7 @@ public class SingleResearchSpring implements InitializingBean {
     }
 
     public String test(){
-        System.out.println(home);
+        System.out.println("home = "+ home);
         return "test method return value";
     }
 

@@ -28,7 +28,7 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor,Envi
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         String[] beanStr = beanFactory.getBeanDefinitionNames();
         for (String beanName : beanStr) {
-            if ("researchConfiguration".equals(beanName)) {
+            if ("singleResearchSpring".equals(beanName)) {
                 BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName);
                 AnnotatedGenericBeanDefinition bd = (AnnotatedGenericBeanDefinition)beanDefinition;
                 try {
@@ -79,6 +79,7 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor,Envi
             }
         }
         System.out.println("BeanFactoryPostProcessor : postProcessBeanFactory invoke");
+//        beanFactory.addBeanPostProcessor(new MyBeanPostProcessor());
     }
 
     @Override

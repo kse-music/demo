@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.spring.basic;
+package com.hiekn.demo.test.frame.spring.processor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class AopConfig {
 
-    @Around("execution(* com.hiekn.demo.test.frame.spring.basic.TestBean.*(..))")
+    @Around("execution(* com.hiekn.demo.test.frame.spring.processor.SingleResearchSpring.*(..))")
     public Object around(ProceedingJoinPoint p) throws Throwable {
-        System.out.println("around前");
+        System.out.println("proceed 前");
         Object obj = p.proceed();
-        System.out.println("around后");
+        System.out.println("proceed 后");
         return obj;
     }
 
