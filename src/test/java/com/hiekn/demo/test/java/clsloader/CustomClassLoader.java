@@ -4,7 +4,11 @@ import java.io.*;
 import java.net.URL;
 
 /**
- * describe about this class
+ * 什么情况需要自定义类加载器？
+ * 1，隔离加载类
+ * 2，修改类加载方式
+ * 3，扩展加载资源
+ * 4，防止源码泄露
  *
  * @author DingHao
  * @date 2018/12/15 16:20

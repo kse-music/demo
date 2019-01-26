@@ -120,9 +120,9 @@ public class ClassLoaderDemo extends TestBase {
         Class<?> class0 = ClassLoaderDemo.class;
         try {
             System.out.println(class0.getClassLoader() instanceof MyClassLoader);
-            Class<?> class1 = class0.getClassLoader().loadClass("com.hiekn.demo.test.java.clsloader.ClassLoaderDemo");
+            Class<?> class1 = class0.getClassLoader().loadClass("com.hiekn.demo.test.java.clsloader.TwiceLoad");
             ClassLoader classLoader = new MyClassLoader();
-            Class<?> class2 = classLoader.loadClass("com.hiekn.demo.test.java.clsloader.ClassLoaderDemo");
+            Class<?> class2 = classLoader.loadClass("com.hiekn.demo.test.java.clsloader.TwiceLoad");
 
             System.out.println(class1.hashCode());
             System.out.println(class2.hashCode());
