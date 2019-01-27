@@ -19,14 +19,16 @@ public class CollectionDemo extends TestBase {
 
     @Test
     public void hashMap() {
-        Map<Integer, String> map = new HashMap<>();
-        map.put(1, "one");
-        map.put(2, "two");
-        map.put(3, "three");
-        map.put(4, "four");
-        map.put(5, "five");
-        map.remove(3);
-        map.put(6, "six");
+        // Default initial capacity：16,thr=16*0.75=12,大于12则扩容
+
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "one");
+        map.put("b", "two");
+        map.put("c", "three");
+        map.put("d", "four");
+        map.put("e", "five");
+        map.remove("c");
+        map.put("f", "six");
         map.forEach((k, v) -> System.out.println(k + " = " + v));
 
     }
@@ -47,7 +49,8 @@ public class CollectionDemo extends TestBase {
 
     @Test
     public void list() {
-        List<String> list = new ArrayList<>();// Default initial capacity：10
+        // Default initial capacity：10,大于则扩容
+        List<String> list = new ArrayList<>();
         list.add("a");
         list.add("b");
         list.add("c");
