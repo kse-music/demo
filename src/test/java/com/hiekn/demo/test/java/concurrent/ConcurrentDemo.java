@@ -8,7 +8,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
- * describe about this class
+ * 无论从性能还是安全性上考虑，我们尽量使用并发包中提供的信号同步类，避免使用对象的wait()和notify()方式来进行同步。
  *
  * @author: DingHao
  * @date: 2019/1/26 22:51
