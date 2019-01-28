@@ -1,25 +1,20 @@
 package com.hiekn.demo.test.java.nio;
 
-import java.io.FileOutputStream;
+
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.channels.ScatteringByteChannel;
 import java.nio.channels.GatheringByteChannel;
+import java.nio.channels.ScatteringByteChannel;
 
-public class ScatterGatherIO {
-
-    public static void main(String params[]) {
-        String data = "Scattering and Gathering example shown in yiibai.com";
-        gatherBytes(data);
-        scatterBytes();
-    }
+public class ScatterGatherDemo{
 
     /*
      * gatherBytes() is used for reading the bytes from the buffers and write it
      * to a file channel.
      */
-    public static void gatherBytes(String data) {
+    public void gatherBytes(String data) {
         String relativelyPath = System.getProperty("user.dir");
         // The First Buffer is used for holding a random number
         ByteBuffer buffer1 = ByteBuffer.allocate(8);
@@ -40,7 +35,7 @@ public class ScatterGatherIO {
      * scatterBytes() is used for reading the bytes from a file channel into a
      * set of buffers.
      */
-    public static void scatterBytes() {
+    public void scatterBytes() {
         String relativelyPath = System.getProperty("user.dir");
         // The First Buffer is used for holding a random number
         ByteBuffer buffer1 = ByteBuffer.allocate(8);
@@ -53,7 +48,7 @@ public class ScatterGatherIO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // Read the two buffers seperately
+        // Read the two buffers seperate
         buffer1.rewind();
         buffer2.rewind();
 
@@ -64,7 +59,7 @@ public class ScatterGatherIO {
         System.out.println(bufferTwo);
     }
 
-    public static FileChannel createChannelInstance(String file, boolean isOutput) {
+    public FileChannel createChannelInstance(String file, boolean isOutput) {
         FileChannel FChannel = null;
         try {
             if (isOutput) {
