@@ -6,6 +6,7 @@ import com.hiekn.demo.test.TestBase;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -45,6 +46,17 @@ public class CollectionDemo extends TestBase {
         map.put(59, "fifty-nine");
         map.forEach((k, v) -> System.out.println(k + " = " + v));
 
+    }
+
+    @Test
+    public void copy() {
+        List<Long> list = new CopyOnWriteArrayList<>();//适用于读多写极少的场景，fail-safe机制
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 20 * 10000; i++) {
+            list.add(System.nanoTime());
+        }
+
+        System.out.println(System.currentTimeMillis()-start);
     }
 
     @Test
