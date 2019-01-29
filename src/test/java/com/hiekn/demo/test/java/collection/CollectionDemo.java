@@ -35,20 +35,6 @@ public class CollectionDemo extends TestBase {
     }
 
     @Test
-    public void treeMap() {
-        TreeMap<Integer, String> map = new TreeMap();
-        map.put(55, "fifty-five");
-        map.put(56, "fifty-six");
-        map.put(57, "fifty-seven");
-        map.put(58, "fifty-eight");
-        map.put(83, "eighty-three");
-        map.remove(57);
-        map.put(59, "fifty-nine");
-        map.forEach((k, v) -> System.out.println(k + " = " + v));
-
-    }
-
-    @Test
     public void copy() {
         List<Long> list = new CopyOnWriteArrayList<>();//适用于读多写极少的场景，fail-safe机制
         long start = System.currentTimeMillis();
@@ -57,6 +43,44 @@ public class CollectionDemo extends TestBase {
         }
 
         System.out.println(System.currentTimeMillis()-start);
+    }
+
+
+    @Test
+    public void treeMap() {
+        Map<Key, String> map = new TreeMap();
+        map.put(new Key(), "value one");
+        map.put(new Key(), "value two");
+        System.out.println(map.size());
+
+        Map<Integer, String> treeMap = new TreeMap();
+        treeMap.put(55, "fifty-five");
+        treeMap.put(56, "fifty-six");
+        treeMap.put(57, "fifty-seven");
+        treeMap.put(58, "fifty-eight");
+        treeMap.put(83, "eighty-three");
+        treeMap.remove(57);
+        treeMap.put(59, "fifty-nine");
+        System.out.println(treeMap.size());
+
+    }
+
+    class Key implements Comparable<Key>{
+
+        @Override
+        public int compareTo(Key o) {
+            return -1;
+        }
+
+        @Override
+        public int hashCode() {
+            return 1;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return true;
+        }
     }
 
     @Test
