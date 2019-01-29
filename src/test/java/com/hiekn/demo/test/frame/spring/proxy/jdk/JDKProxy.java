@@ -27,6 +27,6 @@ public class JDKProxy implements InvocationHandler {
     }
 
     private void checkPermission() {//模拟检查权限的例子
-        System.out.println(".:检查权限  checkPermission()!");
+        System.out.println("检查权限  checkPermission()!");
     }
 }

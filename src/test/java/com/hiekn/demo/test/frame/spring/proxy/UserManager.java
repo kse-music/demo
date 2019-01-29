@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.spring.proxy.jdk;
+package com.hiekn.demo.test.frame.spring.proxy;
 
 public interface UserManager {
     void addUser(String id, String password);

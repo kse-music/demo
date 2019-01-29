@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame;
+package com.hiekn.demo.test.java;
 
 import com.hiekn.demo.test.TestBase;
 import org.apache.commons.configuration2.Configuration;

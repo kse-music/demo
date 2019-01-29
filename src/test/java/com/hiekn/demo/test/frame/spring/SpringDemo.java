@@ -5,9 +5,9 @@ import com.hiekn.demo.test.frame.spring.basic.*;
 import com.hiekn.demo.test.frame.spring.hierarchy.ChildContext;
 import com.hiekn.demo.test.frame.spring.hierarchy.ParentContext;
 import com.hiekn.demo.test.frame.spring.processor.SingleResearchSpring;
-import com.hiekn.demo.test.frame.spring.proxy.cglib.CGLibProxy;
-import com.hiekn.demo.test.frame.spring.proxy.cglib.HelloConcrete;
-import com.hiekn.demo.test.frame.spring.proxy.cglib.MyMethodInterceptor;
+import com.hiekn.demo.test.frame.spring.proxy.UserManager;
+import com.hiekn.demo.test.frame.spring.proxy.UserManagerImpl;
+import com.hiekn.demo.test.frame.spring.proxy.cglib.*;
 import com.hiekn.demo.test.frame.spring.proxy.jdk.*;
 import com.hiekn.demo.test.java.annotation.BeanDefine;
 import com.hiekn.demo.test.java.annotation.TestAnnotation;
@@ -86,28 +86,30 @@ public class SpringDemo extends TestBase {
     }
 
     @Test
-    public void testProxy(){
+    public void jdkProxy(){
         Hello hello = (Hello)Proxy.newProxyInstance(
                 SpringDemo.class.getClassLoader(), // 1. 类加载器
                 new Class<?>[] {Hello.class}, // 2. 代理需要实现的接口，可以有多个
                 new LogInvocationHandler(new HelloImpl()));// 3. 方法调用的实际处理者
         System.out.println(hello.sayHello("I love you!"));
 
-        Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(HelloConcrete.class);
-        enhancer.setCallback(new MyMethodInterceptor());
-
-        HelloConcrete hello2 = (HelloConcrete)enhancer.create();
-        System.out.println(hello2.sayHello("I love you!"));
-
-        System.out.println("-----------CGLibProxy-------------");
-        UserManager userManager = (UserManager) new CGLibProxy().createProxyObject(new UserManagerImpl());
-        userManager.addUser("tom", "root");
-
-        System.out.println("-----------JDKProxy-------------");
         JDKProxy jdkProxy = new JDKProxy();
         UserManager userManagerJDK = (UserManager) jdkProxy.newProxy(new UserManagerImpl());
         userManagerJDK.addUser("tom", "root");
+    }
+
+    @Test
+    public void cglibProxy(){
+
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(HelloConcrete.class);
+        enhancer.setCallback(new MyMethodInterceptor());
+        HelloConcrete hello = (HelloConcrete)enhancer.create();
+        System.out.println(hello.sayHello("I love you!"));
+
+        UserManager userManager = (UserManager) new CGLibProxy().createProxyObject(new UserManagerImpl());
+        userManager.addUser("tom", "root");
+
 
     }
 

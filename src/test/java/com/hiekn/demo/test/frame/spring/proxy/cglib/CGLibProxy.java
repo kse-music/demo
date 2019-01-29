@@ -26,15 +26,14 @@ public class CGLibProxy implements MethodInterceptor {
 
     public Object intercept(Object proxy, Method method, Object[] args,
                             MethodProxy methodProxy) throws Throwable {
-        Object obj = null;
         if ("addUser".equals(method.getName())) {// 过滤方法
             checkPermission();// 检查权限
         }
-        obj = method.invoke(targetObject, args);
+        Object obj = method.invoke(targetObject, args);
         return obj;
     }
 
     private void checkPermission() {
-        System.out.println(".:检查权限  checkPermission()!");
+        System.out.println("检查权限  checkPermission()!");
     }
 }
