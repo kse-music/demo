@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.frame.spring.processor;
+package com.hiekn.demo.test.frame.spring.basic;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
