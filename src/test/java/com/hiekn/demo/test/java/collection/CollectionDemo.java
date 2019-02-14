@@ -48,11 +48,6 @@ public class CollectionDemo extends TestBase {
 
     @Test
     public void treeMap() {
-        Map<Key, String> map = new TreeMap();
-        map.put(new Key(), "value one");
-        map.put(new Key(), "value two");
-        System.out.println(map.size());
-
         Map<Integer, String> treeMap = new TreeMap();
         treeMap.put(55, "fifty-five");
         treeMap.put(56, "fifty-six");
@@ -62,7 +57,6 @@ public class CollectionDemo extends TestBase {
         treeMap.remove(57);
         treeMap.put(59, "fifty-nine");
         System.out.println(treeMap.size());
-
     }
 
     class Key implements Comparable<Key>{
