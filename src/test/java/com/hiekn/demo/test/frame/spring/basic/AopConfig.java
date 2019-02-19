@@ -14,7 +14,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class AopConfig {
 
-    @Around("execution(* com.hiekn.demo.test.frame.spring.processor.SingleResearchSpring.*(..))")
+
+    /**
+     * 拦截SingleResearchSpring下所有方法并忽略有IgnoreCheck注解的方法
+     * @param p
+     * @return
+     * @throws Throwable
+     */
+    @Around("execution(* com.hiekn.demo.test.frame.spring.processor.SingleResearchSpring.*(..)) && !@annotation(com.hiekn.demo.test.frame.spring.basic.IgnoreCheck)")
     public Object around(ProceedingJoinPoint p) throws Throwable {
         System.out.println("proceed 前");
         Object obj = p.proceed();

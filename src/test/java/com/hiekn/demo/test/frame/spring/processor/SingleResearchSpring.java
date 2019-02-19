@@ -1,6 +1,7 @@
 package com.hiekn.demo.test.frame.spring.processor;
 
 import com.hiekn.demo.test.frame.spring.basic.ExampleBean;
+import com.hiekn.demo.test.frame.spring.basic.IgnoreCheck;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
