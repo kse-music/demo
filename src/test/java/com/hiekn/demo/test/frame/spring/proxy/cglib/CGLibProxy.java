@@ -24,8 +24,8 @@ public class CGLibProxy implements MethodInterceptor {
         return proxyObj;// 返回代理对象
     }
 
-    public Object intercept(Object proxy, Method method, Object[] args,
-                            MethodProxy methodProxy) throws Throwable {
+    @Override
+    public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
         if ("addUser".equals(method.getName())) {// 过滤方法
             checkPermission();// 检查权限
         }
