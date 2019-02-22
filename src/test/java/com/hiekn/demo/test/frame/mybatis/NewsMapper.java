@@ -2,6 +2,7 @@ package com.hiekn.demo.test.frame.mybatis;
 
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,6 +21,6 @@ public interface NewsMapper {
      * @return
      */
     @Select("select title from tb_news")
-    Map<String,Object> selectTitle();
+    List<Map<String,Object>> selectTitle();
 
 }
