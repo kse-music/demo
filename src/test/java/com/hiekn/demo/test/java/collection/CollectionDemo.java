@@ -6,6 +6,7 @@ import com.hiekn.demo.test.TestBase;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,12 @@ import java.util.stream.Collectors;
  * @date: 2019/1/23 21:25
  */
 public class CollectionDemo extends TestBase {
+
+    @Test
+    public void concurrentMap(){
+        Map<String, String> map = new ConcurrentHashMap<>();
+        map.put("c","o");
+    }
 
 
     @Test
