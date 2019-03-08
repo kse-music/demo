@@ -22,6 +22,15 @@ public class RegexDemo extends TestBase {
     public static final String TEXT = "This is my text";
 
     @Test
+    public void testOneP(){
+        Pattern pattern = Pattern.compile("([a-z_])+[a-zA-Z0-9_]*");
+        String key = "Va_AsA9";
+        if (pattern.matcher(key).matches()) {
+            System.out.println(key);
+        }
+    }
+
+    @Test
     public void stringRegex() {
 
         String s1 = "a";
