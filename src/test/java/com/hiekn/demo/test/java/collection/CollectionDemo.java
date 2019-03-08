@@ -28,6 +28,7 @@ public class CollectionDemo extends TestBase {
     @Test
     public void hashMap() {
         // Default initial capacity：16,thr=16*0.75=12,大于12则扩容
+        //initialCapacity = (需要存储的元素个数 / 负载因子) + 1
 
         Map<String, String> map = new HashMap<>();
         map.put("a", "one");
