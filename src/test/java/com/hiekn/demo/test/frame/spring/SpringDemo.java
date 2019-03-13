@@ -38,6 +38,7 @@ public class SpringDemo extends TestBase {
     public void research(){
         ApplicationContext context = new AnnotationConfigApplicationContext(SingleResearchSpring.class);
         SingleResearchSpring bean = context.getBean(SingleResearchSpring.class);
+        ExampleBean2 bean2 = context.getBean(ExampleBean2.class);
         System.out.println(bean.test());
     }
 

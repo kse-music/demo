@@ -1,6 +1,7 @@
 package com.hiekn.demo.test.frame.spring.processor;
 
 import com.hiekn.demo.test.frame.spring.basic.ExampleBean;
+import com.hiekn.demo.test.frame.spring.basic.ExampleBean2;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -55,12 +56,21 @@ public class SingleResearchSpring implements InitializingBean {
         return "test method return value";
     }
 
+    //@Component,不会为其生成CGLIB代理Class
     @Configuration
     static class InnerService{
 
         @Bean
         public ExampleBean exampleBean(){
+            System.out.println("only one?");
             return new ExampleBean();
+        }
+
+        @Bean
+        public ExampleBean2 exampleBean2(){
+            ExampleBean2 exampleBean2 = new ExampleBean2();
+            exampleBean2.setExampleBean(exampleBean());
+            return exampleBean2;
         }
 
     }
