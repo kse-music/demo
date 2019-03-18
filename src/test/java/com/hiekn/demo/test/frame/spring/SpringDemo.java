@@ -88,11 +88,11 @@ public class SpringDemo extends TestBase {
 
     @Test
     public void jdkProxy(){
-        Hello hello = (Hello)Proxy.newProxyInstance(
+        UserManager hello = (UserManager)Proxy.newProxyInstance(
                 SpringDemo.class.getClassLoader(), // 1. 类加载器
-                new Class<?>[] {Hello.class}, // 2. 代理需要实现的接口，可以有多个
-                new LogInvocationHandler(new HelloImpl()));// 3. 方法调用的实际处理者
-        System.out.println(hello.sayHello("I love you!"));
+                new Class<?>[] {UserManager.class}, // 2. 代理需要实现的接口，可以有多个
+                new LogInvocationHandler(new UserManagerImpl()));// 3. 方法调用的实际处理者
+        hello.addUser("1","I love you!");
 
         JDKProxy jdkProxy = new JDKProxy();
         UserManager userManagerJDK = (UserManager) jdkProxy.newProxy(new UserManagerImpl());
@@ -101,17 +101,14 @@ public class SpringDemo extends TestBase {
 
     @Test
     public void cglibProxy(){
-
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(HelloConcrete.class);
         enhancer.setCallback(new MyMethodInterceptor());
         HelloConcrete hello = (HelloConcrete)enhancer.create();
         System.out.println(hello.sayHello("I love you!"));
 
-        UserManager userManager = (UserManager) new CGLibProxy().createProxyObject(new UserManagerImpl());
-        userManager.addUser("tom", "root");
-
-
+//        UserManager userManager = (UserManager) new CGLibProxy().createProxyObject(new UserManagerImpl());
+//        userManager.addUser("tom", "root");
     }
 
     @Test
