@@ -190,6 +190,11 @@ public class ComprehensiveDemo extends TestBase {
         try {
             stuClass3 = Class.forName("com.hiekn.demo.bean.Student");//注意此字符串必须是真实路径，就是带包名的类路径，包名.类名
             System.out.println(stuClass3 == stuClass2);//判断三种方式是否获取的是同一个Class对象
+            Annotation[] annotations = stuClass3.getAnnotations();
+            Annotation[] declaredAnnotations = stuClass3.getDeclaredAnnotations();
+            for (Annotation declaredAnnotation : declaredAnnotations) {
+                System.out.println(declaredAnnotation);
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
