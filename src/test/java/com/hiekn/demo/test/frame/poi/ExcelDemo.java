@@ -39,8 +39,8 @@ public class ExcelDemo extends TestBase {
     private static final String EXCEL_FILE_PATH = "F:\\interface.xlsx";
 
     @Test
-    public void test() throws Exception {
-        List<Row> rowList = new ArrayList<Row>();
+    public void poi() throws Exception {
+        List<Row> rowList = new ArrayList<>();
         XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(EXCEL_FILE_PATH));
         for (int t = 0; t < wb.getNumberOfSheets(); t++) {
             Sheet sheet = wb.getSheetAt(t);
