@@ -24,26 +24,26 @@ public class AlgorithmDemo extends TestBase {
 
     @Test
     public void sti() {
-        System.out.println(myAtoi("-91283472332"));
+        System.out.println(myAtoi(" -912834s72332"));
     }
 
     public int myAtoi(String str) {
         int n = str.length();
         int i = 0;
-        while(i < n && str.charAt(i) == ' ') {
+        while(i < n && str.charAt(i) == ' ') {//开头是空白字符
             i++;
         }
-        if(i == n || !((str.charAt(i) == '+') || (str.charAt(i) == '-') ||(str.charAt(i) >= '0' && str.charAt(i) <= '9'))) {
+        if(i == n || !((str.charAt(i) == '+') || (str.charAt(i) == '-') ||(str.charAt(i) >= '0' && str.charAt(i) <= '9'))) {//开头非+-和0-9数字
             return 0;
         }
         StringBuilder stringBuilder = new StringBuilder();
-        if(str.charAt(i) == '-') {
+        if(str.charAt(i) == '-') {//下一个字符是-
             stringBuilder.append('-');
             i++;
-        }else if(str.charAt(i) == '+') {
+        }else if(str.charAt(i) == '+') {//下一个字符是+
             i++;
         }
-        if(i == n || !(str.charAt(i) >= '0' && str.charAt(i) <= '9')) {
+        if(i == n || !(str.charAt(i) >= '0' && str.charAt(i) <= '9')) {//下一个字符不是数字则直接返回0
             return 0;
         }
         while(i < n && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
