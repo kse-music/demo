@@ -30,7 +30,7 @@ public class CollectionDemo extends TestBase {
         // Default initial capacity：16,thr=16*0.75=12,大于12则扩容
         //initialCapacity = (需要存储的元素个数 / 负载因子) + 1
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>(1);
         map.put("a", "one");
         map.put("b", "two");
         map.put("c", "three");
@@ -39,6 +39,8 @@ public class CollectionDemo extends TestBase {
         map.remove("c");
         map.put("f", "six");
         map.forEach((k, v) -> System.out.println(k + " = " + v));
+
+        map = new LinkedHashMap<>();
 
     }
 
@@ -93,6 +95,7 @@ public class CollectionDemo extends TestBase {
         list.add("b");
         list.add("c");
         list.add("d");
+        list = new LinkedList<>();
     }
 
     @Test
