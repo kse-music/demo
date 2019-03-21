@@ -107,7 +107,7 @@ public class ExcelDemo extends TestBase {
 
     @Test
     public void read() {
-        String path = "";
+        String path = "C:\\Users\\DH\\Desktop\\quick\\kgms_new.xlsx";
         ExcelReader reader = ExcelUtil.getReader(FileUtil.file(path));
         //通过sheet编号获取
 //        reader = ExcelUtil.getReader(FileUtil.file(path), 0);
