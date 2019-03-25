@@ -3,6 +3,7 @@ package com.hiekn.demo.test.frame.spring.processor;
 import com.hiekn.demo.test.frame.spring.basic.ExampleBean;
 import com.hiekn.demo.test.frame.spring.basic.ExampleBean2;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +19,9 @@ public class SingleResearchSpring implements InitializingBean {
 
 //    @Autowired
     private ExampleBean exampleBean;
+
+    @Autowired
+    private ExampleBean2 exampleBean2;
 
     public void setHome(String home) {
         this.home = home;
