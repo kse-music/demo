@@ -23,6 +23,137 @@ public class AlgorithmDemo extends TestBase {
     }
 
     @Test
+    public void numDupDigitsAtMostN(){
+        int input = 5987490;
+        long s = System.currentTimeMillis();
+        System.out.println(numDupDigitsAtMostN(input));
+        System.out.println(System.currentTimeMillis()-s);
+    }
+
+    public int numDupDigitsAtMostN(int N) {
+        // Transform N + 1 to arrayList
+        List<Integer> L = new ArrayList<>();
+        for (int x = N + 1; x > 0; x /= 10){
+            L.add(0, x % 10);
+        }
+
+        // Count the number with digits < N
+        int res = 0, n = L.size();
+        for (int i = 1; i < n; ++i){
+            res += 9 * A(9, i - 1);
+            System.out.println(res);
+        }
+
+        // Count the number with same prefix
+        Set<Integer> seen = new HashSet<>();
+        for (int i = 0; i < n; ++i) {
+            for (int j = i > 0 ? 0 : 1; j < L.get(i); ++j){
+                if (!seen.contains(j)){
+                    res += A(9 - i, n - i - 1);
+                }
+            }
+            if (seen.contains(L.get(i))){
+                break;
+            }
+            seen.add(L.get(i));
+        }
+        return N - res;
+    }
+
+    public int A(int m, int n) {
+        return n == 0 ? 1 : A(m, n - 1) * (m - n + 1);
+    }
+
+    @Test
+    public void consistentHash(){
+        ConsistentHash h = new ConsistentHash();
+        h.addNode(new ConsistentHash.Node(1));
+        h.addNode(new ConsistentHash.Node(2));
+//      h.addNode(new ConsistentHash.Node(3));
+//      h.addNode(new ConsistentHash.Node(4));
+//      h.addNode(new ConsistentHash.Node(5));
+//      h.addNode(new ConsistentHash.Node(6));
+//      h.addNode(new ConsistentHash.Node(7));
+//      h.addNode(new ConsistentHash.Node(8));
+//      h.addNode(new ConsistentHash.Node(9));
+
+        for (int i = 0; i < 50; i++) {
+            h.getNode("" + i);
+        }
+    }
+
+    @Test
+    public void lru(){
+        LRULinkedHashMap<String,String> lru = new LRULinkedHashMap<>(4);
+        lru.put("1","one");
+        lru.put("2","two");
+        lru.put("3","three");
+        lru.put("4","four");
+
+        lru.get("1");
+        lru.put("5","five");
+
+        lru.forEach((k,v) -> System.out.println(k+" = "+v));
+    }
+
+    @Test
+    public void lfu(){
+        LFUMap<String,String> lfu = new LFUMap<>(4);
+        lfu.put("1","one");
+        lfu.put("2","two");
+        lfu.put("3","three");
+        lfu.put("4","four");
+
+        lfu.get("1");
+        lfu.put("5","five");
+        lfu.get("3");
+        lfu.put("6","six");
+
+        System.out.println(lfu);
+
+    }
+
+    @Test
+    public void dynamicPlan(){
+
+        int trees = 5;
+        int[] peaches = {10,4,5,12,8};
+        int[] dp = new int[trees];
+        for (int i = 0; i < trees; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                /**
+                 * 表示，第j个位置上的树可以拿，并且拿了桃子的话，总大小能够超过第i个位置
+                 */
+                if (peaches[j] <= peaches[i] && dp[j] + 1 > dp[i]) {
+                    dp[i] = dp[j] + 1;
+                }
+            }
+        }
+        int[] pos = new int[trees];
+        int max = 1 ;
+        for (int i = 0; i < dp.length; i++) {
+            int current = i;
+            int prev = i - 1;
+            int next = i + 1;
+            if(dp[current] > 1){
+                if(pos[prev] == 0){
+                    pos[prev] = 1;
+                }
+                pos[current] = 1;
+                if(current != dp.length -1 && dp[current] == dp[next]){
+                    pos[current] = -1;
+                }
+            }
+            if(max < dp[current]){
+                max = dp[current];
+            }
+        }
+        System.out.println(max);
+    }
+
+
+    @Test
     public void sti() {
         System.out.println(myAtoi(" -912834s72332"));
     }
