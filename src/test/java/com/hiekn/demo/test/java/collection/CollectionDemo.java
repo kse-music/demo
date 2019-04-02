@@ -45,7 +45,7 @@ public class CollectionDemo extends TestBase {
     }
 
     @Test
-    public void copy() {
+    public void cow() {
         List<Long> list = new CopyOnWriteArrayList<>();//适用于读多写极少的场景，fail-safe机制
         long start = System.currentTimeMillis();
         for (int i = 0; i < 20 * 10000; i++) {
@@ -53,6 +53,8 @@ public class CollectionDemo extends TestBase {
         }
 
         System.out.println(System.currentTimeMillis()-start);
+
+
     }
 
 
