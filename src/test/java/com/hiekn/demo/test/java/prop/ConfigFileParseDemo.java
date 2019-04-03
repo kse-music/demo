@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java;
+package com.hiekn.demo.test.java.prop;
 
 import com.hiekn.demo.test.TestBase;
 import org.apache.commons.configuration2.Configuration;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author: DingHao
  * @date: 2018/12/23 1:17
  */
-public class SimpleDemo extends TestBase {
+public class ConfigFileParseDemo extends TestBase {
 
     @Test
     public void prop(){
