@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: DingHao
- * @Date: 2018/11/30 13:37
+ * @author: DingHao
+ * @date: 2018/11/30 13:37
  */
 public interface NewsMapper {
 

@@ -22,6 +22,8 @@ import com.hiekn.demo.test.design.observer.Subject;
 import com.hiekn.demo.test.design.prototype.ShapeCache;
 import com.hiekn.demo.test.design.proxy.Image;
 import com.hiekn.demo.test.design.proxy.ProxyImage;
+import com.hiekn.demo.test.design.state.StartState;
+import com.hiekn.demo.test.design.state.StopState;
 import com.hiekn.demo.test.design.strategy.Context;
 import com.hiekn.demo.test.design.strategy.OperationAdd;
 import com.hiekn.demo.test.design.strategy.OperationMultiply;
@@ -238,6 +240,24 @@ public class PatternDemo extends TestBase {
 
         context = new Context(new OperationMultiply());
         System.out.println("10 * 5 = " + context.executeStrategy(10, 5));
+    }
+
+    /**
+     * 意图：允许对象在内部状态发生改变时改变它的行为，对象看起来好像修改了它的类。
+     */
+    @Test
+    public void state(){
+        com.hiekn.demo.test.design.state.Context context = new com.hiekn.demo.test.design.state.Context();
+
+        StartState startState = new StartState();
+        startState.doAction(context);
+
+        System.out.println(context.getState());
+
+        StopState stopState = new StopState();
+        stopState.doAction(context);
+
+        System.out.println(context.getState());
     }
 
     @Test
