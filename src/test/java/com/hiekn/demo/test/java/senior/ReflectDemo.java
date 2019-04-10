@@ -4,9 +4,9 @@ import com.hiekn.demo.bean.UserBean;
 import com.hiekn.demo.test.TestBase;
 import com.hiekn.demo.test.java.annotation.Student;
 import org.junit.Test;
-import org.springframework.asm.ClassWriter;
-import org.springframework.asm.MethodVisitor;
-import org.springframework.asm.Opcodes;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.MethodParameter;
 
