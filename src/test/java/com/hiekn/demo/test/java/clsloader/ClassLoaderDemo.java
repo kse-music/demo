@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.senior.clsloader;
+package com.hiekn.demo.test.java.clsloader;
 
 import com.hiekn.demo.test.TestBase;
 import com.sun.nio.zipfs.ZipPath;
@@ -120,9 +120,9 @@ public class ClassLoaderDemo extends TestBase {
         Class<?> class0 = ClassLoaderDemo.class;
         try {
             System.out.println(class0.getClassLoader() instanceof MyClassLoader);
-            Class<?> class1 = class0.getClassLoader().loadClass("com.hiekn.demo.test.java.senior.clsloader.TwiceLoad");
+            Class<?> class1 = class0.getClassLoader().loadClass("com.hiekn.demo.test.java.clsloader.TwiceLoad");
             ClassLoader classLoader = new MyClassLoader();
-            Class<?> class2 = classLoader.loadClass("com.hiekn.demo.test.java.senior.clsloader.TwiceLoad");
+            Class<?> class2 = classLoader.loadClass("com.hiekn.demo.test.java.clsloader.TwiceLoad");
 
             System.out.println(class1.hashCode());
             System.out.println(class2.hashCode());

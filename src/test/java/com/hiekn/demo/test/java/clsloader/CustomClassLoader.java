@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.senior.clsloader;
+package com.hiekn.demo.test.java.clsloader;
 
 import java.io.*;
 import java.net.URL;

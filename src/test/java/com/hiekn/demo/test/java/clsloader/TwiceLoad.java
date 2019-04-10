@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.senior.clsloader;
+package com.hiekn.demo.test.java.clsloader;
 
 /**
  * 静态块是否可以执行两次？

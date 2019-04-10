@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.senior.concurrent;
+package com.hiekn.demo.test.java.concurrent;
 
 import com.hiekn.demo.test.TestBase;
 import org.junit.Test;

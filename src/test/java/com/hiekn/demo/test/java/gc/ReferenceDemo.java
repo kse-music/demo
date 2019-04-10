@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.senior;
+package com.hiekn.demo.test.java.gc;
 
 import com.google.common.collect.Lists;
 import com.hiekn.demo.test.TestBase;
