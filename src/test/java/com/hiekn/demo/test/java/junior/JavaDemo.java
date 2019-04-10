@@ -1,15 +1,5 @@
 package com.hiekn.demo.test.java.junior;
 
-import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.crypto.SecureUtil;
-import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
-import cn.hutool.crypto.symmetric.SymmetricCrypto;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.Claim;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.google.common.collect.Maps;
 import com.hiekn.demo.test.TestBase;
 import org.junit.Test;
 
@@ -17,14 +7,10 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -115,56 +101,6 @@ public class JavaDemo extends TestBase {
     }
 
 
-    /**
-     * 利用hutool封装的加密工具
-     */
-    @Test
-    public void crypto() {
-        String content = "test中文";
 
-        //随机生成密钥
-        byte[] key = SecureUtil.generateKey(SymmetricAlgorithm.DESede.getValue()).getEncoded();
-
-        //构建
-        SymmetricCrypto aes = new SymmetricCrypto(SymmetricAlgorithm.DESede, key);
-
-        //加密
-        byte[] encrypt = aes.encrypt(content);
-        //解密
-        byte[] decrypt = aes.decrypt(encrypt);
-
-        //加密为16进制表示
-        String encryptHex = aes.encryptHex(content);
-
-        //解密为字符串
-        String decryptStr = aes.decryptStr(encryptHex, CharsetUtil.CHARSET_UTF_8);
-
-    }
-
-    @Test
-    public void jwtToken() throws UnsupportedEncodingException {
-        //签发时间
-        Date iaDate = new Date();
-
-        //过期时间
-        Calendar nowTime = Calendar.getInstance();
-        nowTime.add(Calendar.MINUTE, 1);
-        Date expireDate = nowTime.getTime();
-
-        Map<String, Object> map = Maps.newHashMap();
-        String token = JWT.create()
-                .withHeader(map)
-                .withClaim("userId", 1)
-                .withExpiresAt(expireDate)
-                .withIssuedAt(iaDate)
-                .withIssuer("hiekn")
-                .sign(Algorithm.HMAC384("SECRET"));
-
-        JWTVerifier verifier = JWT.require(Algorithm.HMAC384("SECRET")).build();
-        DecodedJWT jwt = verifier.verify(token);
-        Map<String, Claim> claims = jwt.getClaims();
-
-        claims.forEach((k, v) -> System.out.println(k + "  " + v.asString()));
-    }
 
 }

@@ -37,7 +37,7 @@
 	</bean>
 
 	<!-- 扫描spring注解, 注解自动打开 -->
-	<context:component-scan base-package="com.hiekn.demo.test.frame.spring.processor" />
+	<context:component-scan base-package="com.hiekn.demo.test.spring.processor" />
 
 	<!-- MyBatis的sqlSession装配 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -54,9 +54,9 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
-    <bean id="replacer" class="com.hiekn.demo.test.frame.spring.basic.Replacer" />
+    <bean id="replacer" class="com.hiekn.demo.test.spring.basic.Replacer" />
     <!-- 方法替换的demo -->
-    <bean id="replaceMethodDemo" class="com.hiekn.demo.test.frame.spring.basic.ReplaceMethodDemo">
+    <bean id="replaceMethodDemo" class="com.hiekn.demo.test.spring.basic.ReplaceMethodDemo">
         <replaced-method name="getName" replacer="replacer" />
     </bean>
 
