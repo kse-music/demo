@@ -4,8 +4,6 @@ import com.hiekn.demo.bean.UserBean;
 import com.hiekn.demo.test.TestBase;
 import com.hiekn.demo.test.java.annotation.Student;
 import org.junit.Test;
-import org.springframework.beans.BeanUtils;
-import org.springframework.core.MethodParameter;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -143,26 +141,19 @@ public class JavaDemo extends TestBase {
      *
      * 反射可以操作各种类的属性，而内省只是通过反射来操作JavaBean的属性
      * 内省设置属性值肯定会调用setter方法，反射可以不用
-     * @throws IntrospectionException
      */
     @Test
-    public void introspecctor() throws IntrospectionException, InvocationTargetException, IllegalAccessException {
+    public void introspector() throws IntrospectionException, InvocationTargetException, IllegalAccessException {
         //1 获得 java Bean的描述信息
         BeanInfo info = Introspector.getBeanInfo(UserBean.class);
         //2 获得 UserBean中的属性信息
         PropertyDescriptor[] pds = info.getPropertyDescriptors();
         //3 遍历属性信息
-        for (PropertyDescriptor pd : pds) {
-            System.out.println(pd.getName());
-        }
-
-        PropertyDescriptor[] descriptors = BeanUtils.getPropertyDescriptors(UserBean.class);
         UserBean userBean = new UserBean();
-        for (PropertyDescriptor descriptor : descriptors) {
-            String name = descriptor.getName();
+        for (PropertyDescriptor pd : pds) {
+            String name = pd.getName();
             if(!"class".equals(name) && "name".equals(name)){
-                MethodParameter methodDescriptors = BeanUtils.getWriteMethodParameter(descriptor);
-                Method method = methodDescriptors.getMethod();
+                Method method = pd.getWriteMethod();
                 method.invoke(userBean,"nn");
             }
         }
