@@ -11,11 +11,22 @@ import java.io.*;
  */
 public class AsmDemo {
 
+    static class AsmVisitor extends ClassVisitor{
+
+        public AsmVisitor() {
+            super(Opcodes.ASM7);
+        }
+
+        @Override
+        public void visitSource(String source, String debug) {
+            super.visitSource(source, debug);
+        }
+    }
+
     @Test
     public void classReader() throws IOException {
         ClassReader classReader = new ClassReader(getClass().getResourceAsStream("HelloWorld.class"));
-        String className = classReader.getClassName();
-        System.out.printf(className);
+        classReader.accept(new AsmVisitor(),2);
     }
 
 
