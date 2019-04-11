@@ -10,8 +10,8 @@ import com.hiekn.demo.test.design.chain.AbstractLogger;
 import com.hiekn.demo.test.design.chain.ConsoleLogger;
 import com.hiekn.demo.test.design.chain.ErrorLogger;
 import com.hiekn.demo.test.design.chain.FileLogger;
-import com.hiekn.demo.test.design.decorator.Rectangle;
 import com.hiekn.demo.test.design.decorator.RedShapeDecorator;
+import com.hiekn.demo.test.design.facade.ShapeMaker;
 import com.hiekn.demo.test.design.factory.Shape;
 import com.hiekn.demo.test.design.factory.ShapeFactory;
 import com.hiekn.demo.test.design.filter.*;
@@ -109,11 +109,11 @@ public class PatternDemo extends TestBase {
      */
     @Test
     public void decorator(){
-        com.hiekn.demo.test.design.decorator.Shape circle = new com.hiekn.demo.test.design.decorator.Circle();
+        Shape circle = new com.hiekn.demo.test.design.factory.Circle();
 
-        com.hiekn.demo.test.design.decorator.Shape redCircle = new RedShapeDecorator(new com.hiekn.demo.test.design.decorator.Circle());
+        Shape redCircle = new RedShapeDecorator(new com.hiekn.demo.test.design.factory.Circle());
 
-        com.hiekn.demo.test.design.decorator.Shape redRectangle = new RedShapeDecorator(new Rectangle());
+        Shape redRectangle = new RedShapeDecorator(new com.hiekn.demo.test.design.factory.Rectangle());
         System.out.println("Circle with normal border");
         circle.draw();
 
@@ -122,6 +122,15 @@ public class PatternDemo extends TestBase {
 
         System.out.println("\nRectangle of red border");
         redRectangle.draw();
+    }
+
+    @Test
+    public void facade() {
+        ShapeMaker shapeMaker = new ShapeMaker();
+
+        shapeMaker.drawCircle();
+        shapeMaker.drawRectangle();
+        shapeMaker.drawSquare();
     }
 
 
