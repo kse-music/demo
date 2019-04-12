@@ -67,7 +67,7 @@ public class ThreadLocalDemo extends TestBase {
 
     @Test
     public void dirtyData(){
-        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
         for (int i = 0; i < 2; i++) {
             executorService.execute(new MyThread());
         }
@@ -84,7 +84,8 @@ public class ThreadLocalDemo extends TestBase {
                 flag = false;
             }
             System.out.println(this.getName() + " 线程是 " + stringLocal.get());
-
+//            stringLocal.remove();
         }
+
     }
 }

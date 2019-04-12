@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.gc;
+package com.hiekn.demo.test.java;
 
 import com.hiekn.demo.test.TestBase;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.gc;
+package com.hiekn.demo.test.java.concurrent;
 
 import com.google.common.collect.Lists;
 import com.hiekn.demo.test.TestBase;
@@ -22,7 +22,7 @@ import java.util.WeakHashMap;
 public class ReferenceDemo extends TestBase {
 
     @Test
-    public void javaReference(){
+    public void reference(){
 
         House house = new House();
 
@@ -69,30 +69,21 @@ public class ReferenceDemo extends TestBase {
     }
 
     @Test
-    public void strong() {
-        List<House> houses = Lists.newArrayList();
+    public void rf() {
+        //-Xms5m -Xmx5m
+//        List<House> houses = Lists.newArrayList();//517个左右
+//        List<SoftReference> houses = Lists.newArrayList();//74006个左右
+        List<WeakReference> houses = Lists.newArrayList();//99991个左右
         int i = 0;
-
         while (true){
-            houses.add(new House());
+//            houses.add(new House());
+//            houses.add(new SoftReference<>(new House()));
+            houses.add(new WeakReference<>(new House()));
             System.out.println("i = " + (++i));
         }
 
     }
 
-    @Test
-    public void soft() {
-
-        List<SoftReference> houses = Lists.newArrayList();
-        int i = 0;
-        while (true){
-            houses.add(new SoftReference<>(new House()));
-
-            System.out.println("i = " + (++i));
-
-        }
-
-    }
 
     static class House{
         private static final Integer DOOR_NUMBER = 2000;
@@ -113,7 +104,7 @@ public class ReferenceDemo extends TestBase {
         }
     }
 
-    class SellerInfo{
+    static class SellerInfo{
 
     }
 
