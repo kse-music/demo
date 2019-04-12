@@ -70,7 +70,7 @@ public class GcDemo extends TestBase {
     @Test
     public void dynamic() {
         byte[] allocation1, allocation2, allocation3, allocation4;
-        allocation1 = new byte[_1MB / 4]; // allocation1+allocation2大于survivo空间一半
+        allocation1 = new byte[_1MB / 4]; // allocation1+allocation2大于survivor空间一半
         allocation2 = new byte[_1MB / 4];
         allocation3 = new byte[4 * _1MB];
         allocation4 = new byte[4 * _1MB];
