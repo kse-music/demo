@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
  */
 public class MapDemo extends TestBase {
 
+    private static HashMap<Long, EasyCoding> map = new HashMap<>();
+
     @Test
     public void treeMap() {
         Map<Key, String> map = new TreeMap();
@@ -24,8 +26,7 @@ public class MapDemo extends TestBase {
         map.put(new Key(),"value two");
         map.forEach((k,v) -> System.out.println(k+" = "+v));
 
-
-        Map<Integer, String> treeMap = new TreeMap();
+        TreeMap<Integer, String> treeMap = new TreeMap<>();
         treeMap.put(55, "fifty-five");
         treeMap.put(56, "fifty-six");
         treeMap.put(57, "fifty-seven");
@@ -35,6 +36,20 @@ public class MapDemo extends TestBase {
         treeMap.put(59, "fifty-nine");
         System.out.println(treeMap.size());
 
+        Map.Entry<Integer, String> integerStringEntry = treeMap.lowerEntry(58);
+        Integer integer2 = treeMap.lowerKey(58);
+        Map.Entry<Integer, String> integerStringEntry1 = treeMap.floorEntry(58);
+        Integer integer3 = treeMap.floorKey(58);
+        NavigableMap<Integer, String> integerStringNavigableMap = treeMap.descendingMap();
+        NavigableSet<Integer> integers = treeMap.navigableKeySet();
+        NavigableSet<Integer> integers2 = treeMap.descendingKeySet();
+
+        SortedMap<Integer, String> integerStringSortedMap = treeMap.subMap(56, 59);
+        SortedMap<Integer, String> integerStringSortedMap1 = treeMap.headMap(57);
+        SortedMap<Integer, String> integerStringSortedMap2 = treeMap.tailMap(57);
+        Integer integer1 = treeMap.firstKey();
+        Integer integer = treeMap.lastKey();
+
         Collections.synchronizedMap(treeMap);//在方法操作上添加同步块
     }
 
@@ -43,19 +58,15 @@ public class MapDemo extends TestBase {
         // Default initial capacity：16,thr=16*0.75=12,大于12则扩容
         //initialCapacity = (需要存储的元素个数 / 负载因子) + 1
 
-        Map<String, String> map = new HashMap<>(1);
-        map.put("a", "one");
-        map.put("b", "two");
-        map.put("c", "three");
-        map.put("d", "four");
-        map.put("e", "five");
-        map.remove("c");
-        map.put("f", "six");
-        map.forEach((k, v) -> System.out.println(k + " = " + v));
-
-        map = new LinkedHashMap<>();
+        for (int i = 0; i < 100000; i++) {
+            new Thread(() -> {
+                map.put(System.nanoTime(),new EasyCoding());
+            }).start();
+        }
 
     }
+
+    static class EasyCoding{}
 
     @Test
     public void concurrentMap() {

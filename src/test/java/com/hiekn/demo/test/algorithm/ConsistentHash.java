@@ -45,14 +45,14 @@ public class ConsistentHash {
         //treemap 转成 排序好的map
         Long keyMd5 = md5(key);
         SortedMap<Long, Node> sortedMap = circle.tailMap(keyMd5);
-        Long k = null;
+        Long k;
 
         //没命中则选择第一个
         if(sortedMap.isEmpty()){
-            k = (circle.firstKey());
+            k = circle.firstKey();
             System.out.println("not hit");
         }else{
-            k = (sortedMap.firstKey());
+            k = sortedMap.firstKey();
         }
         Node node = circle.get(k);
 
