@@ -18,7 +18,7 @@ public class SortDemo extends TestBase {
 
     @After
     public void out() {
-        System.out.println(Arrays.toString(arr));
+        logger.info(Arrays.toString(arr));
     }
 
 
