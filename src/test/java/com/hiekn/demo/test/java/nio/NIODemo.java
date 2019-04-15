@@ -8,10 +8,8 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.*;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 /**
  * 数据总是从缓冲区写入通道，并从通道读取到缓冲区.
@@ -35,6 +33,41 @@ import java.nio.file.StandardOpenOption;
  * 线程之间的切换对于操作系统来说是昂贵的
  */
 public class NIODemo extends TestBase {
+
+    @Test
+    public void nio(){
+
+        File file = new File("pom.xml");
+        file.toPath();
+        Path path = Paths.get("G:\\data");
+        path.toFile();
+        try {
+           Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                    return super.preVisitDirectory(dir, attrs);
+                }
+
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    return super.visitFile(file, attrs);
+                }
+
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                    return super.visitFileFailed(file, exc);
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    return super.postVisitDirectory(dir, exc);
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     @Test
