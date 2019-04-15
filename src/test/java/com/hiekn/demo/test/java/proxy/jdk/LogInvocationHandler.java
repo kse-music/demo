@@ -1,6 +1,6 @@
-package com.hiekn.demo.test.study.spring.proxy.jdk;
+package com.hiekn.demo.test.java.proxy.jdk;
 
-import com.hiekn.demo.test.study.spring.proxy.UserManager;
+import com.hiekn.demo.test.java.proxy.UserManager;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -13,6 +13,8 @@ public class LogInvocationHandler implements InvocationHandler {
     public LogInvocationHandler(UserManager userManager) {
         this.userManager = userManager;
     }
+
+
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

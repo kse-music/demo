@@ -1,19 +1,14 @@
 package com.hiekn.demo.test.study.spring;
 
 import com.hiekn.demo.test.TestBase;
+import com.hiekn.demo.test.java.annotation.BeanDefine;
+import com.hiekn.demo.test.java.annotation.TestAnnotation;
+import com.hiekn.demo.test.java.annotation.ZxfResource;
 import com.hiekn.demo.test.study.spring.basic.*;
 import com.hiekn.demo.test.study.spring.hierarchy.ChildContext;
 import com.hiekn.demo.test.study.spring.hierarchy.ParentContext;
 import com.hiekn.demo.test.study.spring.processor.SingleResearchSpring;
-import com.hiekn.demo.test.study.spring.proxy.UserManager;
-import com.hiekn.demo.test.study.spring.proxy.UserManagerImpl;
-import com.hiekn.demo.test.study.spring.proxy.cglib.*;
-import com.hiekn.demo.test.study.spring.proxy.jdk.*;
-import com.hiekn.demo.test.java.annotation.BeanDefine;
-import com.hiekn.demo.test.java.annotation.TestAnnotation;
-import com.hiekn.demo.test.java.annotation.ZxfResource;
 import org.junit.Test;
-import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,7 +17,6 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.core.type.StandardAnnotationMetadata;
 import org.springframework.util.MultiValueMap;
 
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,30 +79,6 @@ public class SpringDemo extends TestBase {
 
     }
 
-    @Test
-    public void jdkProxy(){
-        UserManager hello = (UserManager)Proxy.newProxyInstance(
-                SpringDemo.class.getClassLoader(), // 1. 类加载器
-                new Class<?>[] {UserManager.class}, // 2. 代理需要实现的接口，可以有多个
-                new LogInvocationHandler(new UserManagerImpl()));// 3. 方法调用的实际处理者
-        hello.addUser("1","I love you!");
-
-        JDKProxy jdkProxy = new JDKProxy();
-        UserManager userManagerJDK = (UserManager) jdkProxy.newProxy(new UserManagerImpl());
-        userManagerJDK.addUser("tom", "root");
-    }
-
-    @Test
-    public void cglibProxy(){
-        Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(HelloConcrete.class);
-        enhancer.setCallback(new MyMethodInterceptor());
-        HelloConcrete hello = (HelloConcrete)enhancer.create();
-        System.out.println(hello.sayHello("I love you!"));
-
-//        UserManager userManager = (UserManager) new CGLibProxy().createProxyObject(new UserManagerImpl());
-//        userManager.addUser("tom", "root");
-    }
 
     @Test
     public void parseAnnotation() {

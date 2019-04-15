@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.study.spring.proxy.cglib;
+package com.hiekn.demo.test.java.proxy.cglib;
 
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;

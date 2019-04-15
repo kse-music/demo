@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.study.spring.proxy.cglib;
+package com.hiekn.demo.test.java.proxy.cglib;
 
 public class HelloConcrete {
     public String sayHello(String str) {
