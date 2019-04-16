@@ -4,8 +4,6 @@ import com.hiekn.demo.test.TestBase;
 import org.junit.After;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 /**
  * description about this class
  *
@@ -14,11 +12,12 @@ import java.util.Arrays;
  */
 public class SortDemo extends TestBase {
 
-    private static final int[] arr = {-2,11,-4,13,-5,-2};
+    private static final int[] arr = {1, -2, 11, -4, 13, -5, -3};
+    private static int[] aux; // 用于排序的辅助数组
 
     @After
     public void out() {
-        logger.info(Arrays.toString(arr));
+        logger.info("{}", arr);
     }
 
 
@@ -77,6 +76,47 @@ public class SortDemo extends TestBase {
     @Test
     public void quickSort() {
         quick(arr, 0, arr.length - 1);
+    }
+
+    /**
+     * 过将两个有序的序列合并为一个大的有序的序列的方式来实现排序。合并排序是一种典型的分治算法
+     * 稳定
+     */
+    @Test
+    public void mergeSort() {
+        aux = new int[arr.length];
+        sort(arr, 0,arr.length - 1);
+    }
+
+    private void sort(int[] array, int lo, int hi) {
+        if (lo >= hi) return; //如果下标大于上标，则返回
+        int mid = lo + (hi - lo) / 2;//平分数组
+        sort(array, lo, mid);//循环对左侧元素排序
+        sort(array, mid + 1, hi);//循环对右侧元素排序
+        merge(array, lo, mid, hi);//对左右排好的序列进行合并
+    }
+
+    private void merge(int[] arr,int lo,int mid , int hi) {
+        int i = lo, j = mid + 1;
+        //把元素拷贝到辅助数组中
+        for (int k = lo; k <= hi; k++) {
+            aux[k] = arr[k];
+        }
+        //然后按照规则将数据从辅助数组中拷贝回原始的array中
+        for (int k = lo; k <= hi; k++) {
+            //如果左边元素没了， 直接将右边的剩余元素都合并到到原数组中
+            if (i > mid) {
+                arr[k] = aux[j++];
+            }//如果右边元素没有了，直接将所有左边剩余元素都合并到原数组中
+            else if (j > hi) {
+                arr[k] = aux[i++];
+            }//如果左边右边小，则将左边的元素拷贝到原数组中
+            else if (aux[i]< aux[j]) {
+                arr[k] = aux[i++];
+            } else {
+                arr[k] = aux[j++];
+            }
+        }
     }
 
     private void quick(int[] arr, int low, int high) {
