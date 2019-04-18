@@ -31,7 +31,7 @@ public class ThreadPoolDemo extends TestBase {
 
     }
 
-    class CustomRejectHandler implements RejectedExecutionHandler {
+    static class CustomRejectHandler implements RejectedExecutionHandler {
 
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
@@ -40,7 +40,7 @@ public class ThreadPoolDemo extends TestBase {
 
     }
 
-    class CustomThreadFactory implements ThreadFactory {
+    static class CustomThreadFactory implements ThreadFactory {
 
         private final String namePrefix;
         private final AtomicInteger nextId = new AtomicInteger(1);
@@ -58,7 +58,7 @@ public class ThreadPoolDemo extends TestBase {
         }
     }
 
-    class Task implements Runnable {
+    static class Task implements Runnable {
 
         private final AtomicLong count = new AtomicLong(0L);
 

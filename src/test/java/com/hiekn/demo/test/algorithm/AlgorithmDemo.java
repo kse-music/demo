@@ -101,6 +101,7 @@ public class AlgorithmDemo extends TestBase {
                 max = dp[current];
             }
         }
+        System.out.println(Arrays.toString(pos));
         System.out.println(max);
     }
 
