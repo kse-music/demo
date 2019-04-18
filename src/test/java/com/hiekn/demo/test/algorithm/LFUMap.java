@@ -79,7 +79,7 @@ public class LFUMap<K,V>{
         @Override
         public int compareTo(LFU<K,V> o) {
             int c = Integer.compare(count,o.count);
-            return count == 0 ? Long.compare(lastTime,o.lastTime) : c;
+            return c == 0 ? Long.compare(lastTime,o.lastTime) : c;
         }
 
         @Override
