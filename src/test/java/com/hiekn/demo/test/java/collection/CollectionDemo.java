@@ -15,6 +15,17 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class CollectionDemo extends TestBase {
 
+    /**
+     *
+     队列	有界性	锁	数据结构
+     ArrayBlockingQueue	bounded(有界)	加锁	 arrayList
+     LinkedBlockingQueue	optionally-bounded	加锁	 linkedList
+     PriorityBlockingQueue	unbounded	加锁	 heap
+     DelayQueue	unbounded	加锁 	heap
+     SynchronousQueue	bounded	加锁	 无
+     LinkedTransferQueue	unbounded	加锁	 heap
+     LinkedBlockingDeque	unbounded	无锁	 heap
+     */
     @Test
     public void queue(){
         Queue<String> queue = new LinkedBlockingQueue<>(4);
