@@ -242,13 +242,6 @@
         </dependency>
         <!-- 第三方工具如：日志、guava、gson、Junit结束 -->
 
-
-        <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>7.1</version>
-        </dependency>
-
     </dependencies>
 
 
