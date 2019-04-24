@@ -13,6 +13,81 @@ import java.util.*;
  */
 public class LeetCodeDemo extends TestBase {
 
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> list = new ArrayList<>();
+        LinkedList<TreeNode> data = new LinkedList<>();
+        data.offer(root);
+
+        while (!data.isEmpty()) {
+            double sum = 0;
+            int count = 0;
+            int size = data.size();
+            for (int i = 0; i < size; i++) {//一层结束
+                TreeNode t = data.poll();
+                sum += t.val;
+                if (t.left != null) {
+                    data.offer(t.left);
+                }
+                if (t.right != null) {
+                    data.offer(t.right);
+                }
+                count++;
+            }
+
+            list.add(sum / count);
+
+        }
+
+        return list;
+    }
+    boolean flag = true;
+
+    public boolean isBalanced(TreeNode root) {
+        trav(root);
+        return flag;
+    }
+
+    int trav(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int l = trav(root.left) + 1;
+        int r = trav(root.right) + 1;
+        if(l - r > 1 || l - r < -1){
+            flag = false;
+        }
+        return Math.max(l, r);
+    }
+
+
+
+    @Test
+    public void averageOfLevels() {
+        TreeNode root = new TreeNode(3);
+        TreeNode left = new TreeNode(9);
+        TreeNode right = new TreeNode(20);
+        root.left = left;
+        root.right = right;
+        right.left = new TreeNode(15);
+        TreeNode treeNode = new TreeNode(7);
+        treeNode.left = new TreeNode(2);
+        right.right = treeNode;
+
+        List<Double> list = averageOfLevels(root);
+        System.out.println(list);
+        System.out.println(isBalanced(root));
+    }
+
 
     @Test
     public void sti() {
@@ -22,32 +97,32 @@ public class LeetCodeDemo extends TestBase {
     public int myAtoi(String str) {
         int n = str.length();
         int i = 0;
-        while(i < n && str.charAt(i) == ' ') {//开头是空白字符
+        while (i < n && str.charAt(i) == ' ') {//开头是空白字符
             i++;
         }
-        if(i == n || !((str.charAt(i) == '+') || (str.charAt(i) == '-') ||(str.charAt(i) >= '0' && str.charAt(i) <= '9'))) {//开头非+-和0-9数字
+        if (i == n || !((str.charAt(i) == '+') || (str.charAt(i) == '-') || (str.charAt(i) >= '0' && str.charAt(i) <= '9'))) {//开头非+-和0-9数字
             return 0;
         }
         StringBuilder stringBuilder = new StringBuilder();
-        if(str.charAt(i) == '-') {//下一个字符是-
+        if (str.charAt(i) == '-') {//下一个字符是-
             stringBuilder.append('-');
             i++;
-        }else if(str.charAt(i) == '+') {//下一个字符是+
+        } else if (str.charAt(i) == '+') {//下一个字符是+
             i++;
         }
-        if(i == n || !(str.charAt(i) >= '0' && str.charAt(i) <= '9')) {//下一个字符不是数字则直接返回0
+        if (i == n || !(str.charAt(i) >= '0' && str.charAt(i) <= '9')) {//下一个字符不是数字则直接返回0
             return 0;
         }
-        while(i < n && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+        while (i < n && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
             stringBuilder.append(str.charAt(i));
             i++;
         }
         try {
             return Integer.valueOf(stringBuilder.toString());
-        }catch (Exception e) {
-            if(stringBuilder.substring(0, 1).equals("-")) {
+        } catch (Exception e) {
+            if (stringBuilder.substring(0, 1).equals("-")) {
                 return Integer.MIN_VALUE;
-            }else {
+            } else {
                 return Integer.MAX_VALUE;
             }
         }
@@ -60,7 +135,7 @@ public class LeetCodeDemo extends TestBase {
         System.out.println(indexValueIndexValueMap);
     }
 
-    static class IndexValue{
+    static class IndexValue {
         int index;
         int value;
 
@@ -75,8 +150,8 @@ public class LeetCodeDemo extends TestBase {
         Map<IndexValue, IndexValue> map = new HashMap<>();
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
-                if(arr[i] + arr[j] == sum){
-                    map.put(new IndexValue(i,arr[i]),new IndexValue(j,arr[j]));
+                if (arr[i] + arr[j] == sum) {
+                    map.put(new IndexValue(i, arr[i]), new IndexValue(j, arr[j]));
                 }
             }
         }
