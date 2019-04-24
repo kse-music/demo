@@ -6,6 +6,7 @@ import com.hiekn.demo.test.java.proxy.jdk.JDKProxy;
 import com.hiekn.demo.test.java.proxy.jdk.LogInvocationHandler;
 import com.hiekn.demo.test.study.spring.SpringDemo;
 import org.junit.Test;
+import org.springframework.cglib.core.DebuggingClassWriter;
 import org.springframework.cglib.proxy.Enhancer;
 
 import java.lang.reflect.Proxy;
@@ -20,6 +21,7 @@ public class ProxyDemo {
 
     @Test
     public void jdkProxy(){
+        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
 
         UserManager hello = (UserManager) Proxy.newProxyInstance(
                 SpringDemo.class.getClassLoader(), // 1. 类加载器
@@ -35,6 +37,7 @@ public class ProxyDemo {
 
     @Test
     public void cglibProxy(){
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "F:\\tmp\\class");
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(HelloConcrete.class);
         enhancer.setCallback(new MyMethodInterceptor());
