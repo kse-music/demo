@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class HttpDemo extends TestBase {
+public class RestTemplateDemo extends TestBase {
 
     private static final String BASE_PATH = "http://localhost:8080/api/";
 
