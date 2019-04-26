@@ -84,8 +84,13 @@ public class SortDemo extends TestBase {
      */
     @Test
     public void mergeSort() {
-        aux = new int[arr.length];
-        sort(arr, 0,arr.length - 1);
+//        aux = new int[arr.length];
+//        sort(arr, 0,arr.length - 1);
+
+        int[] ints = {1, 3, 5, 7, 9, 2, 4, 6, 8, 10};
+        aux = new int[ints.length];
+        merge(ints, 0, 4, 9);
+        System.out.println(ints);
     }
 
     private void sort(int[] array, int lo, int hi) {
@@ -97,24 +102,21 @@ public class SortDemo extends TestBase {
     }
 
     private void merge(int[] arr,int lo,int mid , int hi) {
-        int i = lo, j = mid + 1;
+        int leftStartIndex = lo, rightStartIndex = mid + 1;
         //把元素拷贝到辅助数组中
         for (int k = lo; k <= hi; k++) {
             aux[k] = arr[k];
         }
         //然后按照规则将数据从辅助数组中拷贝回原始的array中
         for (int k = lo; k <= hi; k++) {
-            //如果左边元素没了， 直接将右边的剩余元素都合并到到原数组中
-            if (i > mid) {
-                arr[k] = aux[j++];
-            }//如果右边元素没有了，直接将所有左边剩余元素都合并到原数组中
-            else if (j > hi) {
-                arr[k] = aux[i++];
-            }//如果左边右边小，则将左边的元素拷贝到原数组中
-            else if (aux[i]< aux[j]) {
-                arr[k] = aux[i++];
+            if (leftStartIndex > mid) {//如果左边元素没了， 直接将右边的剩余元素都合并到到原数组中
+                arr[k] = aux[rightStartIndex++];
+            } else if (rightStartIndex > hi) {//如果右边元素没有了，直接将所有左边剩余元素都合并到原数组中
+                arr[k] = aux[leftStartIndex++];
+            } else if (aux[leftStartIndex] < aux[rightStartIndex]) {//如果左边比右边小，则将左边的元素拷贝到原数组中
+                arr[k] = aux[leftStartIndex++];
             } else {
-                arr[k] = aux[j++];
+                arr[k] = aux[rightStartIndex++];
             }
         }
     }
