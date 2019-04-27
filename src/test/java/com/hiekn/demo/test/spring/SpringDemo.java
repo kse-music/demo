@@ -1,9 +1,8 @@
 package com.hiekn.demo.test.spring;
 
 import com.hiekn.demo.test.TestBase;
-import com.hiekn.demo.test.java.annotation.BeanDefine;
-import com.hiekn.demo.test.java.annotation.TestAnnotation;
-import com.hiekn.demo.test.java.annotation.ZxfResource;
+import com.hiekn.demo.test.spring.annotation.TestAnnotation;
+import com.hiekn.demo.test.spring.annotation.ZxfResource;
 import com.hiekn.demo.test.spring.basic.*;
 import com.hiekn.demo.test.spring.hierarchy.ChildContext;
 import com.hiekn.demo.test.spring.hierarchy.ParentContext;

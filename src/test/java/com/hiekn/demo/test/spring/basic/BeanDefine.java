@@ -1,4 +1,6 @@
-package com.hiekn.demo.test.java.annotation;
+package com.hiekn.demo.test.spring.basic;
+
+import com.hiekn.demo.test.spring.annotation.TestAnnotation;
 
 @TestAnnotation("abc")
 public class BeanDefine {

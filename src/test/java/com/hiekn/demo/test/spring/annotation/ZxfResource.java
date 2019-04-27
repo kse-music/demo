@@ -1,4 +1,4 @@
-package com.hiekn.demo.test.java.annotation;
+package com.hiekn.demo.test.spring.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

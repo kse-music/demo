@@ -14,8 +14,6 @@ import com.hiekn.demo.util.CommonUtils;
 import com.mongodb.MongoClient;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -31,12 +29,14 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.sse.EventOutput;
 import org.glassfish.jersey.media.sse.OutboundEvent;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.MediaType;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -70,7 +70,7 @@ public class CommonServiceImpl implements CommonService{
 		String fileName = fileInfo.getFileName();
 		fileName = CommonUtils.getRandomUUID() + fileName.substring(fileName.lastIndexOf("."));
 		try {
-			fileByte = IOUtils.toByteArray(fileIn);
+			fileByte = FileCopyUtils.copyToByteArray(fileIn);
 			uploadManager.put(fileByte, fileName, token);
 		} catch (IOException e) {
 			
@@ -138,7 +138,7 @@ public class CommonServiceImpl implements CommonService{
 		fileName = CommonUtils.getRandomUUID() + "." + ext;
 		File file = new File(path+File.separator+fileName);
 		try {
-			FileUtils.copyInputStreamToFile(fileIn, file);
+            FileCopyUtils.copy(fileIn, new FileOutputStream(file));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -157,8 +157,8 @@ public class CommonServiceImpl implements CommonService{
 				String fileName = detail.getFileName();
 				File file = new File(path+File.separator+fileName);
 				try {
-					FileUtils.copyInputStreamToFile(fileIn, file);
-				} catch (IOException e) {
+                    FileCopyUtils.copy(fileIn, new FileOutputStream(file));
+                } catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
