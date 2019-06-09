@@ -7,15 +7,15 @@ import freemarker.template.TemplateHashModel;
 import freemarker.template.TemplateModelException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.apache.log4j.Logger;
 import org.glassfish.jersey.server.mvc.Template;
 import org.glassfish.jersey.server.mvc.Viewable;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
@@ -26,7 +26,6 @@ import java.util.Map;
 @Produces(MediaType.TEXT_HTML+";charset=UTF-8")
 @Api("返回视图")
 public class Ftl {
-	static final Logger log = Logger.getLogger(Ftl.class);
 
 	@GET
     @Path("/test")

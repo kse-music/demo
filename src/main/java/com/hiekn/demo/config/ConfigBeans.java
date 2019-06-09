@@ -2,12 +2,22 @@ package com.hiekn.demo.config;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Iterator;
 import java.util.List;
 
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.apache.http.Header;
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
+import org.apache.http.message.BasicHeader;
+import org.elasticsearch.client.Node;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,23 +65,47 @@ public class ConfigBeans {
 	
 	@Lazy
     @Bean
-    public TransportClient esClient(){ 
-    	TransportClient client = null;
-    	if(es_name != null && !"".equals(es_name)){
-			Settings settings = Settings.builder().put("cluster.name", es_name).build();
-			client = new PreBuiltTransportClient(settings);
-		}else{
-			client = new PreBuiltTransportClient(Settings.EMPTY);
-		}
-		try {
-			for (String ip : es_ip) {
-				client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(ip), es_port));
-			}
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-        return client;  
-    } 
+    public RestHighLevelClient esClient() {
+        HttpHost[] httpHosts = new HttpHost[es_ip.size()];
+        for (int i = 0; i < es_ip.size(); i++) {
+            httpHosts[i] = new HttpHost(es_ip.get(i), es_port,"http");
+        }
+        return new RestHighLevelClient(builder(httpHosts));
+    }
+
+    private RestClientBuilder builder(HttpHost... httpHosts) {
+        RestClientBuilder builder = RestClient.builder(httpHosts);
+        Header[] defaultHeaders = new Header[]{new BasicHeader("x", "y")};
+        builder.setDefaultHeaders(defaultHeaders);
+        builder.setRequestConfigCallback((RequestConfig.Builder requestConfigBuilder) -> requestConfigBuilder.setConnectTimeout(5000).setSocketTimeout(60000));
+        final CredentialsProvider credentialsProvider =
+                new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY,
+                new UsernamePasswordCredentials("user", "password"));
+        builder.setHttpClientConfigCallback((HttpAsyncClientBuilder httpAsyncClientBuilder) ->
+                httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
+        builder.setNodeSelector((Iterable<Node> nodes) -> {
+            boolean foundOne = false;
+            for (Node node : nodes) {
+//                String rackId = node.getAttributes().get("rack_id").get(0);
+//                if ("rack_one".equals(rackId)) {
+//                    foundOne = true;
+//                    break;
+//                }
+            }
+            if (foundOne) {
+                Iterator<Node> nodesIt = nodes.iterator();
+                while (nodesIt.hasNext()) {
+                    Node node = nodesIt.next();
+                    String rackId = node.getAttributes().get("rack_id").get(0);
+                    if ("rack_one".equals(rackId) == false) {
+                        nodesIt.remove();
+                    }
+                }
+            }
+        });
+        return builder;
+    }
     
     @Lazy
     @Bean

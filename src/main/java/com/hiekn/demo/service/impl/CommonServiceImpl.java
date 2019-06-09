@@ -14,13 +14,15 @@ import com.hiekn.demo.util.CommonUtils;
 import com.mongodb.MongoClient;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
@@ -54,7 +56,7 @@ public class CommonServiceImpl implements CommonService{
 	@Resource
 	private JedisPool jedisPool;
 	@Resource
-	private TransportClient client;
+	private RestHighLevelClient client;
 	
 	@Resource
 	private UserMapper userMapper;
@@ -82,28 +84,37 @@ public class CommonServiceImpl implements CommonService{
 	@Override
 	public List<UserBean> test(String kw,List<QueryCondition> qcList) {
 		List<UserBean> list = Lists.newArrayList();
-		SearchRequestBuilder searchRequestBuilder = client.prepareSearch("twitter").setTypes("twitter_data");
-		BoolQueryBuilder query = QueryBuilders.boolQuery();
+
+//		SearchRequestBuilder searchRequestBuilder = client.prepareSearch("twitter").setTypes("twitter_data");
+        BoolQueryBuilder query = QueryBuilders.boolQuery();
 //		searchRequestBuilder.storedFields("content");//官方已经不推荐，用source filtering替代
-		
-		HighlightBuilder highlightBuilder = new HighlightBuilder().field("*").requireFieldMatch(false);
+
+        HighlightBuilder highlightBuilder = new HighlightBuilder().field("*").requireFieldMatch(false);
 //		highlightBuilder.preTags("<span style=\"color:red\">");
 //		highlightBuilder.postTags("</span>");
-		EsParser.queryCondition2ES(qcList,query);
+        EsParser.queryCondition2ES(qcList,query);
 //		String field = "title";
-		SearchResponse response = searchRequestBuilder
-				.setQuery(query)//在分词的结果上全完全匹配，不带分析器
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder()
+                .query(query)//在分词的结果上全完全匹配，不带分析器
 //				.setQuery(QueryBuilders.termQuery(field,kw))//在分词的结果上全完全匹配，不带分析器
 //				.setQuery(QueryBuilders.queryStringQuery(kw).field(field))//带了分析器
 //				.setQuery(QueryBuilders.matchQuery(field, kw).analyzer("ik_max_word"))//带了分析器
-				
+
 //				.setQuery(QueryBuilders.matchPhraseQuery(field, text))//term像matchPhrase
-				
+
 //				.setFetchSource(new String[]{"content"},new String[]{})
-				.highlighter(highlightBuilder)
-				.get();
-		
-		/* match query搜索的时候，首先会解析查询字符串，进行分词，然后查询，
+                .highlighter(highlightBuilder)
+                ;
+
+        SearchRequest searchRequest = new SearchRequest("twitter").source(searchSourceBuilder);
+        SearchResponse response = null;
+        try {
+            response = client.search(searchRequest, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /* match query搜索的时候，首先会解析查询字符串，进行分词，然后查询，
 		 * 而term query,输入的查询内容是什么，就会按照什么去查询，并不会解析查询内容，对它分词。
 		 */
 		 
